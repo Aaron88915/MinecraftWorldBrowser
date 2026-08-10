@@ -145,9 +145,14 @@ foreach ($binary in $binaries) {
     Upload-ReleaseAsset -Release $release -File $binary
 }
 
-$allReleases = @(Invoke-GitHubJson -Method Get -Uri "$apiBase/releases?per_page=100" -Body $null)
-$publishedTags = @($allReleases | ForEach-Object { $_.tag_name })
-$missing = @($binaries | ForEach-Object { 'v' + ($_.BaseName -replace '^MinecraftWorldBrowser-v', '') } | Where-Object { $_ -notin $publishedTags })
+$expectedTags = @($binaries | ForEach-Object { 'v' + ($_.BaseName -replace '^MinecraftWorldBrowser-v', '') })
+$missing = $expectedTags
+for ($attempt = 1; $attempt -le 5 -and $missing.Count -gt 0; $attempt++) {
+    $allReleases = Invoke-GitHubJson -Method Get -Uri "$apiBase/releases?per_page=100" -Body $null
+    $publishedTags = @($allReleases | ForEach-Object { $_.tag_name })
+    $missing = @($expectedTags | Where-Object { $_ -notin $publishedTags })
+    if ($missing.Count -gt 0 -and $attempt -lt 5) { Start-Sleep -Seconds (2 * $attempt) }
+}
 if ($missing.Count -gt 0) { throw "Release verification failed. Missing: $($missing -join ', ')" }
 Write-Output "RELEASE VERIFICATION OK: $($binaries.Count) releases"
 
