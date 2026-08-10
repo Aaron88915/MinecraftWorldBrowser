@@ -1,0 +1,30 @@
+# Build outputs and release binaries
+*.exe
+*.zip
+/build/
+/bin/
+/obj/
+
+# Local application data and test artifacts
+/.vs/
+/.idea/
+/.vscode/
+*.user
+*.tmp
+*.log
+
+# Local previews and promotional working files
+/promo-storyboard-v1/
+/extracted-world-icons-*/
+/Generate-BilibiliCover.ps1
+/Generate-PromoStoryboard.ps1
+/Export-PromoBackground.ps1
+/MinecraftWorldBrowser-v*-Bilibili-Cover*.png
+/icon-fix-preview-*.png
+/minimal-scrollbars-preview-*.png
+/root-list-fix-preview-*.png
+/rounded-button-fix-preview-*.png
+/smooth-scroll-frame-*.png
+/status-text-fix-*.png
+/ui-preview-*.png
+
