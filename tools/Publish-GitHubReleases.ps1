@@ -1,14 +1,16 @@
 param(
     [string]$Owner = 'Aaron88915',
     [string]$Repository = 'MinecraftWorldBrowser',
-    [string]$Branch = 'main'
+    [string]$Branch = 'main',
+    [string]$ProjectPath = $PSScriptRoot
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
 
-$projectDirectory = Split-Path -Parent $PSScriptRoot
+$projectDirectory = if ([string]::IsNullOrWhiteSpace($ProjectPath)) { (Get-Location).Path } else { Split-Path -Parent $ProjectPath }
+$projectDirectory = [IO.Path]::GetFullPath($projectDirectory)
 $changeLogPath = Join-Path $projectDirectory 'CHANGELOG.md'
 $changeLog = Get-Content -LiteralPath $changeLogPath -Raw -Encoding UTF8
 
