@@ -12,6 +12,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.Drawing.Text;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -26,8 +27,8 @@ using System.Windows.Forms;
 [assembly: AssemblyProduct("Minecraft Java World Browser")]
 [assembly: AssemblyDescription("Browse Minecraft Java worlds across popular launcher instance folders")]
 [assembly: AssemblyCompany("Local Utility")]
-[assembly: AssemblyVersion("3.1.5.0")]
-[assembly: AssemblyFileVersion("3.1.5.0")]
+[assembly: AssemblyVersion("3.2.6.0")]
+[assembly: AssemblyFileVersion("3.2.6.0")]
 
 namespace MinecraftWorldBrowser
 {
@@ -37,7 +38,7 @@ namespace MinecraftWorldBrowser
 
         public static Color Ink { get { return InkFor(Dark); } }
         public static Color Muted { get { return MutedFor(Dark); } }
-        public static Color Accent { get { return Dark ? Color.FromArgb(64, 156, 255) : Color.FromArgb(0, 122, 255); } }
+        public static Color Accent { get { return Dark ? Color.FromArgb(132, 166, 255) : Color.FromArgb(74, 118, 232); } }
         public static Color WindowBase { get { return WindowBaseFor(Dark); } }
         public static Color Sidebar { get { return SidebarFor(Dark); } }
         public static Color Canvas { get { return CanvasFor(Dark); } }
@@ -46,32 +47,34 @@ namespace MinecraftWorldBrowser
         public static Color GlassSurface { get { return GlassSurfaceFor(Dark); } }
         public static Color SidebarCard { get { return SidebarCardFor(Dark); } }
         public static Color Line { get { return LineFor(Dark); } }
-        public static Color Header { get { return Dark ? Color.FromArgb(31, 35, 41) : Color.FromArgb(238, 243, 248); } }
-        public static Color AlternateRow { get { return Dark ? Color.FromArgb(24, 28, 34) : Color.FromArgb(243, 247, 250); } }
-        public static Color Selection { get { return Dark ? Color.FromArgb(35, 61, 87) : Color.FromArgb(218, 235, 253); } }
-        public static Color Hover { get { return Dark ? Color.FromArgb(39, 44, 52) : Color.FromArgb(242, 246, 251); } }
-        public static Color InputBorder { get { return Dark ? Color.FromArgb(72, 80, 91) : Color.FromArgb(185, 198, 212); } }
-        public static Color GlassEdge { get { return Color.FromArgb(Dark ? 42 : 145, 255, 255, 255); } }
-        public static Color Shadow { get { return Dark ? Color.FromArgb(55, 0, 0, 0) : Color.FromArgb(18, 39, 53, 70); } }
-        public static Color SecondaryFill { get { return Dark ? Color.FromArgb(230, 43, 48, 56) : Color.FromArgb(132, 255, 255, 255); } }
-        public static Color SecondaryHover { get { return Dark ? Color.FromArgb(245, 54, 60, 70) : Color.FromArgb(180, 255, 255, 255); } }
-        public static Color SecondaryPressed { get { return Dark ? Color.FromArgb(250, 31, 35, 42) : Color.FromArgb(145, 213, 224, 236); } }
-        public static Color SecondaryBorder { get { return Dark ? Color.FromArgb(150, 88, 96, 108) : Color.FromArgb(135, 255, 255, 255); } }
-        public static Color DisabledFill { get { return Dark ? Color.FromArgb(120, 55, 60, 69) : Color.FromArgb(115, 225, 229, 235); } }
-        public static Color DisabledText { get { return Dark ? Color.FromArgb(120, 174, 181, 191) : Color.FromArgb(155, 155, 160); } }
-        public static Color ScrollThumb { get { return Dark ? Color.FromArgb(142, 150, 162) : Color.FromArgb(155, 155, 160); } }
-        public static Color ScrollThumbHover { get { return Dark ? Color.FromArgb(180, 188, 199) : Color.FromArgb(125, 125, 130); } }
+        public static Color Header { get { return Dark ? Color.FromArgb(39, 43, 52) : Color.FromArgb(218, 225, 235); } }
+        public static Color AlternateRow { get { return Dark ? Color.FromArgb(36, 40, 48) : Color.FromArgb(228, 234, 242); } }
+        public static Color Selection { get { return Dark ? Color.FromArgb(51, 67, 96) : Color.FromArgb(205, 218, 248); } }
+        public static Color Hover { get { return Dark ? Color.FromArgb(46, 51, 62) : Color.FromArgb(233, 239, 246); } }
+        public static Color InputBorder { get { return Dark ? Color.FromArgb(53, 58, 69) : Color.FromArgb(198, 207, 220); } }
+        public static Color GlassEdge { get { return Color.Transparent; } }
+        public static Color Shadow { get { return NeuDarkShadow; } }
+        public static Color NeuLightShadow { get { return Dark ? Color.FromArgb(128, 67, 73, 86) : Color.FromArgb(224, 255, 255, 255); } }
+        public static Color NeuDarkShadow { get { return Dark ? Color.FromArgb(190, 11, 13, 18) : Color.FromArgb(185, 173, 184, 199); } }
+        public static Color SecondaryFill { get { return GlassSurface; } }
+        public static Color SecondaryHover { get { return Dark ? Color.FromArgb(43, 47, 57) : Color.FromArgb(231, 237, 245); } }
+        public static Color SecondaryPressed { get { return GlassSurface; } }
+        public static Color SecondaryBorder { get { return Color.Transparent; } }
+        public static Color DisabledFill { get { return Dark ? Color.FromArgb(34, 37, 44) : Color.FromArgb(218, 224, 233); } }
+        public static Color DisabledText { get { return Dark ? Color.FromArgb(119, 125, 137) : Color.FromArgb(135, 145, 158); } }
+        public static Color ScrollThumb { get { return Dark ? Color.FromArgb(155, 166, 185) : Color.FromArgb(125, 139, 158); } }
+        public static Color ScrollThumbHover { get { return Dark ? Color.FromArgb(210, 218, 232) : Color.FromArgb(74, 118, 232); } }
 
-        public static Color InkFor(bool dark) { return dark ? Color.FromArgb(238, 241, 246) : Color.FromArgb(28, 31, 36); }
-        public static Color MutedFor(bool dark) { return dark ? Color.FromArgb(164, 172, 184) : Color.FromArgb(91, 99, 110); }
-        public static Color WindowBaseFor(bool dark) { return dark ? Color.FromArgb(17, 19, 23) : Color.FromArgb(220, 229, 240); }
-        public static Color SidebarFor(bool dark) { return dark ? Color.FromArgb(25, 28, 33) : Color.FromArgb(233, 238, 245); }
-        public static Color CanvasFor(bool dark) { return dark ? Color.FromArgb(20, 23, 28) : Color.FromArgb(242, 246, 250); }
-        public static Color SurfaceFor(bool dark) { return dark ? Color.FromArgb(27, 31, 37) : Color.FromArgb(247, 249, 252); }
-        public static Color SurfaceRaisedFor(bool dark) { return dark ? Color.FromArgb(34, 38, 45) : Color.FromArgb(239, 244, 249); }
-        public static Color GlassSurfaceFor(bool dark) { return dark ? Color.FromArgb(32, 36, 43) : Color.FromArgb(249, 251, 253); }
-        public static Color SidebarCardFor(bool dark) { return dark ? Color.FromArgb(31, 35, 41) : Color.FromArgb(244, 247, 250); }
-        public static Color LineFor(bool dark) { return dark ? Color.FromArgb(67, 74, 84) : Color.FromArgb(191, 202, 214); }
+        public static Color InkFor(bool dark) { return dark ? Color.FromArgb(236, 239, 244) : Color.FromArgb(47, 55, 68); }
+        public static Color MutedFor(bool dark) { return dark ? Color.FromArgb(164, 171, 184) : Color.FromArgb(98, 110, 126); }
+        public static Color WindowBaseFor(bool dark) { return dark ? Color.FromArgb(34, 37, 44) : Color.FromArgb(223, 229, 238); }
+        public static Color SidebarFor(bool dark) { return dark ? Color.FromArgb(34, 37, 44) : Color.FromArgb(223, 229, 238); }
+        public static Color CanvasFor(bool dark) { return dark ? Color.FromArgb(34, 37, 44) : Color.FromArgb(223, 229, 238); }
+        public static Color SurfaceFor(bool dark) { return dark ? Color.FromArgb(38, 41, 49) : Color.FromArgb(223, 229, 238); }
+        public static Color SurfaceRaisedFor(bool dark) { return dark ? Color.FromArgb(39, 42, 50) : Color.FromArgb(223, 229, 238); }
+        public static Color GlassSurfaceFor(bool dark) { return dark ? Color.FromArgb(39, 42, 50) : Color.FromArgb(223, 229, 238); }
+        public static Color SidebarCardFor(bool dark) { return dark ? Color.FromArgb(39, 42, 50) : Color.FromArgb(223, 229, 238); }
+        public static Color LineFor(bool dark) { return dark ? Color.FromArgb(56, 61, 72) : Color.FromArgb(199, 208, 220); }
 
         public static void SetDark(bool dark) { Dark = dark; }
 
@@ -85,6 +88,198 @@ namespace MinecraftWorldBrowser
         {
             Directory.CreateDirectory(Path.GetDirectoryName(path));
             File.WriteAllText(path, Dark ? "dark" : "light", Encoding.ASCII);
+        }
+    }
+
+    internal static class NeumorphicRenderer
+    {
+        public static void DrawRaised(Graphics graphics, RectangleF bounds, int radius, Color surface, float strength)
+        {
+            if (graphics == null || bounds.Width <= 1F || bounds.Height <= 1F) return;
+            strength = Math.Max(0F, Math.Min(1F, strength));
+            for (int depth = 5; depth >= 1; depth--)
+            {
+                float offset = depth * 0.55F;
+                float falloff = (6F - depth) / 5F;
+                using (GraphicsPath lightPath = RoundedPath(Offset(bounds, -offset, -offset), radius))
+                using (GraphicsPath darkPath = RoundedPath(Offset(bounds, offset, offset), radius))
+                using (Brush lightBrush = new SolidBrush(WithStrength(AppTheme.NeuLightShadow, strength * falloff * 0.32F)))
+                using (Brush darkBrush = new SolidBrush(WithStrength(AppTheme.NeuDarkShadow, strength * falloff * 0.26F)))
+                {
+                    graphics.FillPath(lightBrush, lightPath);
+                    graphics.FillPath(darkBrush, darkPath);
+                }
+            }
+            using (GraphicsPath face = RoundedPath(bounds, radius))
+            using (Brush brush = new SolidBrush(surface)) graphics.FillPath(brush, face);
+        }
+
+        public static void DrawInset(Graphics graphics, RectangleF bounds, int radius, float strength)
+        {
+            if (graphics == null || bounds.Width <= 1F || bounds.Height <= 1F || strength <= 0F) return;
+            strength = Math.Max(0F, Math.Min(1F, strength));
+            GraphicsState state = graphics.Save();
+            try
+            {
+                using (GraphicsPath clip = RoundedPath(bounds, radius)) graphics.SetClip(clip);
+                for (int depth = 1; depth <= 5; depth++)
+                {
+                    float offset = depth * 0.62F;
+                    float falloff = (6F - depth) / 5F;
+                    using (GraphicsPath darkPath = RoundedPath(Offset(bounds, offset, offset), radius))
+                    using (GraphicsPath lightPath = RoundedPath(Offset(bounds, -offset, -offset), radius))
+                    using (Pen darkPen = new Pen(WithStrength(AppTheme.NeuDarkShadow, strength * falloff * 0.54F), 1.6F))
+                    using (Pen lightPen = new Pen(WithStrength(AppTheme.NeuLightShadow, strength * falloff * 0.46F), 1.6F))
+                    {
+                        graphics.DrawPath(darkPen, darkPath);
+                        graphics.DrawPath(lightPen, lightPath);
+                    }
+                }
+            }
+            finally
+            {
+                graphics.Restore(state);
+            }
+        }
+
+        public static GraphicsPath RoundedPath(RectangleF rectangle, float radius)
+        {
+            GraphicsPath path = new GraphicsPath();
+            float safeRadius = Math.Max(1F, Math.Min(radius, Math.Min(rectangle.Width, rectangle.Height) / 2F));
+            float diameter = safeRadius * 2F;
+            path.AddArc(rectangle.Left, rectangle.Top, diameter, diameter, 180, 90);
+            path.AddArc(rectangle.Right - diameter, rectangle.Top, diameter, diameter, 270, 90);
+            path.AddArc(rectangle.Right - diameter, rectangle.Bottom - diameter, diameter, diameter, 0, 90);
+            path.AddArc(rectangle.Left, rectangle.Bottom - diameter, diameter, diameter, 90, 90);
+            path.CloseFigure();
+            return path;
+        }
+
+        private static RectangleF Offset(RectangleF bounds, float x, float y)
+        {
+            return new RectangleF(bounds.X + x, bounds.Y + y, bounds.Width, bounds.Height);
+        }
+
+        private static Color WithStrength(Color color, float strength)
+        {
+            int alpha = (int)Math.Round(color.A * Math.Max(0F, Math.Min(1F, strength)));
+            return Color.FromArgb(alpha, color.R, color.G, color.B);
+        }
+    }
+
+    internal static class GlassTextRenderer
+    {
+        public static void Draw(Graphics graphics, string text, Font font, RectangleF bounds, Color color, StringAlignment alignment, StringTrimming trimming)
+        {
+            if (graphics == null || font == null || String.IsNullOrEmpty(text) || bounds.Width <= 0F || bounds.Height <= 0F) return;
+            GraphicsState state = graphics.Save();
+            try
+            {
+                graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+                using (StringFormat format = new StringFormat(StringFormat.GenericTypographic))
+                using (Brush brush = new SolidBrush(color))
+                {
+                    format.Alignment = alignment;
+                    format.LineAlignment = StringAlignment.Center;
+                    format.Trimming = trimming;
+                    format.FormatFlags = StringFormatFlags.NoWrap;
+                    graphics.DrawString(text, font, brush, bounds, format);
+                }
+            }
+            finally
+            {
+                graphics.Restore(state);
+            }
+        }
+    }
+
+    internal static class GlassBackdropRenderer
+    {
+        private static Bitmap cachedBackdrop;
+        private static Size cachedSize;
+        private static bool cachedDark;
+
+        public static void Invalidate()
+        {
+            if (cachedBackdrop != null) cachedBackdrop.Dispose();
+            cachedBackdrop = null;
+            cachedSize = Size.Empty;
+        }
+
+        public static void Paint(Graphics graphics, Control control)
+        {
+            if (graphics == null || control == null || control.ClientSize.Width <= 0 || control.ClientSize.Height <= 0) return;
+            Form form = control as Form ?? control.FindForm();
+            if (form == null || form.ClientSize.Width <= 0 || form.ClientSize.Height <= 0)
+            {
+                graphics.Clear(MaterialPanel.ResolveBackgroundColor(control.Parent));
+                return;
+            }
+
+            EnsureBackdrop(form.ClientSize);
+            Point offset = OffsetFromForm(control, form);
+            Rectangle source = new Rectangle(
+                Math.Max(0, Math.Min(cachedBackdrop.Width - 1, offset.X)),
+                Math.Max(0, Math.Min(cachedBackdrop.Height - 1, offset.Y)),
+                Math.Min(control.ClientSize.Width, Math.Max(1, cachedBackdrop.Width - Math.Max(0, offset.X))),
+                Math.Min(control.ClientSize.Height, Math.Max(1, cachedBackdrop.Height - Math.Max(0, offset.Y))));
+            Rectangle destination = new Rectangle(0, 0, source.Width, source.Height);
+            graphics.DrawImage(cachedBackdrop, destination, source, GraphicsUnit.Pixel);
+            if (destination.Width < control.ClientSize.Width || destination.Height < control.ClientSize.Height)
+            {
+                using (Brush fallback = new SolidBrush(AppTheme.WindowBase))
+                {
+                    if (destination.Width < control.ClientSize.Width) graphics.FillRectangle(fallback, destination.Width, 0, control.ClientSize.Width - destination.Width, control.ClientSize.Height);
+                    if (destination.Height < control.ClientSize.Height) graphics.FillRectangle(fallback, 0, destination.Height, control.ClientSize.Width, control.ClientSize.Height - destination.Height);
+                }
+            }
+        }
+
+        public static void PaintInherited(Graphics graphics, Control control)
+        {
+            Paint(graphics, control);
+            List<Control> ancestors = new List<Control>();
+            for (Control current = control.Parent; current != null && !(current is Form); current = current.Parent) ancestors.Insert(0, current);
+            foreach (Control ancestor in ancestors)
+            {
+                MaterialPanel material = ancestor as MaterialPanel;
+                RoundedPanel rounded = ancestor as RoundedPanel;
+                if (material != null) Overlay(graphics, material.MaterialColor.IsEmpty ? material.BackColor : material.MaterialColor, control.ClientRectangle);
+                else if (rounded != null) Overlay(graphics, rounded.MaterialColor.IsEmpty ? rounded.BackColor : rounded.MaterialColor, control.ClientRectangle);
+            }
+        }
+
+        public static void Overlay(Graphics graphics, Color color, Rectangle bounds)
+        {
+            if (color == Color.Transparent || color.A == 0 || bounds.Width <= 0 || bounds.Height <= 0) return;
+            using (Brush brush = new SolidBrush(color)) graphics.FillRectangle(brush, bounds);
+        }
+
+        private static Point OffsetFromForm(Control control, Form form)
+        {
+            int x = 0;
+            int y = 0;
+            for (Control current = control; current != null && current != form; current = current.Parent)
+            {
+                x += current.Left;
+                y += current.Top;
+            }
+            return new Point(x, y);
+        }
+
+        private static void EnsureBackdrop(Size size)
+        {
+            int width = Math.Max(1, size.Width);
+            int height = Math.Max(1, size.Height);
+            if (cachedBackdrop != null && cachedSize.Width == width && cachedSize.Height == height && cachedDark == AppTheme.Dark) return;
+            Invalidate();
+            cachedSize = new Size(width, height);
+            cachedDark = AppTheme.Dark;
+            cachedBackdrop = new Bitmap(width, height, PixelFormat.Format32bppPArgb);
+            using (Graphics graphics = Graphics.FromImage(cachedBackdrop))
+            {
+                graphics.Clear(AppTheme.WindowBase);
+            }
         }
     }
 
@@ -509,7 +704,7 @@ namespace MinecraftWorldBrowser
             catch { return CreateFallbackIcon(); }
         }
 
-        private static Image CreateFallbackIcon()
+        internal static Image CreateFallbackIcon()
         {
             Bitmap bitmap = new Bitmap(40, 40);
             using (Graphics graphics = Graphics.FromImage(bitmap))
@@ -1344,11 +1539,11 @@ namespace MinecraftWorldBrowser
         public SmoothComboBox()
         {
             DropDownHeight = 260;
-            BackColor = AppTheme.GlassSurface;
             ForeColor = AppTheme.Ink;
             AccessibleRole = AccessibleRole.ComboBox;
             TabStop = true;
-            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.Selectable, true);
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.ResizeRedraw | ControlStyles.Selectable | ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
         }
 
         public List<object> Items { get { return items; } }
@@ -1387,16 +1582,18 @@ namespace MinecraftWorldBrowser
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            Color outside = MaterialPanel.ResolveBackgroundColor(Parent);
-            e.Graphics.Clear(outside);
-            RectangleF bounds = new RectangleF(0.5F, 0.5F, Math.Max(1, Width - 1F), Math.Max(1, Height - 1F));
-            Color fill = pressed || DroppedDown ? AppTheme.SurfaceRaised : (hovered ? AppTheme.Hover : BackColor);
-            using (GraphicsPath path = RoundedPath(bounds, 7F))
-            using (Brush brush = new SolidBrush(fill)) e.Graphics.FillPath(brush, path);
-            using (GraphicsPath path = RoundedPath(bounds, 7F))
-            using (Pen pen = new Pen(DroppedDown || Focused ? Color.FromArgb(170, AppTheme.Accent) : AppTheme.InputBorder, 1F)) e.Graphics.DrawPath(pen, path);
+            RectangleF bounds = new RectangleF(4F, 3F, Math.Max(1, Width - 8F), Math.Max(1, Height - 7F));
+            bool inset = pressed || DroppedDown;
+            Color fill = hovered && !inset ? AppTheme.SecondaryHover : AppTheme.SecondaryFill;
+            NeumorphicRenderer.DrawRaised(e.Graphics, bounds, 15, fill, inset ? 0F : 1F);
+            NeumorphicRenderer.DrawInset(e.Graphics, bounds, 15, inset ? 1F : 0F);
+            if (DroppedDown || Focused)
+            {
+                using (GraphicsPath focusPath = NeumorphicRenderer.RoundedPath(new RectangleF(bounds.X + 1F, bounds.Y + 1F, bounds.Width - 2F, bounds.Height - 2F), 14F))
+                using (Pen pen = new Pen(Color.FromArgb(165, AppTheme.Accent), 1F)) e.Graphics.DrawPath(pen, focusPath);
+            }
             string text = SelectedItem == null ? "" : Convert.ToString(SelectedItem);
-            TextRenderer.DrawText(e.Graphics, text, Font, new Rectangle(10, 0, Math.Max(1, Width - 36), Height), ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+            GlassTextRenderer.Draw(e.Graphics, text, Font, new RectangleF(10, 0, Math.Max(1, Width - 36), Height), ForeColor, StringAlignment.Near, StringTrimming.EllipsisCharacter);
             Point center = new Point(Width - 15, Height / 2);
             using (Pen pen = new Pen(AppTheme.Muted, 1.5F))
             {
@@ -1408,7 +1605,11 @@ namespace MinecraftWorldBrowser
         internal void PaintForTest(Bitmap bitmap)
         {
             using (Graphics graphics = Graphics.FromImage(bitmap))
-            using (PaintEventArgs args = new PaintEventArgs(graphics, ClientRectangle)) OnPaint(args);
+            using (PaintEventArgs args = new PaintEventArgs(graphics, ClientRectangle))
+            {
+                OnPaintBackground(args);
+                OnPaint(args);
+            }
         }
 
         protected override void OnMouseEnter(EventArgs e) { hovered = true; Invalidate(); base.OnMouseEnter(e); }
@@ -1468,7 +1669,7 @@ namespace MinecraftWorldBrowser
 
         internal void ApplyTheme()
         {
-            BackColor = AppTheme.GlassSurface;
+            BackColor = Color.Transparent;
             ForeColor = AppTheme.Ink;
             if (popupList != null && !popupList.IsDisposed)
             {
@@ -1636,6 +1837,9 @@ namespace MinecraftWorldBrowser
     {
         private bool hovered;
         private bool pressed;
+        private readonly Timer hoverTimer = new Timer();
+        private float hoverProgress;
+        private float pressProgress;
         public Color FillColor { get; set; }
         public Color HoverBackColor { get; set; }
         public Color PressedBackColor { get; set; }
@@ -1649,7 +1853,7 @@ namespace MinecraftWorldBrowser
 
         public ModernButton()
         {
-            CornerRadius = 8;
+            CornerRadius = 18;
             FillColor = Color.Empty;
             HoverBackColor = AppTheme.SecondaryHover;
             PressedBackColor = AppTheme.SecondaryPressed;
@@ -1660,17 +1864,30 @@ namespace MinecraftWorldBrowser
             GlyphFontSize = 10F;
             AccessibleRole = AccessibleRole.PushButton;
             TabStop = true;
-            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.Opaque | ControlStyles.ResizeRedraw, true);
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor | ControlStyles.ResizeRedraw, true);
+            BackColor = Color.Transparent;
+            hoverTimer.Interval = 15;
+            hoverTimer.Tick += delegate
+            {
+                float hoverTarget = hovered ? 1F : 0F;
+                float pressTarget = pressed ? 1F : 0F;
+                hoverProgress += hovered ? 0.14F : -0.18F;
+                hoverProgress = Math.Max(0F, Math.Min(1F, hoverProgress));
+                pressProgress += pressed ? 0.12F : -0.12F;
+                pressProgress = Math.Max(0F, Math.Min(1F, pressProgress));
+                Invalidate();
+                if (Math.Abs(hoverProgress - hoverTarget) < 0.001F && Math.Abs(pressProgress - pressTarget) < 0.001F) hoverTimer.Stop();
+            };
         }
 
-        protected override void OnPaintBackground(PaintEventArgs e) { }
-        protected override void OnMouseEnter(EventArgs e) { hovered = true; RefreshButtonSurface(); base.OnMouseEnter(e); }
-        protected override void OnMouseLeave(EventArgs e) { hovered = false; pressed = false; RefreshButtonSurface(); base.OnMouseLeave(e); }
-        protected override void OnMouseDown(MouseEventArgs e) { if (e.Button == MouseButtons.Left) pressed = true; RefreshButtonSurface(); base.OnMouseDown(e); }
-        protected override void OnMouseUp(MouseEventArgs e) { pressed = false; RefreshButtonSurface(); base.OnMouseUp(e); }
-        protected override void OnEnabledChanged(EventArgs e) { RefreshButtonSurface(); base.OnEnabledChanged(e); }
+        protected override void OnMouseEnter(EventArgs e) { hovered = true; hoverTimer.Start(); RefreshButtonSurface(); base.OnMouseEnter(e); }
+        protected override void OnMouseLeave(EventArgs e) { hovered = false; pressed = false; hoverTimer.Start(); RefreshButtonSurface(); base.OnMouseLeave(e); }
+        protected override void OnMouseDown(MouseEventArgs e) { if (e.Button == MouseButtons.Left) { pressed = true; hoverTimer.Start(); } RefreshButtonSurface(); base.OnMouseDown(e); }
+        protected override void OnMouseUp(MouseEventArgs e) { pressed = false; hoverTimer.Start(); RefreshButtonSurface(); base.OnMouseUp(e); }
+        protected override void OnMouseCaptureChanged(EventArgs e) { if (!Capture) { pressed = false; hoverTimer.Start(); RefreshButtonSurface(); } base.OnMouseCaptureChanged(e); }
+        protected override void OnEnabledChanged(EventArgs e) { if (!Enabled) { pressed = false; pressProgress = 0F; } RefreshButtonSurface(); base.OnEnabledChanged(e); }
         protected override void OnGotFocus(EventArgs e) { RefreshButtonSurface(); base.OnGotFocus(e); }
-        protected override void OnLostFocus(EventArgs e) { RefreshButtonSurface(); base.OnLostFocus(e); }
+        protected override void OnLostFocus(EventArgs e) { pressed = false; pressProgress = 0F; RefreshButtonSurface(); base.OnLostFocus(e); }
 
         protected override bool IsInputKey(Keys keyData)
         {
@@ -1683,6 +1900,7 @@ namespace MinecraftWorldBrowser
             if (Enabled && (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter))
             {
                 pressed = true;
+                pressProgress = 1F;
                 RefreshButtonSurface();
                 e.Handled = true;
             }
@@ -1694,6 +1912,7 @@ namespace MinecraftWorldBrowser
             if (pressed && (e.KeyCode == Keys.Space || e.KeyCode == Keys.Enter))
             {
                 pressed = false;
+                pressProgress = 0F;
                 RefreshButtonSurface();
                 OnClick(EventArgs.Empty);
                 e.Handled = true;
@@ -1704,36 +1923,32 @@ namespace MinecraftWorldBrowser
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            Color outside = MaterialPanel.ResolveBackgroundColor(Parent);
-            e.Graphics.Clear(outside);
-            RectangleF bounds = new RectangleF(0.5F, 0.5F, Width - 1F, Height - 1F);
-            Color normal = FillColor.IsEmpty ? BackColor : FillColor;
-            Color fill = Enabled ? (pressed ? PressedBackColor : (hovered ? HoverBackColor : normal)) : AppTheme.DisabledFill;
-            Color text = Enabled ? ForeColor : AppTheme.DisabledText;
-            using (GraphicsPath path = RoundedPath(bounds, CornerRadius))
-            using (Brush brush = new SolidBrush(fill)) e.Graphics.FillPath(brush, path);
+            RectangleF bounds = new RectangleF(4F, 3.5F, Math.Max(1F, Width - 8F), Math.Max(1F, Height - 8F));
+            Color normal = FillColor.IsEmpty ? AppTheme.SecondaryFill : FillColor;
+            float easedHover = hoverProgress * hoverProgress * (3F - 2F * hoverProgress);
+            Color animatedFill = BlendColor(normal, HoverBackColor, easedHover);
+            Color fill = Enabled ? BlendColor(animatedFill, PressedBackColor, pressProgress * 0.22F) : AppTheme.DisabledFill;
+            Color text = Enabled ? BlendColor(ForeColor, AppTheme.Accent, IsPrimary ? 0F : easedHover * 0.58F) : AppTheme.DisabledText;
+            NeumorphicRenderer.DrawRaised(e.Graphics, bounds, CornerRadius, fill, Enabled ? 1F - pressProgress : 0.28F);
+            if (Enabled) NeumorphicRenderer.DrawInset(e.Graphics, bounds, CornerRadius, pressProgress);
             if (BorderColor != Color.Transparent)
             {
-                using (GraphicsPath path = RoundedPath(bounds, CornerRadius))
+                using (GraphicsPath path = NeumorphicRenderer.RoundedPath(bounds, CornerRadius))
                 using (Pen pen = new Pen(Enabled ? BorderColor : AppTheme.Line, 1F)) e.Graphics.DrawPath(pen, path);
             }
-            if (HighlightColor != Color.Transparent && Height > 4)
-            {
-                using (GraphicsPath highlightPath = RoundedPath(new RectangleF(1.5F, 1.5F, Math.Max(1, Width - 3F), Math.Max(1, Height - 3F)), Math.Max(3, CornerRadius - 1)))
-                using (Pen highlightPen = new Pen(HighlightColor, 1F))
-                {
-                    e.Graphics.SetClip(new Rectangle(1, 1, Math.Max(1, Width - 2), Math.Max(1, Height / 2)));
-                    e.Graphics.DrawPath(highlightPen, highlightPath);
-                    e.Graphics.ResetClip();
-                }
-            }
-            DrawContent(e.Graphics, text, pressed ? 1 : 0);
+            DrawContent(e.Graphics, text, 0);
             if (Focused && ShowFocusCues && Enabled)
             {
-                RectangleF focusBounds = new RectangleF(2.5F, 2.5F, Math.Max(1, Width - 5F), Math.Max(1, Height - 5F));
-                using (GraphicsPath focusPath = RoundedPath(focusBounds, Math.Max(3, CornerRadius - 2)))
+                RectangleF focusBounds = new RectangleF(bounds.X + 1F, bounds.Y + 1F, Math.Max(1, bounds.Width - 2F), Math.Max(1, bounds.Height - 2F));
+                using (GraphicsPath focusPath = NeumorphicRenderer.RoundedPath(focusBounds, Math.Max(3, CornerRadius - 2)))
                 using (Pen focusPen = new Pen(Color.FromArgb(175, AppTheme.Accent), 1F)) e.Graphics.DrawPath(focusPen, focusPath);
             }
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing) hoverTimer.Dispose();
+            base.Dispose(disposing);
         }
 
         private void RefreshButtonSurface()
@@ -1745,7 +1960,16 @@ namespace MinecraftWorldBrowser
         internal void PaintForTest(Bitmap bitmap)
         {
             using (Graphics graphics = Graphics.FromImage(bitmap))
-            using (PaintEventArgs args = new PaintEventArgs(graphics, ClientRectangle)) OnPaint(args);
+            using (PaintEventArgs args = new PaintEventArgs(graphics, ClientRectangle))
+            {
+                OnPaintBackground(args);
+                OnPaint(args);
+            }
+        }
+
+        internal void PaintContentForTest(Bitmap bitmap)
+        {
+            using (Graphics graphics = Graphics.FromImage(bitmap)) DrawContent(graphics, ForeColor, 0);
         }
 
         internal int ContentWidthForTest { get { return MeasureContentWidth(); } }
@@ -1766,9 +1990,9 @@ namespace MinecraftWorldBrowser
         {
             if (String.IsNullOrEmpty(Glyph))
             {
-                Rectangle textBounds = ClientRectangle;
+                RectangleF textBounds = ClientRectangle;
                 textBounds.Offset(0, verticalOffset);
-                TextRenderer.DrawText(graphics, Text, Font, textBounds, color, TextFormatFlags.HorizontalCenter | TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+                GlassTextRenderer.Draw(graphics, Text, Font, textBounds, color, StringAlignment.Center, StringTrimming.EllipsisCharacter);
                 return;
             }
 
@@ -1780,17 +2004,37 @@ namespace MinecraftWorldBrowser
                 int gap = textWidth > 0 ? 7 : 0;
                 int totalWidth = glyphWidth + gap + textWidth;
                 int left = Math.Max(6, (ClientSize.Width - totalWidth) / 2);
-                Rectangle glyphBounds = new Rectangle(left, verticalOffset, glyphWidth, ClientSize.Height);
-                TextRenderer.DrawText(graphics, Glyph, glyphFont, glyphBounds, color, flags);
-                Rectangle labelBounds = new Rectangle(left + glyphWidth + gap, verticalOffset, Math.Max(1, ClientSize.Width - left - glyphWidth - gap - 6), ClientSize.Height);
-                TextRenderer.DrawText(graphics, Text, Font, labelBounds, color, flags | TextFormatFlags.EndEllipsis);
+                RectangleF glyphBounds = new RectangleF(left, verticalOffset, glyphWidth, ClientSize.Height);
+                GlassTextRenderer.Draw(graphics, Glyph, glyphFont, glyphBounds, color, StringAlignment.Near, StringTrimming.None);
+                RectangleF labelBounds = new RectangleF(left + glyphWidth + gap, verticalOffset, Math.Max(1, ClientSize.Width - left - glyphWidth - gap - 6), ClientSize.Height);
+                GlassTextRenderer.Draw(graphics, Text, Font, labelBounds, color, StringAlignment.Near, StringTrimming.EllipsisCharacter);
             }
         }
 
         internal void SetHoveredForTest(bool value)
         {
             hovered = value;
+            hoverProgress = value ? 1F : 0F;
             pressed = false;
+            pressProgress = 0F;
+        }
+
+        internal void SetPressedForTest(bool value)
+        {
+            pressed = value;
+            pressProgress = value ? 1F : 0F;
+        }
+
+        internal float PressProgressForTest { get { return pressProgress; } }
+
+        private static Color BlendColor(Color from, Color to, float progress)
+        {
+            progress = Math.Max(0F, Math.Min(1F, progress));
+            return Color.FromArgb(
+                (int)Math.Round(from.A + (to.A - from.A) * progress),
+                (int)Math.Round(from.R + (to.R - from.R) * progress),
+                (int)Math.Round(from.G + (to.G - from.G) * progress),
+                (int)Math.Round(from.B + (to.B - from.B) * progress));
         }
 
         private static GraphicsPath RoundedPath(RectangleF rectangle, int radius)
@@ -1813,45 +2057,33 @@ namespace MinecraftWorldBrowser
         public Color HighlightColor { get; set; }
         public Color ShadowColor { get; set; }
         public int CornerRadius { get; set; }
+        public bool DrawSheen { get; set; }
+        public int SheenHeight { get; set; }
 
         public RoundedPanel()
         {
             BorderColor = Color.Transparent;
-            MaterialColor = Color.Empty;
+            MaterialColor = AppTheme.GlassSurface;
             HighlightColor = AppTheme.GlassEdge;
             ShadowColor = AppTheme.Shadow;
             CornerRadius = 8;
+            DrawSheen = false;
+            SheenHeight = 0;
             SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
         }
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            Color outside = MaterialPanel.ResolveBackgroundColor(Parent);
-            e.Graphics.Clear(outside);
-            RectangleF bounds = new RectangleF(1.5F, 0.5F, Math.Max(1, Width - 3F), Math.Max(1, Height - 3F));
-            if (ShadowColor != Color.Transparent)
-            {
-                using (GraphicsPath shadowPath = RoundedPath(new RectangleF(bounds.X, bounds.Y + 1.5F, bounds.Width, bounds.Height), CornerRadius))
-                using (Brush shadowBrush = new SolidBrush(ShadowColor)) e.Graphics.FillPath(shadowBrush, shadowPath);
-            }
-            Color fill = MaterialColor.IsEmpty ? BackColor : MaterialColor;
-            using (GraphicsPath path = RoundedPath(bounds, CornerRadius))
-            using (Brush brush = new SolidBrush(fill)) e.Graphics.FillPath(brush, path);
+            base.OnPaintBackground(e);
+            RectangleF bounds = new RectangleF(4F, 3F, Math.Max(1, Width - 8F), Math.Max(1, Height - 8F));
+            Color fill = MaterialColor.IsEmpty ? AppTheme.GlassSurface : MaterialColor;
+            NeumorphicRenderer.DrawRaised(e.Graphics, bounds, CornerRadius, fill, ShadowColor == Color.Transparent ? 0F : 1F);
             if (BorderColor != Color.Transparent)
             {
-                using (GraphicsPath path = RoundedPath(bounds, CornerRadius))
+                using (GraphicsPath path = NeumorphicRenderer.RoundedPath(bounds, CornerRadius))
                 using (Pen pen = new Pen(BorderColor, 1F)) e.Graphics.DrawPath(pen, path);
-            }
-            if (HighlightColor != Color.Transparent)
-            {
-                using (GraphicsPath highlightPath = RoundedPath(new RectangleF(bounds.X + 0.5F, bounds.Y + 0.5F, Math.Max(1, bounds.Width - 1F), Math.Max(1, bounds.Height - 1F)), Math.Max(3, CornerRadius - 1)))
-                using (Pen highlightPen = new Pen(HighlightColor, 1F))
-                {
-                    e.Graphics.SetClip(new Rectangle(1, 0, Math.Max(1, Width - 2), Math.Max(1, Height / 2)));
-                    e.Graphics.DrawPath(highlightPen, highlightPath);
-                    e.Graphics.ResetClip();
-                }
             }
         }
 
@@ -1890,9 +2122,9 @@ namespace MinecraftWorldBrowser
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            Color baseColor = ResolveBackgroundColor(Parent);
-            Color fill = MaterialColor.IsEmpty ? BackColor : Blend(MaterialColor, baseColor);
-            e.Graphics.Clear(fill);
+            GlassBackdropRenderer.PaintInherited(e.Graphics, this);
+            Color fill = MaterialColor.IsEmpty ? BackColor : MaterialColor;
+            GlassBackdropRenderer.Overlay(e.Graphics, fill, ClientRectangle);
             if (DrawRightEdge && Width > 0)
             {
                 using (Pen edge = new Pen(EdgeColor, 1F)) e.Graphics.DrawLine(edge, Width - 1, 0, Width - 1, Height);
@@ -2223,7 +2455,7 @@ namespace MinecraftWorldBrowser
             header.Controls.Add(subtitle);
             root.Controls.Add(header, 0, 0);
 
-            RoundedPanel information = new RoundedPanel { Dock = DockStyle.Fill, BackColor = AppTheme.GlassSurface, MaterialColor = AppTheme.Dark ? AppTheme.SurfaceRaised : Color.FromArgb(150, 255, 255, 255), BorderColor = AppTheme.Dark ? AppTheme.Line : Color.FromArgb(125, 255, 255, 255), CornerRadius = 10, Padding = new Padding(16, 12, 16, 10), Margin = new Padding(0, 0, 0, 10) };
+            RoundedPanel information = new RoundedPanel { Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = AppTheme.SurfaceRaised, BorderColor = Color.Transparent, CornerRadius = 10, Padding = new Padding(16, 12, 16, 10), Margin = new Padding(0, 0, 0, 10) };
             TableLayoutPanel fields = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 2, RowCount = 8, BackColor = Color.Transparent };
             fields.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 118F));
             fields.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
@@ -2245,7 +2477,7 @@ namespace MinecraftWorldBrowser
             tagsBox.Size = new Size(310, 30);
             tagsBox.Anchor = AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
             tagsBox.BorderStyle = BorderStyle.FixedSingle;
-            tagsBox.BackColor = AppTheme.GlassSurface;
+            tagsBox.BackColor = AppTheme.SurfaceRaised;
             tagsBox.ForeColor = AppTheme.Ink;
             tagsBox.Text = world.Tags ?? "";
             autoBackupBox.Text = "\u5b58\u6863\u53d8\u5316\u65f6\u81ea\u52a8\u5907\u4efd";
@@ -2264,7 +2496,7 @@ namespace MinecraftWorldBrowser
             notesBox.Multiline = true;
             notesBox.ScrollBars = ScrollBars.Vertical;
             notesBox.BorderStyle = BorderStyle.FixedSingle;
-            notesBox.BackColor = AppTheme.GlassSurface;
+            notesBox.BackColor = AppTheme.SurfaceRaised;
             notesBox.ForeColor = AppTheme.Ink;
             notesBox.Text = world.Notes ?? "";
             notesPanel.Controls.Add(notesBox);
@@ -2298,7 +2530,7 @@ namespace MinecraftWorldBrowser
 
         private ModernButton CreateButton(string text, bool primary)
         {
-            ModernButton button = new ModernButton { Text = text, Size = new Size(108, 36), IsPrimary = primary, BackColor = primary ? AppTheme.Accent : AppTheme.GlassSurface, FillColor = primary ? Color.FromArgb(226, AppTheme.Accent) : AppTheme.SecondaryFill, ForeColor = primary ? Color.White : AppTheme.Ink, HoverBackColor = primary ? Color.FromArgb(238, Math.Min(255, AppTheme.Accent.R + 18), Math.Min(255, AppTheme.Accent.G + 10), AppTheme.Accent.B) : AppTheme.SecondaryHover, PressedBackColor = primary ? Color.FromArgb(242, 0, 101, 214) : AppTheme.SecondaryPressed, BorderColor = primary ? Color.FromArgb(110, 255, 255, 255) : AppTheme.SecondaryBorder, HighlightColor = AppTheme.GlassEdge, CornerRadius = 9, Cursor = Cursors.Hand };
+            ModernButton button = new ModernButton { Text = text, Size = new Size(108, 36), IsPrimary = primary, BackColor = Color.Transparent, FillColor = AppTheme.SecondaryFill, ForeColor = primary ? AppTheme.Accent : AppTheme.Ink, HoverBackColor = AppTheme.SecondaryHover, PressedBackColor = AppTheme.SecondaryPressed, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, CornerRadius = 9, Cursor = Cursors.Hand };
             return button;
         }
 
@@ -2323,6 +2555,7 @@ namespace MinecraftWorldBrowser
         private readonly string metadataFile;
         private readonly string backupHistoryFile;
         private readonly string themeFile;
+        private readonly bool visualPreview;
         private readonly List<string> roots = new List<string>();
         private readonly Dictionary<string, WorldMetadata> metadata = new Dictionary<string, WorldMetadata>(StringComparer.OrdinalIgnoreCase);
         private readonly List<BackupHistoryEntry> backupHistory = new List<BackupHistoryEntry>();
@@ -2388,7 +2621,7 @@ namespace MinecraftWorldBrowser
 
         protected override void OnPaintBackground(PaintEventArgs e)
         {
-            e.Graphics.Clear(WindowBase);
+            GlassBackdropRenderer.Paint(e.Graphics, this);
         }
 
         protected override void OnResize(EventArgs e)
@@ -2405,6 +2638,7 @@ namespace MinecraftWorldBrowser
         protected override void OnShown(EventArgs e)
         {
             base.OnShown(e);
+            if (visualPreview) return;
             Rectangle working = Screen.FromControl(this).WorkingArea;
             int targetWidth = Math.Max(MinimumSize.Width, Math.Min(Width, working.Width - 24));
             int targetHeight = Math.Max(MinimumSize.Height, Math.Min(Height, working.Height - 24));
@@ -2421,9 +2655,10 @@ namespace MinecraftWorldBrowser
             foreach (Control child in parent.Controls) PerformLayoutTree(child);
         }
 
-        public MainForm(string appDirectory)
+        public MainForm(string appDirectory, bool visualPreview = false)
         {
             this.appDirectory = appDirectory;
+            this.visualPreview = visualPreview;
             settingsDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PCL2WorldBrowser");
             settingsFile = Path.Combine(settingsDirectory, "roots.txt");
             onboardingFile = Path.Combine(settingsDirectory, "onboarding-1.2.1.complete");
@@ -2457,7 +2692,7 @@ namespace MinecraftWorldBrowser
             sidebar.Name = "Sidebar";
             Controls.Add(sidebar);
 
-            MaterialPanel main = new MaterialPanel { Name = "Main", Dock = DockStyle.Fill, Padding = new Padding(22, 22, 22, 18), BackColor = Canvas, MaterialColor = AppTheme.Dark ? Canvas : Color.FromArgb(145, 255, 255, 255) };
+            MaterialPanel main = new MaterialPanel { Name = "Main", Dock = DockStyle.Fill, Padding = new Padding(24, 22, 24, 18), BackColor = Canvas, MaterialColor = Canvas };
             Controls.Add(main);
             main.BringToFront();
 
@@ -2472,7 +2707,7 @@ namespace MinecraftWorldBrowser
 
             Panel header = new Panel { Name = "MainHeader", Dock = DockStyle.Fill, BackColor = Color.Transparent, Margin = new Padding(0) };
             Label title = new Label { Name = "MainTitle", Text = "\u4e16\u754c\u6d4f\u89c8\u5668", Font = new Font(Font.FontFamily, 20F, FontStyle.Bold), ForeColor = Ink, AutoSize = true, Location = new Point(0, 0) };
-            Label subtitle = new Label { Text = "Minecraft Java \u5b58\u6863", ForeColor = Muted, AutoSize = true, Location = new Point(2, 40) };
+            Label subtitle = new Label { Text = "Minecraft Java  \u00b7  \u8de8\u542f\u52a8\u5668\u5b58\u6863", ForeColor = Muted, AutoSize = true, Location = new Point(2, 40) };
             header.Controls.Add(title);
             header.Controls.Add(subtitle);
             summaryLabel.Text = "0  \u4e2a\u4e16\u754c   /   0  \u4e2a\u76ee\u5f55";
@@ -2502,7 +2737,7 @@ namespace MinecraftWorldBrowser
             contentLayout.Controls.Add(header, 0, 0);
 
             Panel toolbar = new Panel { Name = "CommandToolbar", Dock = DockStyle.Fill, BackColor = Color.Transparent, Margin = new Padding(0) };
-            RoundedPanel searchSurface = new RoundedPanel { Name = "SearchSurface", Location = new Point(0, 5), Size = new Size(620, 42), BackColor = GlassSurface, MaterialColor = GlassSurface, BorderColor = AppTheme.Dark ? Line : Color.FromArgb(125, 255, 255, 255), HighlightColor = GlassEdge, ShadowColor = AppTheme.Shadow, CornerRadius = 10 };
+            RoundedPanel searchSurface = new RoundedPanel { Name = "SearchSurface", Location = new Point(0, 4), Size = new Size(620, 44), BackColor = Color.Transparent, MaterialColor = GlassSurface, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 18, DrawSheen = false, SheenHeight = 0 };
             searchSurface.Cursor = Cursors.IBeam;
             searchBox.Name = "SearchBox";
             searchBox.Width = 580;
@@ -2514,10 +2749,10 @@ namespace MinecraftWorldBrowser
             searchBox.ForeColor = Ink;
             searchBox.TextChanged += delegate { ApplyFilter(); };
             searchSurface.Controls.Add(searchBox);
-            Label searchIcon = new Label { Name = "SearchIcon", Text = "\uE721", ForeColor = Muted, Font = new Font("Segoe MDL2 Assets", 11F), AutoSize = true, Location = new Point(12, 13), BackColor = GlassSurface };
+            Label searchIcon = new Label { Name = "SearchIcon", Text = "\uE721", ForeColor = Muted, Font = new Font("Segoe MDL2 Assets", 11F), AutoSize = true, Location = new Point(12, 13), BackColor = Color.Transparent };
             searchIcon.Cursor = Cursors.IBeam;
             searchSurface.Controls.Add(searchIcon);
-            Label searchHint = new Label { Name = "SearchHint", Text = "\u641c\u7d22\u4e16\u754c\u3001\u7248\u672c\u6216\u8def\u5f84", ForeColor = Muted, AutoSize = true, Location = new Point(40, 13), BackColor = GlassSurface };
+            Label searchHint = new Label { Name = "SearchHint", Text = "\u641c\u7d22\u4e16\u754c\u3001\u7248\u672c\u6216\u8def\u5f84", ForeColor = Muted, AutoSize = true, Location = new Point(40, 13), BackColor = Color.Transparent };
             searchHint.Cursor = Cursors.IBeam;
             searchSurface.Controls.Add(searchHint);
             searchHint.BringToFront();
@@ -2589,7 +2824,7 @@ namespace MinecraftWorldBrowser
             contentLayout.Controls.Add(browserLayout, 0, 3);
             ConfigureGrid();
             grid.Margin = new Padding(0);
-            RoundedPanel gridSurface = new RoundedPanel { Name = "GridSurface", Dock = DockStyle.Fill, BackColor = Surface, MaterialColor = AppTheme.Dark ? Surface : Color.FromArgb(190, 255, 255, 255), BorderColor = AppTheme.Dark ? Line : Color.FromArgb(130, 255, 255, 255), HighlightColor = GlassEdge, ShadowColor = AppTheme.Shadow, CornerRadius = 10, Margin = new Padding(0), Padding = new Padding(2) };
+            RoundedPanel gridSurface = new RoundedPanel { Name = "GridSurface", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 16, Margin = new Padding(0), Padding = new Padding(4) };
             gridSurface.Controls.Add(grid);
             gridVerticalScroll.Name = "GridVerticalScroll";
             gridVerticalScroll.Orientation = Orientation.Vertical;
@@ -2624,7 +2859,7 @@ namespace MinecraftWorldBrowser
             browserLayout.Controls.Add(gridSurface, 0, 0);
 
             Panel footer = new Panel { Name = "StatusFooter", Dock = DockStyle.Fill, BackColor = Color.Transparent, Margin = new Padding(0) };
-            RoundedPanel details = new RoundedPanel { Name = "DetailsPanel", Dock = DockStyle.Top, Height = 58, BackColor = GlassSurface, MaterialColor = AppTheme.Dark ? SurfaceRaised : Color.FromArgb(138, 255, 255, 255), BorderColor = AppTheme.Dark ? Line : Color.FromArgb(120, 255, 255, 255), HighlightColor = GlassEdge, ShadowColor = AppTheme.Shadow, CornerRadius = 10, Margin = new Padding(0, 12, 0, 0) };
+            RoundedPanel details = new RoundedPanel { Name = "DetailsPanel", Dock = DockStyle.Top, Height = 60, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 16, Margin = new Padding(0, 12, 0, 0) };
             detailName.Text = "\u6240\u9009\u5730\u56fe\u5b8c\u6574\u8def\u5f84";
             detailName.ForeColor = Muted;
             detailName.Font = new Font(Font.FontFamily, 9F, FontStyle.Regular);
@@ -2719,6 +2954,7 @@ namespace MinecraftWorldBrowser
 
             Load += delegate
             {
+                if (this.visualPreview) return;
                 bool firstRun = LoadRoots();
                 LoadBackupHistory();
                 if (firstRun) PromptForInitialRoot();
@@ -2753,7 +2989,7 @@ namespace MinecraftWorldBrowser
 
         private Panel BuildSidebar()
         {
-            MaterialPanel sidebar = new MaterialPanel { Dock = DockStyle.Left, Width = 292, BackColor = Sidebar, MaterialColor = AppTheme.Dark ? Sidebar : Color.FromArgb(112, 248, 251, 255), EdgeColor = AppTheme.Dark ? Line : Color.FromArgb(115, 255, 255, 255), DrawRightEdge = true, Padding = new Padding(18, 18, 18, 16) };
+            MaterialPanel sidebar = new MaterialPanel { Dock = DockStyle.Left, Width = 296, BackColor = Sidebar, MaterialColor = Sidebar, EdgeColor = Line, DrawRightEdge = true, Padding = new Padding(20, 18, 20, 16) };
             TableLayoutPanel layout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 5, BackColor = Color.Transparent, Margin = new Padding(0), Padding = new Padding(0) };
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 58F));
@@ -2786,10 +3022,10 @@ namespace MinecraftWorldBrowser
             brandPanel.Controls.Add(brandSub);
             layout.Controls.Add(brandPanel, 0, 0);
 
-            RoundedPanel about = new RoundedPanel { Name = "AboutCard", Dock = DockStyle.Fill, BackColor = AppTheme.SidebarCard, MaterialColor = AppTheme.SidebarCard, BorderColor = AppTheme.Dark ? Line : Color.FromArgb(120, 255, 255, 255), HighlightColor = GlassEdge, ShadowColor = AppTheme.Shadow, CornerRadius = 10, Margin = new Padding(0, 4, 0, 8), Padding = new Padding(16, 12, 16, 10) };
+            RoundedPanel about = new RoundedPanel { Name = "AboutCard", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 16, Margin = new Padding(0, 4, 0, 8), Padding = new Padding(16, 12, 16, 10) };
             Color sidebarCard = AppTheme.SidebarCard;
-            Label aboutTitle = new Label { Name = "AboutTitle", Text = "\u7a0b\u5e8f\u4fe1\u606f", ForeColor = Ink, BackColor = sidebarCard, Font = new Font(Font.FontFamily, 10F, FontStyle.Bold), AutoSize = true, Location = new Point(16, 12) };
-            Label aboutBody = new Label { Name = "AboutBody", Text = "\u517c\u5bb9\u4e3b\u6d41 Java \u542f\u52a8\u5668\u5b58\u6863\n\u7248\u672c 3.1.5", ForeColor = Muted, BackColor = sidebarCard, Font = new Font(Font.FontFamily, 9F), AutoSize = false, Location = new Point(16, 40), Size = new Size(220, 52) };
+            Label aboutTitle = new Label { Name = "AboutTitle", Text = "\u7a0b\u5e8f\u4fe1\u606f", ForeColor = Ink, BackColor = Color.Transparent, Font = new Font(Font.FontFamily, 10F, FontStyle.Bold), AutoSize = true, Location = new Point(16, 12) };
+            Label aboutBody = new Label { Name = "AboutBody", Text = "\u517c\u5bb9\u4e3b\u6d41 Java \u542f\u52a8\u5668\u5b58\u6863\n\u7248\u672c 3.2.6  \u00b7  SOFT UI", ForeColor = Muted, BackColor = Color.Transparent, Font = new Font(Font.FontFamily, 9F), AutoSize = false, Location = new Point(16, 40), Size = new Size(220, 52) };
             about.Controls.Add(aboutTitle);
             about.Controls.Add(aboutBody);
             layout.Controls.Add(about, 0, 1);
@@ -2797,7 +3033,7 @@ namespace MinecraftWorldBrowser
             Label caption = new Label { Text = ".minecraft / \u5b9e\u4f8b\u76ee\u5f55", ForeColor = Muted, Font = new Font(Font.FontFamily, 9F, FontStyle.Bold), Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft, Margin = new Padding(2, 0, 0, 0) };
             layout.Controls.Add(caption, 0, 2);
 
-            RoundedPanel rootSurface = new RoundedPanel { Name = "RootSurface", Dock = DockStyle.Fill, BackColor = Surface, MaterialColor = AppTheme.Dark ? Surface : Color.FromArgb(155, 255, 255, 255), BorderColor = AppTheme.Dark ? Line : Color.FromArgb(125, 255, 255, 255), HighlightColor = GlassEdge, ShadowColor = AppTheme.Shadow, CornerRadius = 10, Margin = new Padding(0), Padding = new Padding(2) };
+            RoundedPanel rootSurface = new RoundedPanel { Name = "RootSurface", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 16, Margin = new Padding(0), Padding = new Padding(4) };
             rootList.Name = "RootList";
             rootList.BackColor = Surface;
             rootList.ForeColor = Ink;
@@ -3024,21 +3260,21 @@ namespace MinecraftWorldBrowser
             button.IsPrimary = primary;
             button.Height = 36;
             button.Width = primary ? 158 : 116;
-            button.BackColor = primary ? Accent : GlassSurface;
-            button.FillColor = primary ? Color.FromArgb(226, Accent) : AppTheme.SecondaryFill;
-            button.ForeColor = primary ? Color.White : Ink;
-            button.HoverBackColor = primary ? Color.FromArgb(238, Math.Min(255, Accent.R + 18), Math.Min(255, Accent.G + 10), Accent.B) : AppTheme.SecondaryHover;
-            button.PressedBackColor = primary ? Color.FromArgb(242, 0, 101, 214) : AppTheme.SecondaryPressed;
-            button.BorderColor = primary ? Color.FromArgb(95, 255, 255, 255) : AppTheme.SecondaryBorder;
-            button.HighlightColor = AppTheme.GlassEdge;
-            button.CornerRadius = 9;
+            button.BackColor = Color.Transparent;
+            button.FillColor = AppTheme.SecondaryFill;
+            button.ForeColor = primary ? Accent : Ink;
+            button.HoverBackColor = AppTheme.SecondaryHover;
+            button.PressedBackColor = AppTheme.SecondaryPressed;
+            button.BorderColor = Color.Transparent;
+            button.HighlightColor = Color.Transparent;
+            button.CornerRadius = 18;
             button.Cursor = Cursors.Hand;
             return button;
         }
 
         private void ConfigureFilterCombo(SmoothComboBox combo, int left, int width)
         {
-            combo.BackColor = GlassSurface;
+            combo.BackColor = Color.Transparent;
             combo.ForeColor = Ink;
             combo.Location = new Point(left, 4);
             combo.Size = new Size(width, 30);
@@ -3054,6 +3290,7 @@ namespace MinecraftWorldBrowser
         {
             bool previousDark = AppTheme.Dark;
             AppTheme.SetDark(dark);
+            GlassBackdropRenderer.Invalidate();
             if (persist)
             {
                 try { AppTheme.Save(themeFile); }
@@ -3067,19 +3304,19 @@ namespace MinecraftWorldBrowser
             if (sidebar != null)
             {
                 sidebar.BackColor = Sidebar;
-                sidebar.MaterialColor = AppTheme.Dark ? Sidebar : Color.FromArgb(112, 248, 251, 255);
-                sidebar.EdgeColor = AppTheme.Dark ? Line : Color.FromArgb(115, 255, 255, 255);
+                sidebar.MaterialColor = Sidebar;
+                sidebar.EdgeColor = Line;
             }
             if (main != null)
             {
                 main.BackColor = Canvas;
-                main.MaterialColor = AppTheme.Dark ? Canvas : Color.FromArgb(145, 255, 255, 255);
+                main.MaterialColor = Canvas;
             }
-            ApplyRoundedTheme("SearchSurface", SurfaceRaised, 145, 125);
-            ApplyRoundedTheme("DetailsPanel", SurfaceRaised, 138, 120);
-            ApplyRoundedTheme("AboutCard", SurfaceRaised, 130, 120);
-            ApplyRoundedTheme("GridSurface", Surface, 190, 130);
-            ApplyRoundedTheme("RootSurface", Surface, 155, 125);
+            ApplyRoundedTheme("SearchSurface", GlassSurface, 255, 168);
+            ApplyRoundedTheme("DetailsPanel", Color.FromArgb(152, 44, 40, 72), 132, 132);
+            ApplyRoundedTheme("AboutCard", Color.FromArgb(148, 49, 42, 73), 118, 135);
+            ApplyRoundedTheme("GridSurface", Color.FromArgb(210, 28, 27, 49), 202, 145);
+            ApplyRoundedTheme("RootSurface", Color.FromArgb(188, 31, 29, 52), 174, 138);
             ApplyEmbeddedSurfaceTheme();
 
             rootList.BackColor = Surface;
@@ -3101,10 +3338,10 @@ namespace MinecraftWorldBrowser
             if (matches.Length == 0) return;
             RoundedPanel panel = matches[0] as RoundedPanel;
             if (panel == null) return;
-            panel.BackColor = name == "GridSurface" || name == "RootSurface" ? Surface : GlassSurface;
-            panel.MaterialColor = AppTheme.Dark ? darkMaterial : Color.FromArgb(lightMaterialAlpha, 255, 255, 255);
-            panel.BorderColor = AppTheme.Dark ? Line : Color.FromArgb(lightBorderAlpha, 255, 255, 255);
-            panel.HighlightColor = GlassEdge;
+            panel.BackColor = Color.Transparent;
+            panel.MaterialColor = name == "SearchSurface" ? GlassSurface : SurfaceRaised;
+            panel.BorderColor = Color.Transparent;
+            panel.HighlightColor = Color.Transparent;
             panel.ShadowColor = AppTheme.Shadow;
         }
 
@@ -3115,19 +3352,17 @@ namespace MinecraftWorldBrowser
             if (searchSurface != null)
             {
                 Color fill = GlassSurface;
-                searchSurface.BackColor = fill;
+                searchSurface.BackColor = Color.Transparent;
                 searchSurface.MaterialColor = fill;
-                foreach (Control child in searchSurface.Controls) child.BackColor = fill;
+                foreach (Control child in searchSurface.Controls) child.BackColor = child == searchBox ? fill : Color.Transparent;
             }
 
             Control[] aboutMatches = Controls.Find("AboutCard", true);
             RoundedPanel aboutCard = aboutMatches.Length == 0 ? null : aboutMatches[0] as RoundedPanel;
             if (aboutCard != null)
             {
-                Color fill = AppTheme.SidebarCard;
-                aboutCard.BackColor = fill;
-                aboutCard.MaterialColor = fill;
-                foreach (Control child in aboutCard.Controls) child.BackColor = fill;
+                aboutCard.BackColor = Color.Transparent;
+                foreach (Control child in aboutCard.Controls) child.BackColor = Color.Transparent;
             }
         }
 
@@ -3136,17 +3371,16 @@ namespace MinecraftWorldBrowser
             RoundedPanel searchSurface = Controls.Find("SearchSurface", true).FirstOrDefault() as RoundedPanel;
             RoundedPanel aboutCard = Controls.Find("AboutCard", true).FirstOrDefault() as RoundedPanel;
             if (searchSurface == null || aboutCard == null) throw new Exception("Embedded material surfaces are missing.");
-            if (searchSurface.MaterialColor != searchSurface.BackColor || searchBox.BackColor != searchSurface.MaterialColor)
+            if (searchSurface.BackColor != Color.Transparent || searchBox.BackColor != searchSurface.MaterialColor)
                 throw new Exception("Search text background does not match its material surface.");
             foreach (Control child in searchSurface.Controls)
             {
-                if (child.BackColor != searchSurface.MaterialColor) throw new Exception("A search child control has a mismatched background.");
+                Color expected = child == searchBox ? searchSurface.MaterialColor : Color.Transparent;
+                if (child.BackColor != expected) throw new Exception("A search child control has a mismatched background.");
             }
-            if (aboutCard.MaterialColor != aboutCard.BackColor)
-                throw new Exception("Program information card uses inconsistent material colors.");
             foreach (Control child in aboutCard.Controls)
             {
-                if (child.BackColor != aboutCard.MaterialColor) throw new Exception("Program information text has a mismatched background.");
+                if (child.BackColor != Color.Transparent) throw new Exception("Program information text does not inherit the glass material.");
             }
         }
 
@@ -3168,7 +3402,7 @@ namespace MinecraftWorldBrowser
         {
             Color oldInk = AppTheme.InkFor(previousDark);
             Color oldMuted = AppTheme.MutedFor(previousDark);
-            Color oldAccent = previousDark ? Color.FromArgb(64, 156, 255) : Color.FromArgb(0, 122, 255);
+            Color oldAccent = previousDark ? Color.FromArgb(132, 166, 255) : Color.FromArgb(74, 118, 232);
             if (parent.ForeColor == oldInk) parent.ForeColor = Ink;
             else if (parent.ForeColor == oldMuted) parent.ForeColor = Muted;
             else if (parent.ForeColor == oldAccent) parent.ForeColor = Accent;
@@ -3189,13 +3423,13 @@ namespace MinecraftWorldBrowser
         private void ApplyButtonTheme(ModernButton button)
         {
             bool primary = button.IsPrimary;
-            button.BackColor = primary ? Accent : GlassSurface;
-            button.FillColor = primary ? Color.FromArgb(226, Accent) : AppTheme.SecondaryFill;
-            button.ForeColor = primary ? Color.White : Ink;
-            button.HoverBackColor = primary ? Color.FromArgb(238, Math.Min(255, Accent.R + 18), Math.Min(255, Accent.G + 10), Accent.B) : AppTheme.SecondaryHover;
-            button.PressedBackColor = primary ? Color.FromArgb(242, 0, 101, 214) : AppTheme.SecondaryPressed;
-            button.BorderColor = primary ? Color.FromArgb(95, 255, 255, 255) : AppTheme.SecondaryBorder;
-            button.HighlightColor = GlassEdge;
+            button.BackColor = Color.Transparent;
+            button.FillColor = AppTheme.SecondaryFill;
+            button.ForeColor = primary ? Accent : Ink;
+            button.HoverBackColor = AppTheme.SecondaryHover;
+            button.PressedBackColor = AppTheme.SecondaryPressed;
+            button.BorderColor = Color.Transparent;
+            button.HighlightColor = Color.Transparent;
             button.Invalidate();
         }
 
@@ -3235,13 +3469,38 @@ namespace MinecraftWorldBrowser
             ApplyTheme(original, false);
         }
 
+        internal void PrepareVisualPreview()
+        {
+            roots.Clear();
+            roots.Add(@"D:\Games\PCL2\.minecraft");
+            roots.Add(@"D:\Minecraft\PrismLauncher\instances");
+            roots.Add(@"C:\Users\Player\AppData\Roaming\.minecraft");
+            RefreshRootList();
+            allWorlds = new List<WorldInfo>
+            {
+                new WorldInfo { Icon = WorldScanner.CreateFallbackIcon(), Name = "Survival Garden", Version = "1.21.1", GameMode = "\u751f\u5b58", Health = "\u6b63\u5e38", SizeBytes = 1328755507L, LastPlayed = DateTime.Now.AddMinutes(-18), Loader = "Fabric 0.16.9", Path = @"D:\Games\PCL2\.minecraft\versions\1.21.1-Fabric\saves\Survival Garden", Source = "1.21.1-Fabric", Favorite = true },
+                new WorldInfo { Icon = WorldScanner.CreateFallbackIcon(), Name = "Creative Studio", Version = "1.20.4", GameMode = "\u521b\u9020", Health = "\u6b63\u5e38", SizeBytes = 486539264L, LastPlayed = DateTime.Now.AddDays(-2), Loader = "Forge 49.0.50", Path = @"D:\Minecraft\PrismLauncher\instances\Creative\.minecraft\saves\Creative Studio", Source = "Creative" },
+                new WorldInfo { Icon = WorldScanner.CreateFallbackIcon(), Name = "Redstone Lab", Version = "1.19.2", GameMode = "\u751f\u5b58", Health = "\u6b63\u5e38", SizeBytes = 203423744L, LastPlayed = DateTime.Now.AddDays(-8), Loader = "NeoForge", Path = @"C:\Users\Player\AppData\Roaming\.minecraft\saves\Redstone Lab", Source = ".minecraft" }
+            };
+            versionFilter.Items.Clear();
+            versionFilter.Items.AddRange(new object[] { "\u5168\u90e8\u7248\u672c", "1.21.1", "1.20.4", "1.19.2" });
+            versionFilter.SelectedIndex = 0;
+            ApplyFilter(true);
+            if (grid.Rows.Count > 0)
+            {
+                grid.Rows[0].Selected = true;
+                grid.CurrentCell = grid.Rows[0].Cells["WorldName"];
+            }
+            statusLabel.Text = "\u5df2\u53d1\u73b0 3 \u4e2a\u4e16\u754c  \u00b7  \u8de8\u542f\u52a8\u5668\u5b58\u6863\u5df2\u5408\u5e76";
+        }
+
         private void UpdateFavoriteFilterAppearance()
         {
-            favoriteFilterButton.FillColor = favoriteOnly ? Color.FromArgb(220, Accent) : AppTheme.SecondaryFill;
-            favoriteFilterButton.HoverBackColor = favoriteOnly ? Color.FromArgb(232, Math.Min(255, Accent.R + 18), Math.Min(255, Accent.G + 10), Accent.B) : AppTheme.SecondaryHover;
-            favoriteFilterButton.PressedBackColor = favoriteOnly ? Color.FromArgb(242, 0, 101, 214) : AppTheme.SecondaryPressed;
-            favoriteFilterButton.BorderColor = favoriteOnly ? Color.FromArgb(110, 255, 255, 255) : AppTheme.SecondaryBorder;
-            favoriteFilterButton.ForeColor = favoriteOnly ? Color.White : Ink;
+            favoriteFilterButton.FillColor = favoriteOnly ? AppTheme.Selection : AppTheme.SecondaryFill;
+            favoriteFilterButton.HoverBackColor = favoriteOnly ? AppTheme.Selection : AppTheme.SecondaryHover;
+            favoriteFilterButton.PressedBackColor = favoriteOnly ? AppTheme.Selection : AppTheme.SecondaryPressed;
+            favoriteFilterButton.BorderColor = Color.Transparent;
+            favoriteFilterButton.ForeColor = favoriteOnly ? Accent : Ink;
             favoriteFilterButton.Invalidate();
         }
 
@@ -3253,9 +3512,10 @@ namespace MinecraftWorldBrowser
             using (Bitmap bitmap = new Bitmap(favoriteFilterButton.Width, favoriteFilterButton.Height))
             {
                 favoriteFilterButton.PaintForTest(bitmap);
-                Color hoverPixel = bitmap.GetPixel(12, favoriteFilterButton.Height - 10);
-                if (favoriteFilterButton.ForeColor != Color.White || hoverPixel.B <= hoverPixel.R + 80 || hoverPixel.B <= hoverPixel.G + 35)
-                    throw new Exception("Active favorite filter loses its blue surface while hovered.");
+                Color hoverPixel = bitmap.GetPixel(16, favoriteFilterButton.Height / 2);
+                int surfaceDifference = Math.Abs(hoverPixel.R - AppTheme.Selection.R) + Math.Abs(hoverPixel.G - AppTheme.Selection.G) + Math.Abs(hoverPixel.B - AppTheme.Selection.B);
+                if (favoriteFilterButton.ForeColor != Accent || favoriteFilterButton.FillColor != AppTheme.Selection || favoriteFilterButton.HoverBackColor != AppTheme.Selection || surfaceDifference > 8)
+                    throw new Exception("Active favorite filter loses its selected neumorphic surface while hovered.");
             }
             favoriteFilterButton.SetHoveredForTest(false);
             favoriteOnly = false;
@@ -4716,6 +4976,14 @@ namespace MinecraftWorldBrowser
                 string appDirectory = AppDomain.CurrentDomain.BaseDirectory;
                 string themePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PCL2WorldBrowser", "theme.txt");
                 AppTheme.Load(themePath);
+                string renderArgument = args == null ? null : args.FirstOrDefault(delegate(string arg) { return arg.StartsWith("--render-preview=", StringComparison.OrdinalIgnoreCase); });
+                if (!String.IsNullOrEmpty(renderArgument))
+                {
+                    string outputPath = renderArgument.Substring("--render-preview=".Length).Trim('"');
+                    bool darkPreview = args.Any(delegate(string arg) { return String.Equals(arg, "--dark", StringComparison.OrdinalIgnoreCase); });
+                    RenderPreview(appDirectory, outputPath, darkPreview);
+                    return 0;
+                }
                 if (args != null && args.Any(delegate(string arg) { return String.Equals(arg, "--details-preview", StringComparison.OrdinalIgnoreCase); }))
                 {
                     Application.EnableVisualStyles();
@@ -4760,6 +5028,41 @@ namespace MinecraftWorldBrowser
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm(appDirectory));
+        }
+
+        public static void RenderPreview(string appDirectory, string outputPath, bool dark)
+        {
+            if (String.IsNullOrWhiteSpace(outputPath)) throw new ArgumentException("A preview output path is required.");
+            AppTheme.SetDark(dark);
+            GlassBackdropRenderer.Invalidate();
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            using (MainForm form = new MainForm(appDirectory, true))
+            {
+                form.ClientSize = new Size(1280, 780);
+                form.StartPosition = FormStartPosition.Manual;
+                form.Location = new Point(-32000, -32000);
+                form.ShowInTaskbar = false;
+                form.Show();
+                Application.DoEvents();
+                CreateControlTree(form);
+                form.PerformLayout();
+                form.PrepareVisualPreview();
+                form.PerformLayout();
+                Application.DoEvents();
+                using (Bitmap bitmap = new Bitmap(form.ClientSize.Width, form.ClientSize.Height, PixelFormat.Format32bppPArgb))
+                {
+                    form.DrawToBitmap(bitmap, form.ClientRectangle);
+                    Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outputPath)));
+                    bitmap.Save(outputPath, ImageFormat.Png);
+                }
+            }
+        }
+
+        private static void CreateControlTree(Control parent)
+        {
+            parent.CreateControl();
+            foreach (Control child in parent.Controls) CreateControlTree(child);
         }
 
         public static string SelfTest(string testRoot)
@@ -4842,7 +5145,7 @@ namespace MinecraftWorldBrowser
                 form.PerformLayout();
                 Control sidebar = form.Controls["Sidebar"];
                 Control main = form.Controls["Main"];
-                if (sidebar == null || main == null || sidebar.Width != 292 || main.Left < sidebar.Right)
+                if (sidebar == null || main == null || sidebar.Width != 296 || main.Left < sidebar.Right)
                     throw new Exception("Main window layout overlaps the sidebar.");
                 Control[] progressControls = form.Controls.Find("ScanProgress", true);
                 if (progressControls.Length != 1 || progressControls[0].Width < 100)
@@ -4866,6 +5169,25 @@ namespace MinecraftWorldBrowser
                     throw new Exception("Toolbar commands overlap or leave the visible area at minimum width.");
                 if (searchInput.Parent != search || searchInput.Top < 6 || searchInput.Bottom > search.ClientSize.Height - 6 || search.Cursor != Cursors.IBeam)
                     throw new Exception("Search input and its visual hit area are not aligned.");
+                RoundedPanel searchPanel = search as RoundedPanel;
+                if (searchPanel == null || searchPanel.DrawSheen || searchPanel.SheenHeight != 0 || searchInput.BackColor != searchPanel.MaterialColor)
+                    throw new Exception("Search input does not share the uniform neumorphic surface.");
+                using (Bitmap searchBitmap = new Bitmap(search.Width, search.Height, PixelFormat.Format32bppPArgb))
+                {
+                    search.DrawToBitmap(searchBitmap, search.ClientRectangle);
+                    int sampleX = Math.Max(searchInput.Left + 8, searchInput.Right - 16);
+                    int inputY = searchInput.Top + 2;
+                    int surfaceY = searchInput.Top - 1;
+                    Color inputPixel = searchBitmap.GetPixel(sampleX, inputY);
+                    Color surfacePixel = searchBitmap.GetPixel(sampleX, surfaceY);
+                    int difference = Math.Abs(inputPixel.R - surfacePixel.R) + Math.Abs(inputPixel.G - surfacePixel.G) + Math.Abs(inputPixel.B - surfacePixel.B);
+                    if (difference > 3)
+                        throw new Exception("Search input background has a visible rectangular edge: " + inputPixel + " / " + surfacePixel + ", difference=" + difference);
+                    Color upperShadowPixel = searchBitmap.GetPixel(search.Width / 2, 1);
+                    Color interiorPixel = searchBitmap.GetPixel(search.Width / 2, searchInput.Bottom + 1);
+                    if (upperShadowPixel.ToArgb() == interiorPixel.ToArgb())
+                        throw new Exception("Search surface lost its raised neumorphic edge.");
+                }
                 if (form.Controls.Find("VersionFilter", true).Length != 1 || form.Controls.Find("ModeFilter", true).Length != 1 || form.Controls.Find("FavoriteFilterButton", true).Length != 1)
                     throw new Exception("Advanced world filters are missing.");
                 SmoothComboBox testVersionFilter = form.Controls.Find("VersionFilter", true)[0] as SmoothComboBox;
@@ -4992,30 +5314,167 @@ namespace MinecraftWorldBrowser
                 {
                     buttonHost.BackColor = Color.White;
                     buttonHost.Size = new Size(120, 36);
-                    testButton.BackColor = Color.FromArgb(0, 122, 255);
+                    testButton.BackColor = Color.Transparent;
+                    testButton.FillColor = Color.FromArgb(0, 122, 255);
                     testButton.ForeColor = Color.White;
                     testButton.Size = buttonHost.Size;
                     buttonHost.Controls.Add(testButton);
-                    testButton.PaintForTest(buttonBitmap);
+                    buttonHost.DrawToBitmap(buttonBitmap, buttonHost.ClientRectangle);
                     if (buttonBitmap.GetPixel(0, 0).ToArgb() != Color.White.ToArgb() || buttonBitmap.GetPixel(119, 0).ToArgb() != Color.White.ToArgb())
                         throw new Exception("Rounded button corners contain a rectangular background artifact: " + buttonBitmap.GetPixel(0, 0) + " / " + buttonBitmap.GetPixel(119, 0));
                 }
+                using (Panel patternedHost = new Panel())
+                using (ModernButton patternedButton = new ModernButton())
+                using (Bitmap pattern = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
+                using (Bitmap baseline = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
+                using (Bitmap rendered = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
+                {
+                    for (int y = 0; y < pattern.Height; y++)
+                    {
+                        for (int x = 0; x < pattern.Width; x++)
+                        {
+                            pattern.SetPixel(x, y, Color.FromArgb(255, 120 + x / 4, 150 + y, 180 + (x + y) / 8));
+                        }
+                    }
+                    patternedHost.Size = pattern.Size;
+                    patternedHost.BackgroundImage = pattern;
+                    patternedHost.DrawToBitmap(baseline, patternedHost.ClientRectangle);
+                    patternedButton.Location = new Point(20, 6);
+                    patternedButton.Size = new Size(120, 36);
+                    patternedButton.BackColor = Color.Transparent;
+                    patternedButton.FillColor = AppTheme.SecondaryFill;
+                    patternedHost.Controls.Add(patternedButton);
+                    patternedHost.DrawToBitmap(rendered, patternedHost.ClientRectangle);
+                    foreach (Point corner in new Point[] { new Point(20, 6), new Point(139, 6), new Point(20, 41), new Point(139, 41) })
+                    {
+                        if (rendered.GetPixel(corner.X, corner.Y).ToArgb() != baseline.GetPixel(corner.X, corner.Y).ToArgb())
+                            throw new Exception("Rounded button exposes its rectangular control canvas at " + corner + ": " + rendered.GetPixel(corner.X, corner.Y) + " / " + baseline.GetPixel(corner.X, corner.Y));
+                    }
+                }
+                using (Panel pressHost = new Panel())
+                using (ModernButton pressButton = new ModernButton())
+                using (Bitmap raisedButton = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
+                using (Bitmap insetButton = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
+                {
+                    AppTheme.SetDark(false);
+                    pressHost.Size = raisedButton.Size;
+                    pressHost.BackColor = AppTheme.WindowBase;
+                    pressButton.Size = pressHost.Size;
+                    pressButton.BackColor = Color.Transparent;
+                    pressButton.FillColor = AppTheme.GlassSurface;
+                    pressButton.PressedBackColor = AppTheme.GlassSurface;
+                    pressButton.CornerRadius = 18;
+                    pressHost.Controls.Add(pressButton);
+                    pressButton.SetPressedForTest(false);
+                    pressHost.DrawToBitmap(raisedButton, pressHost.ClientRectangle);
+                    pressButton.SetPressedForTest(true);
+                    if (pressButton.PressProgressForTest != 1F) throw new Exception("Neumorphic button press state did not reach its inset target.");
+                    pressHost.DrawToBitmap(insetButton, pressHost.ClientRectangle);
+                    int changedPixels = 0;
+                    for (int y = 1; y < raisedButton.Height - 1; y++)
+                    {
+                        for (int x = 1; x < raisedButton.Width - 1; x++)
+                        {
+                            if (raisedButton.GetPixel(x, y).ToArgb() != insetButton.GetPixel(x, y).ToArgb()) changedPixels++;
+                        }
+                    }
+                    if (changedPixels < 180) throw new Exception("Pressed button does not visibly change from raised shadows to inset shadows: changed=" + changedPixels);
+                    foreach (Point corner in new Point[] { new Point(0, 0), new Point(159, 0), new Point(0, 47), new Point(159, 47) })
+                    {
+                        if (insetButton.GetPixel(corner.X, corner.Y).ToArgb() != AppTheme.WindowBase.ToArgb())
+                            throw new Exception("Pressed neumorphic button exposes a rectangular corner at " + corner + ".");
+                    }
+                    Color raisedOuter = raisedButton.GetPixel(158, 24);
+                    Color insetOuter = insetButton.GetPixel(158, 24);
+                    int raisedDistance = Math.Abs(raisedOuter.R - AppTheme.WindowBase.R) + Math.Abs(raisedOuter.G - AppTheme.WindowBase.G) + Math.Abs(raisedOuter.B - AppTheme.WindowBase.B);
+                    int insetDistance = Math.Abs(insetOuter.R - AppTheme.WindowBase.R) + Math.Abs(insetOuter.G - AppTheme.WindowBase.G) + Math.Abs(insetOuter.B - AppTheme.WindowBase.B);
+                    if (raisedDistance <= insetDistance) throw new Exception("Outer raised shadow does not disappear when the button is pressed.");
+                    pressButton.SetPressedForTest(false);
+                    if (pressButton.PressProgressForTest != 0F) throw new Exception("Neumorphic button did not restore its raised state after release.");
+                }
+                using (Panel roundedHost = new Panel())
+                using (RoundedPanel roundedSurface = new RoundedPanel())
+                using (Bitmap roundedPattern = new Bitmap(220, 64, PixelFormat.Format32bppPArgb))
+                using (Bitmap roundedBaseline = new Bitmap(220, 64, PixelFormat.Format32bppPArgb))
+                using (Bitmap roundedRendered = new Bitmap(220, 64, PixelFormat.Format32bppPArgb))
+                {
+                    for (int y = 0; y < roundedPattern.Height; y++)
+                    {
+                        for (int x = 0; x < roundedPattern.Width; x++)
+                        {
+                            roundedPattern.SetPixel(x, y, Color.FromArgb(255, 70 + x / 3, 95 + y, 130 + (x + y) / 7));
+                        }
+                    }
+                    roundedHost.Size = roundedPattern.Size;
+                    roundedHost.BackgroundImage = roundedPattern;
+                    roundedHost.DrawToBitmap(roundedBaseline, roundedHost.ClientRectangle);
+                    roundedSurface.Location = new Point(12, 8);
+                    roundedSurface.Size = new Size(196, 48);
+                    roundedSurface.BackColor = Color.Transparent;
+                    roundedSurface.MaterialColor = Color.FromArgb(128, 255, 255, 255);
+                    roundedSurface.CornerRadius = 18;
+                    roundedHost.Controls.Add(roundedSurface);
+                    roundedHost.DrawToBitmap(roundedRendered, roundedHost.ClientRectangle);
+                    foreach (Point corner in new Point[] { new Point(12, 8), new Point(207, 8), new Point(12, 55), new Point(207, 55) })
+                    {
+                        if (roundedRendered.GetPixel(corner.X, corner.Y).ToArgb() != roundedBaseline.GetPixel(corner.X, corner.Y).ToArgb())
+                            throw new Exception("Rounded glass panel exposes its rectangular canvas at " + corner + ": " + roundedRendered.GetPixel(corner.X, corner.Y) + " / " + roundedBaseline.GetPixel(corner.X, corner.Y));
+                    }
+                }
+                foreach (bool darkTextTest in new bool[] { false, true })
+                {
+                    AppTheme.SetDark(darkTextTest);
+                    using (ModernButton textButton = new ModernButton())
+                    using (Bitmap textBitmap = new Bitmap(220, 40, PixelFormat.Format32bppPArgb))
+                    using (Bitmap textBaseline = new Bitmap(220, 40, PixelFormat.Format32bppPArgb))
+                    {
+                        textButton.Size = textBitmap.Size;
+                        textButton.Text = "Glass button text";
+                        textButton.Font = new Font("Segoe UI", 9F);
+                        textButton.ForeColor = AppTheme.Ink;
+                        for (int y = 0; y < textBitmap.Height; y++)
+                        {
+                            for (int x = 0; x < textBitmap.Width; x++)
+                            {
+                                Color pixel = ((x / 3 + y / 3) % 2 == 0)
+                                    ? (darkTextTest ? Color.FromArgb(28, 48, 70) : Color.FromArgb(235, 187, 222))
+                                    : (darkTextTest ? Color.FromArgb(62, 35, 75) : Color.FromArgb(161, 229, 209));
+                                textBitmap.SetPixel(x, y, pixel);
+                                textBaseline.SetPixel(x, y, pixel);
+                            }
+                        }
+                        textButton.PaintContentForTest(textBitmap);
+                        int changedPixels = 0;
+                        Rectangle inspection = new Rectangle(35, 7, 150, 26);
+                        for (int y = inspection.Top; y < inspection.Bottom; y++)
+                        {
+                            for (int x = inspection.Left; x < inspection.Right; x++)
+                            {
+                                if (textBitmap.GetPixel(x, y).ToArgb() != textBaseline.GetPixel(x, y).ToArgb()) changedPixels++;
+                            }
+                        }
+                        double changedRatio = changedPixels / (double)(inspection.Width * inspection.Height);
+                        if (changedRatio <= 0D || changedRatio >= 0.42D)
+                            throw new Exception((darkTextTest ? "Dark" : "Light") + " glass button text paints an opaque rectangular background: ratio=" + changedRatio.ToString("0.000"));
+                    }
+                }
+                AppTheme.SetDark(false);
                 using (Panel backgroundHost = new Panel())
                 using (Panel transparentHost = new Panel())
                 using (SmoothComboBox testCombo = new SmoothComboBox())
                 using (Bitmap comboBitmap = new Bitmap(184, 30))
                 {
                     backgroundHost.BackColor = Color.White;
-                    backgroundHost.Size = new Size(220, 50);
+                    backgroundHost.Size = comboBitmap.Size;
                     transparentHost.BackColor = Color.Transparent;
                     transparentHost.Size = backgroundHost.Size;
-                    testCombo.BackColor = Color.FromArgb(249, 251, 253);
+                    testCombo.BackColor = Color.Transparent;
                     testCombo.Size = comboBitmap.Size;
                     testCombo.Items.Add("All versions");
                     testCombo.SelectedIndex = 0;
                     backgroundHost.Controls.Add(transparentHost);
                     transparentHost.Controls.Add(testCombo);
-                    testCombo.PaintForTest(comboBitmap);
+                    backgroundHost.DrawToBitmap(comboBitmap, backgroundHost.ClientRectangle);
                     Color topLeft = comboBitmap.GetPixel(0, 0);
                     Color bottomRight = comboBitmap.GetPixel(comboBitmap.Width - 1, comboBitmap.Height - 1);
                 if (topLeft.ToArgb() != Color.White.ToArgb() || bottomRight.ToArgb() != Color.White.ToArgb())

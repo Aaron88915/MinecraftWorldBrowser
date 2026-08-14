@@ -1,7 +1,21 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-if exist "%~dp0MinecraftWorldBrowser-v3.1.5.exe" (
+if exist "%~dp0MinecraftWorldBrowser-v3.2.6.exe" (
+  start "" "%~dp0MinecraftWorldBrowser-v3.2.6.exe"
+) else if exist "%~dp0MinecraftWorldBrowser-v3.2.5.exe" (
+  start "" "%~dp0MinecraftWorldBrowser-v3.2.5.exe"
+) else if exist "%~dp0MinecraftWorldBrowser-v3.2.4.exe" (
+  start "" "%~dp0MinecraftWorldBrowser-v3.2.4.exe"
+) else if exist "%~dp0MinecraftWorldBrowser-v3.2.3.exe" (
+  start "" "%~dp0MinecraftWorldBrowser-v3.2.3.exe"
+) else if exist "%~dp0MinecraftWorldBrowser-v3.2.2.exe" (
+  start "" "%~dp0MinecraftWorldBrowser-v3.2.2.exe"
+) else if exist "%~dp0MinecraftWorldBrowser-v3.2.1.exe" (
+  start "" "%~dp0MinecraftWorldBrowser-v3.2.1.exe"
+) else if exist "%~dp0MinecraftWorldBrowser-v3.2.0.exe" (
+  start "" "%~dp0MinecraftWorldBrowser-v3.2.0.exe"
+) else if exist "%~dp0MinecraftWorldBrowser-v3.1.5.exe" (
   start "" "%~dp0MinecraftWorldBrowser-v3.1.5.exe"
 ) else if exist "%~dp0MinecraftWorldBrowser-v3.1.4.exe" (
   start "" "%~dp0MinecraftWorldBrowser-v3.1.4.exe"

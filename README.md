@@ -20,14 +20,14 @@
 - 创建 ZIP 备份，并记录原存档位置
 - 恢复时可返回原位置；目标已存在时可选择覆盖或创建新存档
 - 自动备份、配置导入导出、拖放目录、刷新与全盘扫描
-- 亮色与暗色磨砂界面，支持平滑滚动和实时调整列宽
+- 亮色与暗色新拟态界面，支持内凹按压反馈、平滑滚动和实时调整列宽
 
 ## 下载
 
 前往 [Releases](https://github.com/Aaron88915/MinecraftWorldBrowser/releases) 下载最新的：
 
 ```text
-MinecraftWorldBrowser-v3.1.5.exe
+MinecraftWorldBrowser-v3.2.6.exe
 ```
 
 程序为单文件 Windows EXE，不需要安装。建议使用 Windows 10 或 Windows 11，并确保系统已启用 .NET Framework 4.8。
@@ -36,7 +36,7 @@ MinecraftWorldBrowser-v3.1.5.exe
 
 ## 使用方法
 
-1. 运行 `MinecraftWorldBrowser-v3.1.5.exe`。
+1. 运行 `MinecraftWorldBrowser-v3.2.6.exe`。
 2. 首次启动时可添加一个 `.minecraft`、游戏实例或启动器目录；跳过也可以直接进入。
 3. 点击右上角“全盘扫描”，自动发现电脑中的其他 Minecraft Java 目录。
 4. 使用搜索框、版本/模式筛选器、收藏或表头排序找到目标世界。
@@ -116,4 +116,3 @@ CHANGELOG.md                 完整版本记录
 ## 反馈
 
 发现无法识别的启动器目录、界面显示问题或备份异常时，请在 [Issues](https://github.com/Aaron88915/MinecraftWorldBrowser/issues) 提交问题，并附上启动器名称、目录结构和程序版本。请不要上传包含个人信息的完整路径或私人存档。
-

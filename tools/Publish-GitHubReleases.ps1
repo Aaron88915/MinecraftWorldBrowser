@@ -69,8 +69,8 @@ function Get-ReleaseNotes {
     $match = [regex]::Match($changeLog, $pattern)
     if (-not $match.Success) { throw "CHANGELOG entry missing for $Version." }
     $notes = "构建日期：$($match.Groups['date'].Value)`n`n" + $match.Groups['body'].Value.Trim()
-    if ($Version -ne '3.1.5') {
-        $notes += "`n`n> 历史二进制归档：本地未保留此版本的独立源码快照，附件是当时构建的原始 EXE；仓库当前源码对应 v3.1.5。"
+    if ($Version -ne '3.2.6') {
+        $notes += "`n`n> 历史二进制归档：本地未保留此版本的独立源码快照，附件是当时构建的原始 EXE；仓库当前源码对应 v3.2.6。"
     }
     return $notes
 }
@@ -110,7 +110,7 @@ Invoke-GitHubJson -Method Put -Uri "$apiBase/topics" -Body @{
 Write-Output 'REPOSITORY METADATA UPDATED'
 
 $binaries = @(Get-ChildItem -LiteralPath $projectDirectory -File -Filter 'MinecraftWorldBrowser-v*.exe' | Sort-Object LastWriteTime, Name)
-if ($binaries.Count -ne 46) { throw "Expected 46 versioned EXEs, found $($binaries.Count)." }
+if ($binaries.Count -ne 52) { throw "Expected 52 versioned EXEs, found $($binaries.Count)." }
 
 foreach ($binary in $binaries) {
     if ($binary.BaseName -notmatch '^MinecraftWorldBrowser-v(?<version>\d+(?:\.\d+){1,2})$') {
