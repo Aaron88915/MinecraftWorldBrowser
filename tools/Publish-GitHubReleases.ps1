@@ -1,4 +1,4 @@
-param(
+﻿param(
     [string]$Owner = 'Aaron88915',
     [string]$Repository = 'MinecraftWorldBrowser',
     [string]$Branch = 'main',
