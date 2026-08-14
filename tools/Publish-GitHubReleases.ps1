@@ -110,7 +110,7 @@ Invoke-GitHubJson -Method Put -Uri "$apiBase/topics" -Body @{
 Write-Output 'REPOSITORY METADATA UPDATED'
 
 $binaries = @(Get-ChildItem -LiteralPath $projectDirectory -File -Filter 'MinecraftWorldBrowser-v*.exe' | Sort-Object LastWriteTime, Name)
-if ($binaries.Count -ne 52) { throw "Expected 52 versioned EXEs, found $($binaries.Count)." }
+if ($binaries.Count -ne 53) { throw "Expected 53 versioned EXEs, found $($binaries.Count)." }
 
 foreach ($binary in $binaries) {
     if ($binary.BaseName -notmatch '^MinecraftWorldBrowser-v(?<version>\d+(?:\.\d+){1,2})$') {
