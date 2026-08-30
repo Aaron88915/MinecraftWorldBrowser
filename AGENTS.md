@@ -10,3 +10,4 @@
 - Neumorphic surfaces use one consistent light direction: a light upper-left outer shadow and a dark lower-right outer shadow in the raised state.
 - Pointer press feedback must replace the paired outer shadows with paired inset shadows without moving text, icons, or layout. The transition must remain interruptible and complete in roughly 100-160 ms.
 - Every neumorphic interaction change must test raised, pressed, and released states in both themes. Pressed rounded corners must still match the real parent background pixel-for-pixel.
+- Scan progress tracks must inherit the actual footer/parent surface in both themes; do not use the global divider color as a standalone rectangular track background.

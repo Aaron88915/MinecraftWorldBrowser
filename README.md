@@ -27,7 +27,7 @@
 前往 [Releases](https://github.com/Aaron88915/MinecraftWorldBrowser/releases) 下载最新的：
 
 ```text
-MinecraftWorldBrowser-v3.2.6.exe
+MinecraftWorldBrowser-v3.2.7.exe
 ```
 
 程序为单文件 Windows EXE，不需要安装。建议使用 Windows 10 或 Windows 11，并确保系统已启用 .NET Framework 4.8。
@@ -36,7 +36,7 @@ MinecraftWorldBrowser-v3.2.6.exe
 
 ## 使用方法
 
-1. 运行 `MinecraftWorldBrowser-v3.2.6.exe`。
+1. 运行 `MinecraftWorldBrowser-v3.2.7.exe`。
 2. 首次启动时可添加一个 `.minecraft`、游戏实例或启动器目录；跳过也可以直接进入。
 3. 点击右上角“全盘扫描”，自动发现电脑中的其他 Minecraft Java 目录。
 4. 使用搜索框、版本/模式筛选器、收藏或表头排序找到目标世界。

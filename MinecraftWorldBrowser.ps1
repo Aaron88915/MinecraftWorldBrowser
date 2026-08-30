@@ -27,8 +27,8 @@ using System.Windows.Forms;
 [assembly: AssemblyProduct("Minecraft Java World Browser")]
 [assembly: AssemblyDescription("Browse Minecraft Java worlds across popular launcher instance folders")]
 [assembly: AssemblyCompany("Local Utility")]
-[assembly: AssemblyVersion("3.2.6.0")]
-[assembly: AssemblyFileVersion("3.2.6.0")]
+[assembly: AssemblyVersion("3.2.7.0")]
+[assembly: AssemblyFileVersion("3.2.7.0")]
 
 namespace MinecraftWorldBrowser
 {
@@ -2365,7 +2365,8 @@ namespace MinecraftWorldBrowser
         public IndeterminateProgressBar()
         {
             Height = 12;
-            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer | ControlStyles.SupportsTransparentBackColor, true);
+            BackColor = Color.Transparent;
             timer.Interval = 16;
             timer.Tick += delegate
             {
@@ -2394,8 +2395,11 @@ namespace MinecraftWorldBrowser
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             RectangleF track = new RectangleF(0, 3, Math.Max(1, Width), 6);
+            Color surrounding = MaterialPanel.ResolveBackgroundColor(Parent);
             using (GraphicsPath trackPath = RoundedPath(track, 3))
-            using (Brush trackBrush = new SolidBrush(AppTheme.Line)) e.Graphics.FillPath(trackBrush, trackPath);
+            using (Brush trackBrush = new SolidBrush(surrounding)) e.Graphics.FillPath(trackBrush, trackPath);
+            using (GraphicsPath edgePath = RoundedPath(new RectangleF(0.5F, 3.5F, Math.Max(1, Width - 1F), 5F), 2.5F))
+            using (Pen edge = new Pen(Color.FromArgb(AppTheme.Dark ? 44 : 34, AppTheme.NeuDarkShadow), 1F)) e.Graphics.DrawPath(edge, edgePath);
             if (!running) return;
             RectangleF segment = new RectangleF(offset, 3, 70, 6);
             using (GraphicsPath segmentPath = RoundedPath(segment, 3))
@@ -5150,6 +5154,27 @@ namespace MinecraftWorldBrowser
                 Control[] progressControls = form.Controls.Find("ScanProgress", true);
                 if (progressControls.Length != 1 || progressControls[0].Width < 100)
                     throw new Exception("Scan progress bar is missing from the main window.");
+                bool progressTheme = AppTheme.Dark;
+                foreach (bool darkProgressTest in new bool[] { false, true })
+                {
+                    AppTheme.SetDark(darkProgressTest);
+                    using (Panel progressHost = new Panel())
+                    using (IndeterminateProgressBar progressTest = new IndeterminateProgressBar())
+                    using (Bitmap progressBitmap = new Bitmap(220, 30, PixelFormat.Format32bppPArgb))
+                    {
+                        progressHost.BackColor = AppTheme.Canvas;
+                        progressHost.Size = progressBitmap.Size;
+                        progressTest.Size = new Size(190, 12);
+                        progressTest.Location = new Point(15, 9);
+                        progressHost.Controls.Add(progressTest);
+                        progressHost.DrawToBitmap(progressBitmap, progressHost.ClientRectangle);
+                        Color surrounding = progressBitmap.GetPixel(8, 15);
+                        Color trackCenter = progressBitmap.GetPixel(105, 15);
+                        if (surrounding.ToArgb() != AppTheme.Canvas.ToArgb() || trackCenter.ToArgb() != surrounding.ToArgb())
+                            throw new Exception((darkProgressTest ? "Dark" : "Light") + " scan progress track does not match its surrounding surface: " + surrounding + " / " + trackCenter);
+                    }
+                }
+                AppTheme.SetDark(progressTheme);
                 if (form.Controls.Find("RefreshButton", true).Length != 1 || form.Controls.Find("FullScanButton", true).Length != 1)
                     throw new Exception("Refresh or full scan command is missing.");
                 if (form.Controls.Find("ThemeToggleButton", true).Length != 1)
