@@ -27,8 +27,8 @@ using System.Windows.Forms;
 [assembly: AssemblyProduct("Minecraft Java World Browser")]
 [assembly: AssemblyDescription("Browse Minecraft Java worlds across popular launcher instance folders")]
 [assembly: AssemblyCompany("Local Utility")]
-[assembly: AssemblyVersion("3.2.7.0")]
-[assembly: AssemblyFileVersion("3.2.7.0")]
+[assembly: AssemblyVersion("3.2.10.0")]
+[assembly: AssemblyFileVersion("3.2.10.0")]
 
 namespace MinecraftWorldBrowser
 {
@@ -801,7 +801,10 @@ namespace MinecraftWorldBrowser
         private Bitmap scrollFromImage;
         private Bitmap scrollToImage;
         private bool scrollAnimating;
-        private int scrollDistance;
+        private double scrollDistance;
+        private double scrollBaseRow;
+        private int scrollTargetRow;
+        private double scrollRowHeight = 1D;
         private long scrollStarted;
         private double wheelRowRemainder;
         private const double WheelRowsPerNotch = 2D;
@@ -832,54 +835,67 @@ namespace MinecraftWorldBrowser
             try { before = Math.Max(0, FirstDisplayedScrollingRowIndex); }
             catch { before = 0; }
             int visibleRows = Math.Max(1, DisplayedRowCount(false));
+            int rowHeight = Math.Max(1, RowTemplate.Height);
+            double presentedRow = PresentedRowOffset(rowHeight, before);
             double rowDelta = -(e.Delta / (double)Math.Max(1, SystemInformation.MouseWheelScrollDelta)) * WheelRowsPerNotch;
             wheelRowRemainder += rowDelta;
             int rowChange = (int)Math.Truncate(wheelRowRemainder);
             if (rowChange == 0) return;
-            wheelRowRemainder -= rowChange;
             int maximumFirstRow = Math.Max(0, Rows.Count - visibleRows);
-            int target = Math.Max(0, Math.Min(maximumFirstRow, before + rowChange));
-            if (target == before) return;
+            double pending = scrollAnimating ? scrollTargetRow - presentedRow : 0D;
+            double basis = scrollAnimating && Math.Sign(rowChange) == Math.Sign(pending) ? scrollTargetRow : presentedRow;
+            int target = Math.Max(0, Math.Min(maximumFirstRow, (int)Math.Round(basis + rowChange)));
+            if (target == before)
+            {
+                wheelRowRemainder -= rowChange;
+                return;
+            }
 
             if (!SystemInformation.IsMenuAnimationEnabled)
             {
                 CancelSmoothScroll();
                 try { FirstDisplayedScrollingRowIndex = target; }
                 catch { }
+                wheelRowRemainder -= rowChange;
                 return;
             }
 
             Bitmap fromImage = scrollAnimating ? RenderCurrentScrollFrame() : CaptureDataArea();
-            int remainingDistance = scrollAnimating ? scrollDistance - CurrentScrollOffset() : 0;
+            if (fromImage == null) return;
             CancelSmoothScroll();
 
             try { FirstDisplayedScrollingRowIndex = target; }
             catch
             {
-                if (fromImage != null) fromImage.Dispose();
+                fromImage.Dispose();
                 return;
             }
             Bitmap toImage = CaptureDataArea();
-            if (fromImage == null || toImage == null)
+            if (toImage == null)
             {
-                if (fromImage != null) fromImage.Dispose();
-                if (toImage != null) toImage.Dispose();
+                fromImage.Dispose();
+                try { FirstDisplayedScrollingRowIndex = before; }
+                catch { }
+                Invalidate(DataAreaRectangle());
                 return;
             }
 
-            int rowHeight = RowTemplate.Height;
             if (before >= 0 && before < Rows.Count) rowHeight = Math.Max(1, Rows[before].Height);
-            int distance = remainingDistance + (target - before) * rowHeight;
-            if (distance == 0)
+            double distance = (target - presentedRow) * rowHeight;
+            if (Math.Abs(distance) < 0.5D)
             {
                 fromImage.Dispose();
                 toImage.Dispose();
                 return;
             }
 
+            wheelRowRemainder -= rowChange;
             scrollFromImage = fromImage;
             scrollToImage = toImage;
             scrollDistance = distance;
+            scrollBaseRow = presentedRow;
+            scrollTargetRow = target;
+            scrollRowHeight = rowHeight;
             scrollStarted = Stopwatch.GetTimestamp() - (long)(smoothScrollTimer.Interval * Stopwatch.Frequency / 1000D);
             scrollAnimating = true;
             smoothScrollTimer.Start();
@@ -896,6 +912,8 @@ namespace MinecraftWorldBrowser
             if (scrollAnimating) FinishSmoothScroll();
         }
 
+        internal int TargetFirstRowForTest { get { return scrollTargetRow; } }
+
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
@@ -905,7 +923,7 @@ namespace MinecraftWorldBrowser
             GraphicsState state = e.Graphics.Save();
             e.Graphics.SetClip(dataArea);
             using (Brush background = new SolidBrush(DefaultCellStyle.BackColor)) e.Graphics.FillRectangle(background, dataArea);
-            e.Graphics.DrawImageUnscaled(scrollToImage, dataArea.X, dataArea.Y + scrollDistance - offset);
+            e.Graphics.DrawImageUnscaled(scrollToImage, dataArea.X, dataArea.Y + (int)Math.Round(scrollDistance) - offset);
             e.Graphics.DrawImageUnscaled(scrollFromImage, dataArea.X, dataArea.Y - offset);
             e.Graphics.Restore(state);
         }
@@ -1051,7 +1069,7 @@ namespace MinecraftWorldBrowser
             {
                 graphics.Clear(DefaultCellStyle.BackColor);
                 int offset = CurrentScrollOffset();
-                graphics.DrawImageUnscaled(scrollToImage, 0, scrollDistance - offset);
+                graphics.DrawImageUnscaled(scrollToImage, 0, (int)Math.Round(scrollDistance) - offset);
                 graphics.DrawImageUnscaled(scrollFromImage, 0, -offset);
             }
             return frame;
@@ -1059,7 +1077,19 @@ namespace MinecraftWorldBrowser
 
         private int CurrentScrollOffset()
         {
-            return (int)Math.Round(scrollDistance * StrongEaseOut(AnimationProgress()));
+            return (int)Math.Round(CurrentScrollOffsetExact());
+        }
+
+        private double CurrentScrollOffsetExact()
+        {
+            return scrollDistance * StrongEaseOut(AnimationProgress());
+        }
+
+        private double PresentedRowOffset(int rowHeight, int fallbackRow)
+        {
+            if (!scrollAnimating) return fallbackRow;
+            double height = scrollRowHeight > 0D ? scrollRowHeight : Math.Max(1, rowHeight);
+            return scrollBaseRow + CurrentScrollOffsetExact() / height;
         }
 
         private double AnimationProgress()
@@ -3532,10 +3562,32 @@ namespace MinecraftWorldBrowser
             versionFilter.BeginUpdate();
             versionFilter.Items.Clear();
             versionFilter.Items.Add("\u5168\u90e8\u7248\u672c");
-            foreach (string version in allWorlds.Select(delegate(WorldInfo world) { return world.Version; }).Where(delegate(string value) { return !String.IsNullOrWhiteSpace(value); }).Distinct(StringComparer.CurrentCultureIgnoreCase).OrderBy(delegate(string value) { return value; })) versionFilter.Items.Add(version);
+            foreach (string version in allWorlds.Select(delegate(WorldInfo world) { return world.Version; }).Where(delegate(string value) { return !String.IsNullOrWhiteSpace(value); }).Distinct(StringComparer.CurrentCultureIgnoreCase).OrderByDescending(delegate(string value) { return MinecraftVersionSortKey(value); }).ThenBy(delegate(string value) { return value; }, StringComparer.CurrentCultureIgnoreCase)) versionFilter.Items.Add(version);
             int index = selected == null ? 0 : versionFilter.FindStringExact(selected);
             versionFilter.SelectedIndex = index < 0 ? 0 : index;
             versionFilter.EndUpdate();
+        }
+
+        private static long MinecraftVersionSortKey(string value)
+        {
+            if (String.IsNullOrWhiteSpace(value)) return 0L;
+            long best = 0L;
+            MatchCollection matches = Regex.Matches(value, @"(?<!\d)(\d+)\.(\d+)(?:\.(\d+))?");
+            foreach (Match match in matches)
+            {
+                long major;
+                long minor;
+                long patch;
+                if (!Int64.TryParse(match.Groups[1].Value, out major) || !Int64.TryParse(match.Groups[2].Value, out minor)) continue;
+                patch = 0L;
+                if (match.Groups[3].Success) Int64.TryParse(match.Groups[3].Value, out patch);
+                major = Math.Min(999L, Math.Max(0L, major));
+                minor = Math.Min(999L, Math.Max(0L, minor));
+                patch = Math.Min(999L, Math.Max(0L, patch));
+                long key = major * 1000000L + minor * 1000L + patch;
+                if (key > best) best = key;
+            }
+            return best;
         }
 
         private bool LoadRoots()
@@ -5324,6 +5376,23 @@ namespace MinecraftWorldBrowser
                 if (firstWheelTarget != 2) throw new Exception("World-list wheel distance does not match the directory list.");
                 testGrid.ScrollWheelForTest(-SystemInformation.MouseWheelScrollDelta);
                 if (testGrid.FirstDisplayedScrollingRowIndex <= firstWheelTarget) throw new Exception("Interrupted smooth scrolling does not continue toward the new target.");
+                testGrid.CompleteScrollForTest();
+                testGrid.FirstDisplayedScrollingRowIndex = 0;
+                testGrid.ScrollWheelForTest(-SystemInformation.MouseWheelScrollDelta);
+                testGrid.ScrollWheelForTest(SystemInformation.MouseWheelScrollDelta);
+                if (testGrid.TargetFirstRowForTest != 0) throw new Exception("Reversed world-list scrolling does not retarget from the currently presented position.");
+                testGrid.CompleteScrollForTest();
+                testGrid.FirstDisplayedScrollingRowIndex = 0;
+                int rapidPreviousTarget = 0;
+                for (int rapid = 0; rapid < 8; rapid++)
+                {
+                    testGrid.ScrollWheelForTest(-SystemInformation.MouseWheelScrollDelta);
+                    if (testGrid.TargetFirstRowForTest < rapidPreviousTarget)
+                        throw new Exception("Rapid world-list wheel input moved the target backwards.");
+                    rapidPreviousTarget = testGrid.TargetFirstRowForTest;
+                }
+                if (rapidPreviousTarget <= 0) throw new Exception("Rapid world-list wheel input did not advance the target.");
+                testGrid.CompleteScrollForTest();
                 using (MinimalScrollBar testScroll = new MinimalScrollBar())
                 {
                     int changeCount = 0;

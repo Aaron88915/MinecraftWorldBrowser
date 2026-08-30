@@ -1,7 +1,9 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-if exist "%~dp0MinecraftWorldBrowser-v3.2.7.exe" (
+if exist "%~dp0MinecraftWorldBrowser-v3.2.8.exe" (
+  start "" "%~dp0MinecraftWorldBrowser-v3.2.8.exe"
+) else if exist "%~dp0MinecraftWorldBrowser-v3.2.7.exe" (
   start "" "%~dp0MinecraftWorldBrowser-v3.2.7.exe"
 ) else if exist "%~dp0MinecraftWorldBrowser-v3.2.6.exe" (
   start "" "%~dp0MinecraftWorldBrowser-v3.2.6.exe"
