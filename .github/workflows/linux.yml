@@ -1,0 +1,90 @@
+name: Linux build and UI verification
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'linux/**'
+      - '.github/workflows/linux.yml'
+      - '.gitattributes'
+  pull_request:
+    paths:
+      - 'linux/**'
+      - '.github/workflows/linux.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04, ubuntu-24.04]
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: linux/requirements.txt
+      - name: Install desktop libraries and virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb xauth libgl1 libegl1 libxkbcommon0 libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 xdg-user-dirs desktop-file-utils
+      - name: Verify source edition on Linux
+        run: |
+          python -m pip install -r linux/requirements.txt
+          python linux/tools/verify.py
+          xvfb-run -a env QT_QPA_PLATFORM=xcb python linux/MinecraftWorldBrowser.py --render-preview build/linux-ui/native-xcb-light.png --capture-screen
+          xvfb-run -a env QT_QPA_PLATFORM=xcb python linux/MinecraftWorldBrowser.py --render-preview build/linux-ui/native-xcb-dark.png --dark --capture-screen
+      - name: Obtain and package pinned Linux runtime
+        run: |
+          python linux/tools/fetch_runtime.py
+          python -m pip download --platform manylinux_2_28_x86_64 --implementation cp --python-version 312 --abi cp312 --abi abi3 --only-binary=:all: --dest build/linux-wheels -r linux/requirements.txt
+          python linux/tools/package_portable.py
+          python linux/tools/package_source.py
+          python linux/tools/verify_package.py
+          python linux/tools/package_installer.py
+          python linux/tools/verify_installer.py
+          desktop-file-validate linux/一键安装.desktop
+      - name: Exercise the packaged runtime
+        run: |
+          version=$(python linux/MinecraftWorldBrowser.py --version)
+          mkdir -p build/linux-installed
+          tar -xzf "MinecraftWorldBrowser-v$version-linux-x86_64.tar.gz" -C build/linux-installed
+          app="build/linux-installed/MinecraftWorldBrowser-v$version-linux-x86_64"
+          test "$(sh "$app/launch.sh" --version)" = "$version"
+          sh "$app/launch.sh" --self-test
+          QT_QPA_PLATFORM=offscreen sh "$app/launch.sh" --ui-test
+          xvfb-run -a env QT_QPA_PLATFORM=xcb sh "$app/launch.sh" --render-preview build/linux-ui/portable-xcb-light.png --capture-screen
+          xvfb-run -a env QT_QPA_PLATFORM=xcb sh "$app/launch.sh" --render-preview build/linux-ui/portable-xcb-dark.png --dark --capture-screen
+      - name: Install and verify desktop shortcuts
+        run: |
+          version=$(python linux/MinecraftWorldBrowser.py --version)
+          export XDG_DATA_HOME="$PWD/build/one-step-data"
+          desktop="$PWD/build/桌面"
+          QT_QPA_PLATFORM=offscreen sh "MinecraftWorldBrowser-v$version-linux-x86_64-install.run" --skip-dependencies --desktop-dir "$desktop"
+          installed="$XDG_DATA_HOME/minecraft-world-browser/app"
+          test "$(sh "$installed/launch.sh" --version)" = "$version"
+          desktop-file-validate "$desktop/Minecraft 世界浏览器.desktop"
+          desktop-file-validate "$XDG_DATA_HOME/applications/minecraft-world-browser.desktop"
+          printf '%s\n' 'preserve-config' > "$XDG_DATA_HOME/minecraft-world-browser/installer-config-fixture.txt"
+          QT_QPA_PLATFORM=offscreen sh "MinecraftWorldBrowser-v$version-linux-x86_64-install.run" --skip-dependencies --desktop-dir "$desktop"
+          test "$(cat "$XDG_DATA_HOME/minecraft-world-browser/installer-config-fixture.txt")" = preserve-config
+          xvfb-run -a env QT_QPA_PLATFORM=xcb sh "$installed/launch.sh" --render-preview build/linux-ui/installed-xcb-light.png --capture-screen
+      - uses: actions/upload-artifact@v7
+        with:
+          name: MinecraftWorldBrowser-linux-${{ matrix.os }}
+          path: |
+            MinecraftWorldBrowser-v*-linux-*.tar.gz
+            MinecraftWorldBrowser-v*-linux-*.tar.gz.sha256
+            MinecraftWorldBrowser-v*-linux-*.run
+            MinecraftWorldBrowser-v*-linux-*.run.sha256
+            build/linux-ui/*.png
+          compression-level: 0
+          if-no-files-found: error

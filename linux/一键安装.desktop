@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=一键安装世界浏览器
+Comment=安装依赖、程序和桌面快捷图标
+Exec=python3 -c "import subprocess,sys; from pathlib import Path; from urllib.parse import urlparse,unquote; p=sys.argv[1]; u=urlparse(p); p=unquote(u.path) if u.scheme=='file' else p; sys.exit(subprocess.call(['/bin/sh',str(Path(p).resolve().parent/'install.sh'),'--in-terminal']))" %k
+Icon=system-software-install
+Terminal=true
+Categories=Utility;

@@ -1,4 +1,4 @@
-param(
+﻿param(
     [switch]$SelfTest
 )
 
@@ -27,8 +27,8 @@ using System.Windows.Forms;
 [assembly: AssemblyProduct("Minecraft Java World Browser")]
 [assembly: AssemblyDescription("Browse Minecraft Java worlds across popular launcher instance folders")]
 [assembly: AssemblyCompany("Local Utility")]
-[assembly: AssemblyVersion("3.2.10.0")]
-[assembly: AssemblyFileVersion("3.2.10.0")]
+[assembly: AssemblyVersion("3.3.2.0")]
+[assembly: AssemblyFileVersion("3.3.2.0")]
 
 namespace MinecraftWorldBrowser
 {
@@ -38,7 +38,8 @@ namespace MinecraftWorldBrowser
 
         public static Color Ink { get { return InkFor(Dark); } }
         public static Color Muted { get { return MutedFor(Dark); } }
-        public static Color Accent { get { return Dark ? Color.FromArgb(132, 166, 255) : Color.FromArgb(74, 118, 232); } }
+        public static Color Accent { get { return Dark ? Color.FromArgb(100, 181, 239) : Color.FromArgb(51, 144, 236); } }
+        public static Color PrimaryFill { get { return Dark ? Color.FromArgb(31, 118, 194) : Color.FromArgb(26, 115, 195); } }
         public static Color WindowBase { get { return WindowBaseFor(Dark); } }
         public static Color Sidebar { get { return SidebarFor(Dark); } }
         public static Color Canvas { get { return CanvasFor(Dark); } }
@@ -47,34 +48,32 @@ namespace MinecraftWorldBrowser
         public static Color GlassSurface { get { return GlassSurfaceFor(Dark); } }
         public static Color SidebarCard { get { return SidebarCardFor(Dark); } }
         public static Color Line { get { return LineFor(Dark); } }
-        public static Color Header { get { return Dark ? Color.FromArgb(39, 43, 52) : Color.FromArgb(218, 225, 235); } }
-        public static Color AlternateRow { get { return Dark ? Color.FromArgb(36, 40, 48) : Color.FromArgb(228, 234, 242); } }
-        public static Color Selection { get { return Dark ? Color.FromArgb(51, 67, 96) : Color.FromArgb(205, 218, 248); } }
-        public static Color Hover { get { return Dark ? Color.FromArgb(46, 51, 62) : Color.FromArgb(233, 239, 246); } }
-        public static Color InputBorder { get { return Dark ? Color.FromArgb(53, 58, 69) : Color.FromArgb(198, 207, 220); } }
+        public static Color Header { get { return Dark ? Color.FromArgb(32, 43, 54) : Color.FromArgb(247, 249, 251); } }
+        public static Color AlternateRow { get { return Surface; } }
+        public static Color Selection { get { return Dark ? Color.FromArgb(43, 82, 120) : Color.FromArgb(226, 240, 252); } }
+        public static Color Hover { get { return Dark ? Color.FromArgb(37, 51, 65) : Color.FromArgb(242, 246, 250); } }
+        public static Color InputBorder { get { return Dark ? Color.FromArgb(51, 67, 82) : Color.FromArgb(219, 227, 234); } }
         public static Color GlassEdge { get { return Color.Transparent; } }
-        public static Color Shadow { get { return NeuDarkShadow; } }
-        public static Color NeuLightShadow { get { return Dark ? Color.FromArgb(128, 67, 73, 86) : Color.FromArgb(224, 255, 255, 255); } }
-        public static Color NeuDarkShadow { get { return Dark ? Color.FromArgb(190, 11, 13, 18) : Color.FromArgb(185, 173, 184, 199); } }
-        public static Color SecondaryFill { get { return GlassSurface; } }
-        public static Color SecondaryHover { get { return Dark ? Color.FromArgb(43, 47, 57) : Color.FromArgb(231, 237, 245); } }
-        public static Color SecondaryPressed { get { return GlassSurface; } }
-        public static Color SecondaryBorder { get { return Color.Transparent; } }
-        public static Color DisabledFill { get { return Dark ? Color.FromArgb(34, 37, 44) : Color.FromArgb(218, 224, 233); } }
-        public static Color DisabledText { get { return Dark ? Color.FromArgb(119, 125, 137) : Color.FromArgb(135, 145, 158); } }
-        public static Color ScrollThumb { get { return Dark ? Color.FromArgb(155, 166, 185) : Color.FromArgb(125, 139, 158); } }
-        public static Color ScrollThumbHover { get { return Dark ? Color.FromArgb(210, 218, 232) : Color.FromArgb(74, 118, 232); } }
+        public static Color Shadow { get { return Color.Transparent; } }
+        public static Color SecondaryFill { get { return Dark ? Color.FromArgb(36, 50, 64) : Color.White; } }
+        public static Color SecondaryHover { get { return Dark ? Color.FromArgb(45, 64, 81) : Color.FromArgb(225, 238, 250); } }
+        public static Color SecondaryPressed { get { return Dark ? Color.FromArgb(54, 79, 101) : Color.FromArgb(205, 227, 247); } }
+        public static Color SecondaryBorder { get { return Dark ? Color.FromArgb(70, 92, 112) : Color.FromArgb(169, 189, 209); } }
+        public static Color DisabledFill { get { return Dark ? Color.FromArgb(30, 42, 54) : Color.FromArgb(242, 245, 248); } }
+        public static Color DisabledText { get { return Dark ? Color.FromArgb(108, 128, 145) : Color.FromArgb(160, 172, 184); } }
+        public static Color ScrollThumb { get { return Dark ? Color.FromArgb(89, 109, 127) : Color.FromArgb(185, 199, 212); } }
+        public static Color ScrollThumbHover { get { return Accent; } }
 
-        public static Color InkFor(bool dark) { return dark ? Color.FromArgb(236, 239, 244) : Color.FromArgb(47, 55, 68); }
-        public static Color MutedFor(bool dark) { return dark ? Color.FromArgb(164, 171, 184) : Color.FromArgb(98, 110, 126); }
-        public static Color WindowBaseFor(bool dark) { return dark ? Color.FromArgb(34, 37, 44) : Color.FromArgb(223, 229, 238); }
-        public static Color SidebarFor(bool dark) { return dark ? Color.FromArgb(34, 37, 44) : Color.FromArgb(223, 229, 238); }
-        public static Color CanvasFor(bool dark) { return dark ? Color.FromArgb(34, 37, 44) : Color.FromArgb(223, 229, 238); }
-        public static Color SurfaceFor(bool dark) { return dark ? Color.FromArgb(38, 41, 49) : Color.FromArgb(223, 229, 238); }
-        public static Color SurfaceRaisedFor(bool dark) { return dark ? Color.FromArgb(39, 42, 50) : Color.FromArgb(223, 229, 238); }
-        public static Color GlassSurfaceFor(bool dark) { return dark ? Color.FromArgb(39, 42, 50) : Color.FromArgb(223, 229, 238); }
-        public static Color SidebarCardFor(bool dark) { return dark ? Color.FromArgb(39, 42, 50) : Color.FromArgb(223, 229, 238); }
-        public static Color LineFor(bool dark) { return dark ? Color.FromArgb(56, 61, 72) : Color.FromArgb(199, 208, 220); }
+        public static Color InkFor(bool dark) { return dark ? Color.FromArgb(233, 241, 248) : Color.FromArgb(32, 43, 54); }
+        public static Color MutedFor(bool dark) { return dark ? Color.FromArgb(138, 160, 180) : Color.FromArgb(119, 139, 157); }
+        public static Color WindowBaseFor(bool dark) { return dark ? Color.FromArgb(23, 33, 43) : Color.FromArgb(237, 243, 248); }
+        public static Color SidebarFor(bool dark) { return dark ? Color.FromArgb(23, 33, 43) : Color.FromArgb(255, 255, 255); }
+        public static Color CanvasFor(bool dark) { return dark ? Color.FromArgb(14, 22, 33) : Color.FromArgb(237, 243, 248); }
+        public static Color SurfaceFor(bool dark) { return dark ? Color.FromArgb(23, 33, 43) : Color.FromArgb(255, 255, 255); }
+        public static Color SurfaceRaisedFor(bool dark) { return dark ? Color.FromArgb(23, 33, 43) : Color.FromArgb(255, 255, 255); }
+        public static Color GlassSurfaceFor(bool dark) { return dark ? Color.FromArgb(36, 50, 64) : Color.FromArgb(241, 245, 249); }
+        public static Color SidebarCardFor(bool dark) { return dark ? Color.FromArgb(23, 33, 43) : Color.FromArgb(255, 255, 255); }
+        public static Color LineFor(bool dark) { return dark ? Color.FromArgb(37, 52, 66) : Color.FromArgb(229, 236, 242); }
 
         public static void SetDark(bool dark) { Dark = dark; }
 
@@ -91,79 +90,29 @@ namespace MinecraftWorldBrowser
         }
     }
 
-    internal static class NeumorphicRenderer
+    internal static class FlatSurfaceRenderer
     {
-        public static void DrawRaised(Graphics graphics, RectangleF bounds, int radius, Color surface, float strength)
+        public static void Draw(Graphics graphics, RectangleF bounds, int radius, Color surface, Color border)
         {
             if (graphics == null || bounds.Width <= 1F || bounds.Height <= 1F) return;
-            strength = Math.Max(0F, Math.Min(1F, strength));
-            for (int depth = 5; depth >= 1; depth--)
-            {
-                float offset = depth * 0.55F;
-                float falloff = (6F - depth) / 5F;
-                using (GraphicsPath lightPath = RoundedPath(Offset(bounds, -offset, -offset), radius))
-                using (GraphicsPath darkPath = RoundedPath(Offset(bounds, offset, offset), radius))
-                using (Brush lightBrush = new SolidBrush(WithStrength(AppTheme.NeuLightShadow, strength * falloff * 0.32F)))
-                using (Brush darkBrush = new SolidBrush(WithStrength(AppTheme.NeuDarkShadow, strength * falloff * 0.26F)))
-                {
-                    graphics.FillPath(lightBrush, lightPath);
-                    graphics.FillPath(darkBrush, darkPath);
-                }
-            }
             using (GraphicsPath face = RoundedPath(bounds, radius))
-            using (Brush brush = new SolidBrush(surface)) graphics.FillPath(brush, face);
-        }
-
-        public static void DrawInset(Graphics graphics, RectangleF bounds, int radius, float strength)
-        {
-            if (graphics == null || bounds.Width <= 1F || bounds.Height <= 1F || strength <= 0F) return;
-            strength = Math.Max(0F, Math.Min(1F, strength));
-            GraphicsState state = graphics.Save();
-            try
             {
-                using (GraphicsPath clip = RoundedPath(bounds, radius)) graphics.SetClip(clip);
-                for (int depth = 1; depth <= 5; depth++)
-                {
-                    float offset = depth * 0.62F;
-                    float falloff = (6F - depth) / 5F;
-                    using (GraphicsPath darkPath = RoundedPath(Offset(bounds, offset, offset), radius))
-                    using (GraphicsPath lightPath = RoundedPath(Offset(bounds, -offset, -offset), radius))
-                    using (Pen darkPen = new Pen(WithStrength(AppTheme.NeuDarkShadow, strength * falloff * 0.54F), 1.6F))
-                    using (Pen lightPen = new Pen(WithStrength(AppTheme.NeuLightShadow, strength * falloff * 0.46F), 1.6F))
-                    {
-                        graphics.DrawPath(darkPen, darkPath);
-                        graphics.DrawPath(lightPen, lightPath);
-                    }
-                }
-            }
-            finally
-            {
-                graphics.Restore(state);
+                using (Brush brush = new SolidBrush(surface)) graphics.FillPath(brush, face);
+                if (border.A > 0)
+                    using (Pen pen = new Pen(border, 1F)) graphics.DrawPath(pen, face);
             }
         }
 
         public static GraphicsPath RoundedPath(RectangleF rectangle, float radius)
         {
             GraphicsPath path = new GraphicsPath();
-            float safeRadius = Math.Max(1F, Math.Min(radius, Math.Min(rectangle.Width, rectangle.Height) / 2F));
-            float diameter = safeRadius * 2F;
+            float diameter = Math.Max(1F, Math.Min(radius * 2F, Math.Min(rectangle.Width, rectangle.Height)));
             path.AddArc(rectangle.Left, rectangle.Top, diameter, diameter, 180, 90);
             path.AddArc(rectangle.Right - diameter, rectangle.Top, diameter, diameter, 270, 90);
             path.AddArc(rectangle.Right - diameter, rectangle.Bottom - diameter, diameter, diameter, 0, 90);
             path.AddArc(rectangle.Left, rectangle.Bottom - diameter, diameter, diameter, 90, 90);
             path.CloseFigure();
             return path;
-        }
-
-        private static RectangleF Offset(RectangleF bounds, float x, float y)
-        {
-            return new RectangleF(bounds.X + x, bounds.Y + y, bounds.Width, bounds.Height);
-        }
-
-        private static Color WithStrength(Color color, float strength)
-        {
-            int alpha = (int)Math.Round(color.A * Math.Max(0F, Math.Min(1F, strength)));
-            return Color.FromArgb(alpha, color.R, color.G, color.B);
         }
     }
 
@@ -709,12 +658,17 @@ namespace MinecraftWorldBrowser
             Bitmap bitmap = new Bitmap(40, 40);
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
-                graphics.Clear(Color.FromArgb(64, 122, 72));
-                using (Brush grass = new SolidBrush(Color.FromArgb(92, 154, 81))) graphics.FillRectangle(grass, 0, 0, 40, 13);
-                using (Pen line = new Pen(Color.FromArgb(55, 98, 60)))
+                graphics.Clear(Color.FromArgb(159, 212, 240));
+                using (Brush grass = new SolidBrush(Color.FromArgb(101, 171, 105)))
+                    graphics.FillPolygon(grass, new Point[] { new Point(0, 25), new Point(12, 15), new Point(25, 24), new Point(40, 17), new Point(40, 40), new Point(0, 40) });
+                using (Brush earth = new SolidBrush(Color.FromArgb(109, 144, 83))) graphics.FillRectangle(earth, 0, 31, 40, 9);
+                using (Brush river = new SolidBrush(Color.FromArgb(76, 163, 219)))
+                    graphics.FillPolygon(river, new Point[] { new Point(19, 25), new Point(24, 25), new Point(19, 40), new Point(10, 40) });
+                using (Brush trunk = new SolidBrush(Color.FromArgb(104, 82, 62))) graphics.FillRectangle(trunk, 29, 18, 3, 11);
+                using (Brush leaves = new SolidBrush(Color.FromArgb(54, 123, 83)))
                 {
-                    graphics.DrawLine(line, 0, 13, 39, 13);
-                    graphics.DrawRectangle(line, 0, 0, 39, 39);
+                    graphics.FillRectangle(leaves, 25, 13, 11, 9);
+                    graphics.FillRectangle(leaves, 28, 10, 6, 6);
                 }
             }
             return bitmap;
@@ -1186,6 +1140,7 @@ namespace MinecraftWorldBrowser
         public List<object> Items { get { return items; } }
         public int ItemHeight { get; set; }
         public bool ShowInternalScrollBar { get; set; }
+        public bool OverlayScrollBar { get; set; }
 
         public int SelectedIndex
         {
@@ -1215,6 +1170,31 @@ namespace MinecraftWorldBrowser
         {
             get { return ItemHeight <= 0 ? 0 : Math.Max(0, (int)Math.Floor(scrollOffset / ItemHeight)); }
             set { SetScrollOffset(Math.Max(0, value) * Math.Max(1, ItemHeight), true); }
+        }
+
+        internal void HoverItemForTest(int index)
+        {
+            if (index < 0) OnMouseLeave(EventArgs.Empty);
+            else OnMouseMove(new MouseEventArgs(MouseButtons.None, 0, 20, index * ItemHeight - ScrollOffset + 14, 0));
+        }
+
+        internal void SetScrollBarPressedForTest(bool pressed)
+        {
+            Rectangle thumb = InternalThumbRectangle();
+            MouseEventArgs pointer = new MouseEventArgs(MouseButtons.Left, 1, thumb.X + thumb.Width / 2, thumb.Y + thumb.Height / 2, 0);
+            if (pressed) OnMouseDown(pointer);
+            else { OnMouseUp(pointer); OnMouseLeave(EventArgs.Empty); }
+        }
+
+        internal void DragScrollBarForTest(int distance)
+        {
+            Rectangle thumb = InternalThumbRectangle();
+            int x = thumb.X + thumb.Width / 2;
+            int y = thumb.Y + thumb.Height / 2;
+            OnMouseDown(new MouseEventArgs(MouseButtons.Left, 1, x, y, 0));
+            OnMouseMove(new MouseEventArgs(MouseButtons.Left, 0, x, y + distance, 0));
+            OnMouseUp(new MouseEventArgs(MouseButtons.Left, 1, x, y + distance, 0));
+            OnMouseLeave(EventArgs.Empty);
         }
 
         internal double TargetScrollOffsetForTest { get { return animationTargetOffset; } }
@@ -1264,7 +1244,7 @@ namespace MinecraftWorldBrowser
 
             int first = Math.Max(0, (int)Math.Floor(scrollOffset / ItemHeight));
             int y = (int)Math.Round(first * ItemHeight - scrollOffset);
-            int contentWidth = Math.Max(1, ClientSize.Width - (ShowInternalScrollBar && IsScrollBarNeeded() ? 12 : 0));
+            int contentWidth = Math.Max(1, ClientSize.Width - (ShowInternalScrollBar && IsScrollBarNeeded() && !OverlayScrollBar ? 12 : 0));
             for (int index = first; index < items.Count && y < ClientSize.Height; index++, y += ItemHeight)
             {
                 Rectangle bounds = new Rectangle(0, y, contentWidth, ItemHeight);
@@ -1345,7 +1325,7 @@ namespace MinecraftWorldBrowser
                 SetScrollOffset((int)Math.Round(MaximumOffset() * pixel / (double)travel), true);
                 return;
             }
-            int nextHovered = IndexAt(e.Y);
+            int nextHovered = ShowInternalScrollBar && IsScrollBarNeeded() && e.X >= ClientSize.Width - 14 ? -2 : IndexAt(e.Y);
             if (hoveredIndex != nextHovered)
             {
                 hoveredIndex = nextHovered;
@@ -1612,14 +1592,14 @@ namespace MinecraftWorldBrowser
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            RectangleF bounds = new RectangleF(4F, 3F, Math.Max(1, Width - 8F), Math.Max(1, Height - 7F));
+            RectangleF bounds = new RectangleF(1F, 1F, Math.Max(1, Width - 2F), Math.Max(1, Height - 2F));
             bool inset = pressed || DroppedDown;
             Color fill = hovered && !inset ? AppTheme.SecondaryHover : AppTheme.SecondaryFill;
-            NeumorphicRenderer.DrawRaised(e.Graphics, bounds, 15, fill, inset ? 0F : 1F);
-            NeumorphicRenderer.DrawInset(e.Graphics, bounds, 15, inset ? 1F : 0F);
+            if (inset) fill = AppTheme.SecondaryPressed;
+            FlatSurfaceRenderer.Draw(e.Graphics, bounds, 8, fill, AppTheme.SecondaryBorder);
             if (DroppedDown || Focused)
             {
-                using (GraphicsPath focusPath = NeumorphicRenderer.RoundedPath(new RectangleF(bounds.X + 1F, bounds.Y + 1F, bounds.Width - 2F, bounds.Height - 2F), 14F))
+                using (GraphicsPath focusPath = FlatSurfaceRenderer.RoundedPath(new RectangleF(bounds.X + 1F, bounds.Y + 1F, bounds.Width - 2F, bounds.Height - 2F), 7F))
                 using (Pen pen = new Pen(Color.FromArgb(165, AppTheme.Accent), 1F)) e.Graphics.DrawPath(pen, focusPath);
             }
             string text = SelectedItem == null ? "" : Convert.ToString(SelectedItem);
@@ -1631,6 +1611,8 @@ namespace MinecraftWorldBrowser
                 e.Graphics.DrawLine(pen, center.X, center.Y + 1, center.X + 3, center.Y - 2);
             }
         }
+
+        internal void SetPressedForTest(bool value) { pressed = value; }
 
         internal void PaintForTest(Bitmap bitmap)
         {
@@ -1883,7 +1865,7 @@ namespace MinecraftWorldBrowser
 
         public ModernButton()
         {
-            CornerRadius = 18;
+            CornerRadius = 8;
             FillColor = Color.Empty;
             HoverBackColor = AppTheme.SecondaryHover;
             PressedBackColor = AppTheme.SecondaryPressed;
@@ -1953,24 +1935,23 @@ namespace MinecraftWorldBrowser
         protected override void OnPaint(PaintEventArgs e)
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
-            RectangleF bounds = new RectangleF(4F, 3.5F, Math.Max(1F, Width - 8F), Math.Max(1F, Height - 8F));
+            RectangleF bounds = new RectangleF(1F, 1F, Math.Max(1F, Width - 2F), Math.Max(1F, Height - 2F));
             Color normal = FillColor.IsEmpty ? AppTheme.SecondaryFill : FillColor;
             float easedHover = hoverProgress * hoverProgress * (3F - 2F * hoverProgress);
             Color animatedFill = BlendColor(normal, HoverBackColor, easedHover);
-            Color fill = Enabled ? BlendColor(animatedFill, PressedBackColor, pressProgress * 0.22F) : AppTheme.DisabledFill;
+            Color fill = Enabled ? BlendColor(animatedFill, PressedBackColor, pressProgress) : AppTheme.DisabledFill;
             Color text = Enabled ? BlendColor(ForeColor, AppTheme.Accent, IsPrimary ? 0F : easedHover * 0.58F) : AppTheme.DisabledText;
-            NeumorphicRenderer.DrawRaised(e.Graphics, bounds, CornerRadius, fill, Enabled ? 1F - pressProgress : 0.28F);
-            if (Enabled) NeumorphicRenderer.DrawInset(e.Graphics, bounds, CornerRadius, pressProgress);
+            FlatSurfaceRenderer.Draw(e.Graphics, bounds, CornerRadius, fill, Color.Transparent);
             if (BorderColor != Color.Transparent)
             {
-                using (GraphicsPath path = NeumorphicRenderer.RoundedPath(bounds, CornerRadius))
+                using (GraphicsPath path = FlatSurfaceRenderer.RoundedPath(bounds, CornerRadius))
                 using (Pen pen = new Pen(Enabled ? BorderColor : AppTheme.Line, 1F)) e.Graphics.DrawPath(pen, path);
             }
-            DrawContent(e.Graphics, text, 0);
+            DrawContent(e.Graphics, IsPrimary && Enabled ? Color.White : text, 0);
             if (Focused && ShowFocusCues && Enabled)
             {
                 RectangleF focusBounds = new RectangleF(bounds.X + 1F, bounds.Y + 1F, Math.Max(1, bounds.Width - 2F), Math.Max(1, bounds.Height - 2F));
-                using (GraphicsPath focusPath = NeumorphicRenderer.RoundedPath(focusBounds, Math.Max(3, CornerRadius - 2)))
+                using (GraphicsPath focusPath = FlatSurfaceRenderer.RoundedPath(focusBounds, Math.Max(3, CornerRadius - 2)))
                 using (Pen focusPen = new Pen(Color.FromArgb(175, AppTheme.Accent), 1F)) e.Graphics.DrawPath(focusPen, focusPath);
             }
         }
@@ -2107,12 +2088,12 @@ namespace MinecraftWorldBrowser
         {
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
             base.OnPaintBackground(e);
-            RectangleF bounds = new RectangleF(4F, 3F, Math.Max(1, Width - 8F), Math.Max(1, Height - 8F));
-            Color fill = MaterialColor.IsEmpty ? AppTheme.GlassSurface : MaterialColor;
-            NeumorphicRenderer.DrawRaised(e.Graphics, bounds, CornerRadius, fill, ShadowColor == Color.Transparent ? 0F : 1F);
+            RectangleF bounds = new RectangleF(0.5F, 0.5F, Math.Max(1, Width - 1F), Math.Max(1, Height - 1F));
+            Color fill = MaterialColor.IsEmpty ? AppTheme.SurfaceRaised : MaterialColor;
+            FlatSurfaceRenderer.Draw(e.Graphics, bounds, CornerRadius, fill, Color.Transparent);
             if (BorderColor != Color.Transparent)
             {
-                using (GraphicsPath path = NeumorphicRenderer.RoundedPath(bounds, CornerRadius))
+                using (GraphicsPath path = FlatSurfaceRenderer.RoundedPath(bounds, CornerRadius))
                 using (Pen pen = new Pen(BorderColor, 1F)) e.Graphics.DrawPath(pen, path);
             }
         }
@@ -2429,7 +2410,7 @@ namespace MinecraftWorldBrowser
             using (GraphicsPath trackPath = RoundedPath(track, 3))
             using (Brush trackBrush = new SolidBrush(surrounding)) e.Graphics.FillPath(trackBrush, trackPath);
             using (GraphicsPath edgePath = RoundedPath(new RectangleF(0.5F, 3.5F, Math.Max(1, Width - 1F), 5F), 2.5F))
-            using (Pen edge = new Pen(Color.FromArgb(AppTheme.Dark ? 44 : 34, AppTheme.NeuDarkShadow), 1F)) e.Graphics.DrawPath(edge, edgePath);
+            using (Pen edge = new Pen(Color.FromArgb(AppTheme.Dark ? 44 : 34, AppTheme.Muted), 1F)) e.Graphics.DrawPath(edge, edgePath);
             if (!running) return;
             RectangleF segment = new RectangleF(offset, 3, 70, 6);
             using (GraphicsPath segmentPath = RoundedPath(segment, 3))
@@ -2449,6 +2430,30 @@ namespace MinecraftWorldBrowser
         }
     }
 
+    internal sealed class HintTextBox : TextBox
+    {
+        private bool drawingHint;
+
+        protected override void WndProc(ref Message message)
+        {
+            base.WndProc(ref message);
+            // Filter messages before reading TextLength: that property sends native text messages.
+            if (drawingHint || (message.Msg != 0x000F && message.Msg != 0x0318) || TextLength != 0 || !IsHandleCreated) return;
+            drawingHint = true;
+            try
+            {
+                using (Graphics graphics = message.Msg == 0x0318 && message.WParam != IntPtr.Zero
+                    ? Graphics.FromHdc(message.WParam) : Graphics.FromHwnd(Handle))
+                {
+                    using (Brush background = new SolidBrush(BackColor)) graphics.FillRectangle(background, ClientRectangle);
+                    GlassTextRenderer.Draw(graphics, "\u641c\u7d22\u4e16\u754c\u3001\u7248\u672c\u6216\u8def\u5f84", Font,
+                        ClientRectangle, AppTheme.Muted, StringAlignment.Near, StringTrimming.EllipsisCharacter);
+                }
+            }
+            finally { drawingHint = false; }
+        }
+    }
+
     internal sealed class WorldDetailsDialog : Form
     {
         private readonly TextBox tagsBox = new TextBox();
@@ -2463,10 +2468,10 @@ namespace MinecraftWorldBrowser
         {
             Text = "\u4e16\u754c\u8be6\u60c5";
             StartPosition = FormStartPosition.CenterParent;
-            Size = new Size(620, 610);
-            MinimumSize = new Size(540, 540);
+            Size = new Size(680, 680);
+            MinimumSize = new Size(620, 620);
             BackColor = AppTheme.Canvas;
-            Font = new Font("Microsoft YaHei UI", 9F);
+            Font = new Font("Microsoft YaHei UI", 9.5F);
             AutoScaleMode = AutoScaleMode.None;
             ShowInTaskbar = false;
             ShowIcon = false;
@@ -2474,7 +2479,7 @@ namespace MinecraftWorldBrowser
             TableLayoutPanel root = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 5, Padding = new Padding(24, 20, 24, 18), BackColor = Color.Transparent };
             root.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 78F));
-            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 198F));
+            root.RowStyles.Add(new RowStyle(SizeType.Absolute, 254F));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 60F));
             root.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             root.RowStyles.Add(new RowStyle(SizeType.Absolute, 52F));
@@ -2482,11 +2487,21 @@ namespace MinecraftWorldBrowser
 
             Panel header = new Panel { Dock = DockStyle.Fill, BackColor = Color.Transparent };
             PictureBox icon = new PictureBox { Location = new Point(0, 2), Size = new Size(56, 56), SizeMode = PictureBoxSizeMode.Zoom, Image = world.Icon };
+            using (GraphicsPath avatarClip = new GraphicsPath())
+            {
+                avatarClip.AddEllipse(icon.ClientRectangle);
+                icon.Region = new Region(avatarClip);
+            }
             Label title = new Label { Text = world.Name, Location = new Point(72, 2), Size = new Size(470, 32), Font = new Font(Font.FontFamily, 18F, FontStyle.Bold), ForeColor = AppTheme.Ink, AutoEllipsis = true };
             Label subtitle = new Label { Text = world.Version + "   /   " + world.GameMode + "   /   " + world.Loader + (world.Favorite ? "   /   \u5df2\u6536\u85cf" : ""), Location = new Point(74, 40), Size = new Size(450, 24), ForeColor = AppTheme.Muted, AutoEllipsis = true };
             header.Controls.Add(icon);
             header.Controls.Add(title);
             header.Controls.Add(subtitle);
+            header.Resize += delegate
+            {
+                title.Width = Math.Max(100, header.ClientSize.Width - 74);
+                subtitle.Width = Math.Max(100, header.ClientSize.Width - 74);
+            };
             root.Controls.Add(header, 0, 0);
 
             RoundedPanel information = new RoundedPanel { Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = AppTheme.SurfaceRaised, BorderColor = Color.Transparent, CornerRadius = 10, Padding = new Padding(16, 12, 16, 10), Margin = new Padding(0, 0, 0, 10) };
@@ -2514,7 +2529,8 @@ namespace MinecraftWorldBrowser
             tagsBox.BackColor = AppTheme.SurfaceRaised;
             tagsBox.ForeColor = AppTheme.Ink;
             tagsBox.Text = world.Tags ?? "";
-            autoBackupBox.Text = "\u5b58\u6863\u53d8\u5316\u65f6\u81ea\u52a8\u5907\u4efd";
+            autoBackupBox.Text = "\u81ea\u52a8\u5907\u4efd";
+            autoBackupBox.AccessibleDescription = "\u5b58\u6863\u53d8\u5316\u65f6\u81ea\u52a8\u5907\u4efd";
             autoBackupBox.AutoSize = true;
             autoBackupBox.Checked = world.AutoBackup;
             autoBackupBox.ForeColor = AppTheme.Muted;
@@ -2522,6 +2538,11 @@ namespace MinecraftWorldBrowser
             tagsPanel.Controls.Add(tagsLabel);
             tagsPanel.Controls.Add(tagsBox);
             tagsPanel.Controls.Add(autoBackupBox);
+            tagsPanel.Resize += delegate
+            {
+                autoBackupBox.Left = tagsPanel.ClientSize.Width - autoBackupBox.Width - 8;
+                tagsBox.Width = Math.Max(80, autoBackupBox.Left - tagsBox.Left - 16);
+            };
             root.Controls.Add(tagsPanel, 0, 2);
 
             Panel notesPanel = new Panel { Dock = DockStyle.Fill, BackColor = Color.Transparent };
@@ -2564,7 +2585,7 @@ namespace MinecraftWorldBrowser
 
         private ModernButton CreateButton(string text, bool primary)
         {
-            ModernButton button = new ModernButton { Text = text, Size = new Size(108, 36), IsPrimary = primary, BackColor = Color.Transparent, FillColor = AppTheme.SecondaryFill, ForeColor = primary ? AppTheme.Accent : AppTheme.Ink, HoverBackColor = AppTheme.SecondaryHover, PressedBackColor = AppTheme.SecondaryPressed, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, CornerRadius = 9, Cursor = Cursors.Hand };
+            ModernButton button = new ModernButton { Text = text, Size = new Size(108, 36), IsPrimary = primary, BackColor = Color.Transparent, FillColor = primary ? AppTheme.PrimaryFill : AppTheme.SecondaryFill, ForeColor = primary ? Color.White : AppTheme.Ink, HoverBackColor = primary ? Color.FromArgb(28, 123, 202) : AppTheme.SecondaryHover, PressedBackColor = primary ? Color.FromArgb(22, 102, 173) : AppTheme.SecondaryPressed, BorderColor = primary ? Color.Transparent : AppTheme.SecondaryBorder, HighlightColor = Color.Transparent, CornerRadius = 9, Cursor = Cursors.Hand };
             return button;
         }
 
@@ -2599,7 +2620,7 @@ namespace MinecraftWorldBrowser
         private int worldSizeCalculationGeneration;
         private readonly SmoothListControl rootList = new SmoothListControl();
         private readonly DataGridView grid = new BufferedDataGridView();
-        private readonly TextBox searchBox = new TextBox();
+        private readonly TextBox searchBox = new HintTextBox();
         private readonly SmoothComboBox versionFilter = new SmoothComboBox();
         private readonly SmoothComboBox modeFilter = new SmoothComboBox();
         private readonly Label statusLabel = new Label();
@@ -2608,7 +2629,6 @@ namespace MinecraftWorldBrowser
         private readonly Label detailName = new Label();
         private readonly Label detailPath = new Label();
         private readonly ToolTip toolTip = new ToolTip();
-        private readonly MinimalScrollBar rootScroll = new MinimalScrollBar();
         private readonly MinimalScrollBar gridVerticalScroll = new MinimalScrollBar();
         private readonly MinimalScrollBar gridHorizontalScroll = new MinimalScrollBar();
         private readonly ModernButton openButton;
@@ -2705,7 +2725,7 @@ namespace MinecraftWorldBrowser
             MinimumSize = new Size(980, 620);
             Size = new Size(1280, 780);
             BackColor = WindowBase;
-            Font = new Font("Microsoft YaHei UI", 9F);
+            Font = new Font("Microsoft YaHei UI", 9.5F);
             AutoScaleMode = AutoScaleMode.None;
             DoubleBuffered = false;
             SetStyle(ControlStyles.UserPaint | ControlStyles.ResizeRedraw, true);
@@ -2726,22 +2746,22 @@ namespace MinecraftWorldBrowser
             sidebar.Name = "Sidebar";
             Controls.Add(sidebar);
 
-            MaterialPanel main = new MaterialPanel { Name = "Main", Dock = DockStyle.Fill, Padding = new Padding(24, 22, 24, 18), BackColor = Canvas, MaterialColor = Canvas };
+            MaterialPanel main = new MaterialPanel { Name = "Main", Dock = DockStyle.Fill, Padding = new Padding(20, 18, 20, 14), BackColor = Canvas, MaterialColor = Canvas };
             Controls.Add(main);
             main.BringToFront();
 
             TableLayoutPanel contentLayout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 5, Margin = new Padding(0), Padding = new Padding(0), BackColor = Color.Transparent };
             contentLayout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            contentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 70F));
-            contentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 58F));
-            contentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 44F));
+            contentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 64F));
+            contentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
+            contentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 48F));
             contentLayout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            contentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 90F));
+            contentLayout.RowStyles.Add(new RowStyle(SizeType.Absolute, 112F));
             main.Controls.Add(contentLayout);
 
             Panel header = new Panel { Name = "MainHeader", Dock = DockStyle.Fill, BackColor = Color.Transparent, Margin = new Padding(0) };
-            Label title = new Label { Name = "MainTitle", Text = "\u4e16\u754c\u6d4f\u89c8\u5668", Font = new Font(Font.FontFamily, 20F, FontStyle.Bold), ForeColor = Ink, AutoSize = true, Location = new Point(0, 0) };
-            Label subtitle = new Label { Text = "Minecraft Java  \u00b7  \u8de8\u542f\u52a8\u5668\u5b58\u6863", ForeColor = Muted, AutoSize = true, Location = new Point(2, 40) };
+            Label title = new Label { Name = "MainTitle", Text = "\u5168\u90e8\u4e16\u754c", Font = new Font(Font.FontFamily, 18F, FontStyle.Bold), ForeColor = Ink, AutoSize = true, Location = new Point(0, 0) };
+            Label subtitle = new Label { Text = "\u96c6\u4e2d\u7ba1\u7406\u4f60\u7684 Minecraft \u5b58\u6863", ForeColor = Muted, AutoSize = true, Location = new Point(2, 35) };
             header.Controls.Add(title);
             header.Controls.Add(subtitle);
             summaryLabel.Text = "0  \u4e2a\u4e16\u754c   /   0  \u4e2a\u76ee\u5f55";
@@ -2754,7 +2774,7 @@ namespace MinecraftWorldBrowser
             themeButton = MakeButton("", false);
             themeButton.Name = "ThemeToggleButton";
             themeButton.AccessibleName = "\u5207\u6362\u6df1\u8272\u6a21\u5f0f";
-            themeButton.Size = new Size(122, 34);
+            themeButton.Size = new Size(142, 34);
             themeButton.Font = new Font("Microsoft YaHei UI", 9F);
             themeButton.Click += delegate { ToggleTheme(); };
             toolTip.SetToolTip(themeButton, "\u5207\u6362\u6df1\u8272\u6a21\u5f0f");
@@ -2771,7 +2791,7 @@ namespace MinecraftWorldBrowser
             contentLayout.Controls.Add(header, 0, 0);
 
             Panel toolbar = new Panel { Name = "CommandToolbar", Dock = DockStyle.Fill, BackColor = Color.Transparent, Margin = new Padding(0) };
-            RoundedPanel searchSurface = new RoundedPanel { Name = "SearchSurface", Location = new Point(0, 4), Size = new Size(620, 44), BackColor = Color.Transparent, MaterialColor = GlassSurface, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 18, DrawSheen = false, SheenHeight = 0 };
+            RoundedPanel searchSurface = new RoundedPanel { Name = "SearchSurface", Location = new Point(0, 4), Size = new Size(620, 44), BackColor = Color.Transparent, MaterialColor = GlassSurface, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 9, DrawSheen = false, SheenHeight = 0 };
             searchSurface.Cursor = Cursors.IBeam;
             searchBox.Name = "SearchBox";
             searchBox.Width = 580;
@@ -2786,10 +2806,6 @@ namespace MinecraftWorldBrowser
             Label searchIcon = new Label { Name = "SearchIcon", Text = "\uE721", ForeColor = Muted, Font = new Font("Segoe MDL2 Assets", 11F), AutoSize = true, Location = new Point(12, 13), BackColor = Color.Transparent };
             searchIcon.Cursor = Cursors.IBeam;
             searchSurface.Controls.Add(searchIcon);
-            Label searchHint = new Label { Name = "SearchHint", Text = "\u641c\u7d22\u4e16\u754c\u3001\u7248\u672c\u6216\u8def\u5f84", ForeColor = Muted, AutoSize = true, Location = new Point(40, 13), BackColor = Color.Transparent };
-            searchHint.Cursor = Cursors.IBeam;
-            searchSurface.Controls.Add(searchHint);
-            searchHint.BringToFront();
             Action focusSearch = delegate
             {
                 searchBox.Focus();
@@ -2798,9 +2814,6 @@ namespace MinecraftWorldBrowser
             };
             searchSurface.MouseDown += delegate { focusSearch(); };
             searchIcon.MouseDown += delegate { focusSearch(); };
-            searchHint.MouseDown += delegate { focusSearch(); };
-            searchBox.GotFocus += delegate { searchHint.Visible = false; };
-            searchBox.LostFocus += delegate { searchHint.Visible = searchBox.TextLength == 0; };
             toolbar.Controls.Add(searchSurface);
 
             fullScanButton = MakeButton("\u5168\u76d8\u626b\u63cf", false);
@@ -2858,7 +2871,7 @@ namespace MinecraftWorldBrowser
             contentLayout.Controls.Add(browserLayout, 0, 3);
             ConfigureGrid();
             grid.Margin = new Padding(0);
-            RoundedPanel gridSurface = new RoundedPanel { Name = "GridSurface", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 16, Margin = new Padding(0), Padding = new Padding(4) };
+            RoundedPanel gridSurface = new RoundedPanel { Name = "GridSurface", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 9, Margin = new Padding(0, 0, 0, 12), Padding = new Padding(4) };
             gridSurface.Controls.Add(grid);
             gridVerticalScroll.Name = "GridVerticalScroll";
             gridVerticalScroll.Orientation = Orientation.Vertical;
@@ -2893,50 +2906,50 @@ namespace MinecraftWorldBrowser
             browserLayout.Controls.Add(gridSurface, 0, 0);
 
             Panel footer = new Panel { Name = "StatusFooter", Dock = DockStyle.Fill, BackColor = Color.Transparent, Margin = new Padding(0) };
-            RoundedPanel details = new RoundedPanel { Name = "DetailsPanel", Dock = DockStyle.Top, Height = 60, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 16, Margin = new Padding(0, 12, 0, 0) };
+            RoundedPanel details = new RoundedPanel { Name = "DetailsPanel", Dock = DockStyle.Top, Height = 72, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 9, Margin = new Padding(0, 12, 0, 0) };
             detailName.Text = "\u6240\u9009\u5730\u56fe\u5b8c\u6574\u8def\u5f84";
             detailName.ForeColor = Muted;
             detailName.Font = new Font(Font.FontFamily, 9F, FontStyle.Regular);
-            detailName.Location = new Point(18, 8);
-            detailName.Size = new Size(210, 20);
+            detailName.Location = new Point(18, 12);
+            detailName.Size = new Size(210, 26);
             detailPath.ForeColor = Ink;
             detailPath.AutoEllipsis = true;
-            detailPath.Location = new Point(18, 30);
+            detailPath.Location = new Point(18, 38);
             detailPath.Size = new Size(640, 28);
             details.Controls.Add(detailName);
             details.Controls.Add(detailPath);
             openButton = MakeButton("\u6253\u5f00\u5b58\u6863", true);
             openButton.Name = "OpenWorldButton";
             openButton.Enabled = false;
-            openButton.Location = new Point(0, 10);
+            openButton.Location = new Point(0, 19);
             openButton.Width = 112;
             openButton.Click += delegate { OpenSelectedWorld(); };
             details.Controls.Add(openButton);
             copyButton = MakeButton("\u590d\u5236\u8def\u5f84", false);
             copyButton.Name = "CopyPathButton";
             copyButton.Enabled = false;
-            copyButton.Location = new Point(0, 10);
+            copyButton.Location = new Point(0, 19);
             copyButton.Width = 90;
             copyButton.Click += delegate { CopySelectedPath(); };
             details.Controls.Add(copyButton);
             backupButton = MakeButton("\u5907\u4efd", false);
             backupButton.Name = "BackupButton";
             backupButton.Enabled = false;
-            backupButton.Location = new Point(0, 10);
+            backupButton.Location = new Point(0, 19);
             backupButton.Width = 64;
             backupButton.Click += delegate { BackupSelectedWorld(); };
             details.Controls.Add(backupButton);
             backupHistoryButton = MakeButton("\u5386\u53f2", false);
             backupHistoryButton.Name = "BackupHistoryButton";
             backupHistoryButton.Enabled = false;
-            backupHistoryButton.Location = new Point(0, 10);
+            backupHistoryButton.Location = new Point(0, 19);
             backupHistoryButton.Width = 64;
             backupHistoryButton.Click += delegate { ShowBackupHistory(); };
             details.Controls.Add(backupHistoryButton);
             detailsButton = MakeButton("\u8be6\u60c5", false);
             detailsButton.Name = "DetailsButton";
             detailsButton.Enabled = false;
-            detailsButton.Location = new Point(0, 10);
+            detailsButton.Location = new Point(0, 19);
             detailsButton.Width = 64;
             detailsButton.Click += delegate { ShowSelectedWorldDetails(); };
             details.Controls.Add(detailsButton);
@@ -2944,7 +2957,7 @@ namespace MinecraftWorldBrowser
             favoriteButton.Name = "FavoriteButton";
             favoriteButton.AccessibleName = "\u6536\u85cf\u4e16\u754c";
             favoriteButton.Enabled = false;
-            favoriteButton.Location = new Point(0, 10);
+            favoriteButton.Location = new Point(0, 19);
             favoriteButton.Width = 40;
             favoriteButton.Font = new Font("Segoe UI Symbol", 14F);
             favoriteButton.Click += delegate { ToggleSelectedFavorite(); };
@@ -2968,8 +2981,8 @@ namespace MinecraftWorldBrowser
             statusLabel.Name = "StatusLabel";
             statusLabel.ForeColor = Muted;
             statusLabel.AutoSize = false;
-            statusLabel.Location = new Point(0, 62);
-            statusLabel.Size = new Size(620, 24);
+            statusLabel.Location = new Point(0, 78);
+            statusLabel.Size = new Size(620, 28);
             statusLabel.TextAlign = ContentAlignment.MiddleLeft;
             statusLabel.AutoEllipsis = true;
             footer.Controls.Add(statusLabel);
@@ -2977,7 +2990,7 @@ namespace MinecraftWorldBrowser
             scanProgress.Visible = false;
             scanProgress.Size = new Size(190, 12);
             scanProgress.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            scanProgress.Location = new Point(footer.Width - scanProgress.Width, 67);
+            scanProgress.Location = new Point(footer.Width - scanProgress.Width, 84);
             footer.Controls.Add(scanProgress);
             footer.Resize += delegate
             {
@@ -3023,14 +3036,14 @@ namespace MinecraftWorldBrowser
 
         private Panel BuildSidebar()
         {
-            MaterialPanel sidebar = new MaterialPanel { Dock = DockStyle.Left, Width = 296, BackColor = Sidebar, MaterialColor = Sidebar, EdgeColor = Line, DrawRightEdge = true, Padding = new Padding(20, 18, 20, 16) };
+            MaterialPanel sidebar = new MaterialPanel { Dock = DockStyle.Left, Width = 296, BackColor = Sidebar, MaterialColor = Sidebar, EdgeColor = Line, DrawRightEdge = true, Padding = new Padding(16, 18, 16, 16) };
             TableLayoutPanel layout = new TableLayoutPanel { Dock = DockStyle.Fill, ColumnCount = 1, RowCount = 5, BackColor = Color.Transparent, Margin = new Padding(0), Padding = new Padding(0) };
             layout.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 58F));
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 128F));
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 30F));
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 104F));
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 36F));
             layout.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 236F));
+            layout.RowStyles.Add(new RowStyle(SizeType.Absolute, 230F));
             sidebar.Controls.Add(layout);
 
             Panel brandPanel = new Panel { Dock = DockStyle.Fill, BackColor = Color.Transparent, Margin = new Padding(0) };
@@ -3056,60 +3069,53 @@ namespace MinecraftWorldBrowser
             brandPanel.Controls.Add(brandSub);
             layout.Controls.Add(brandPanel, 0, 0);
 
-            RoundedPanel about = new RoundedPanel { Name = "AboutCard", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 16, Margin = new Padding(0, 4, 0, 8), Padding = new Padding(16, 12, 16, 10) };
+            RoundedPanel about = new RoundedPanel { Name = "AboutCard", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 9, Margin = new Padding(0, 4, 0, 8), Padding = new Padding(16, 12, 16, 10) };
             Color sidebarCard = AppTheme.SidebarCard;
-            Label aboutTitle = new Label { Name = "AboutTitle", Text = "\u7a0b\u5e8f\u4fe1\u606f", ForeColor = Ink, BackColor = Color.Transparent, Font = new Font(Font.FontFamily, 10F, FontStyle.Bold), AutoSize = true, Location = new Point(16, 12) };
-            Label aboutBody = new Label { Name = "AboutBody", Text = "\u517c\u5bb9\u4e3b\u6d41 Java \u542f\u52a8\u5668\u5b58\u6863\n\u7248\u672c 3.2.6  \u00b7  SOFT UI", ForeColor = Muted, BackColor = Color.Transparent, Font = new Font(Font.FontFamily, 9F), AutoSize = false, Location = new Point(16, 40), Size = new Size(220, 52) };
+            Label aboutTitle = new Label { Name = "AboutTitle", Text = "\u4f60\u7684\u4e16\u754c\uff0c\u4e00\u5904\u7ba1\u7406", ForeColor = Ink, BackColor = Color.Transparent, Font = new Font(Font.FontFamily, 10F, FontStyle.Bold), AutoSize = true, Location = new Point(16, 12) };
+            Label aboutBody = new Label { Name = "AboutBody", Text = "\u8de8\u542f\u52a8\u5668\u6d4f\u89c8\u3001\u641c\u7d22\u4e0e\u5907\u4efd\nMinecraft Java  \u00b7  v3.3.2", ForeColor = Muted, BackColor = Color.Transparent, Font = new Font(Font.FontFamily, 9F), AutoSize = false, Location = new Point(16, 40), Size = new Size(220, 52) };
             about.Controls.Add(aboutTitle);
             about.Controls.Add(aboutBody);
             layout.Controls.Add(about, 0, 1);
 
-            Label caption = new Label { Text = ".minecraft / \u5b9e\u4f8b\u76ee\u5f55", ForeColor = Muted, Font = new Font(Font.FontFamily, 9F, FontStyle.Bold), Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft, Margin = new Padding(2, 0, 0, 0) };
+            Label caption = new Label { Text = "\u6e38\u620f\u76ee\u5f55", ForeColor = Muted, Font = new Font(Font.FontFamily, 9F, FontStyle.Bold), Dock = DockStyle.Fill, TextAlign = ContentAlignment.MiddleLeft, Margin = new Padding(2, 0, 0, 0) };
             layout.Controls.Add(caption, 0, 2);
 
-            RoundedPanel rootSurface = new RoundedPanel { Name = "RootSurface", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 16, Margin = new Padding(0), Padding = new Padding(4) };
+            RoundedPanel rootSurface = new RoundedPanel { Name = "RootSurface", Dock = DockStyle.Fill, BackColor = Color.Transparent, MaterialColor = SurfaceRaised, BorderColor = Color.Transparent, HighlightColor = Color.Transparent, ShadowColor = AppTheme.Shadow, CornerRadius = 9, Margin = new Padding(0), Padding = new Padding(4) };
             rootList.Name = "RootList";
             rootList.BackColor = Surface;
             rootList.ForeColor = Ink;
             rootList.Font = new Font("Segoe UI", 9F);
-            rootList.ItemHeight = 38;
+            rootList.ItemHeight = 68;
+            // Paint the thumb on the row canvas so selected/hovered backgrounds continue underneath it.
+            rootList.ShowInternalScrollBar = true;
+            rootList.OverlayScrollBar = true;
             rootList.DrawItem += delegate(object sender, DrawItemEventArgs e)
             {
                 if (e.Index < 0 || e.Index >= rootList.Items.Count) return;
-                bool selected = (e.State & DrawItemState.Selected) == DrawItemState.Selected;
-                bool hovered = (e.State & DrawItemState.HotLight) == DrawItemState.HotLight;
-                using (Brush backgroundBrush = new SolidBrush(Surface)) e.Graphics.FillRectangle(backgroundBrush, e.Bounds);
-                Rectangle row = new Rectangle(e.Bounds.X + 4, e.Bounds.Y + 2, Math.Max(1, e.Bounds.Width - 10), e.Bounds.Height - 4);
-                if (selected)
-                {
-                    using (Brush selectionBrush = new SolidBrush(AppTheme.Selection)) e.Graphics.FillRectangle(selectionBrush, row);
-                }
-                else if (hovered)
-                {
-                    using (Brush hoverBrush = new SolidBrush(AppTheme.Hover)) e.Graphics.FillRectangle(hoverBrush, row);
-                }
+                bool selected = (e.State & DrawItemState.Selected) != 0;
+                bool hovered = (e.State & DrawItemState.HotLight) != 0;
+                Color fill = selected ? AppTheme.PrimaryFill : (hovered ? AppTheme.Hover : Sidebar);
+                using (Brush background = new SolidBrush(fill)) e.Graphics.FillRectangle(background, e.Bounds);
                 string value = Convert.ToString(rootList.Items[e.Index]);
-                int textWidth = rootList.Parent == null ? row.Width - 18 : Math.Min(row.Width - 18, rootList.Parent.ClientSize.Width - row.X - 20);
-                TextRenderer.DrawText(e.Graphics, value, rootList.Font, new Rectangle(row.X + 10, row.Y, Math.Max(20, textWidth), row.Height), selected ? Accent : Ink, TextFormatFlags.VerticalCenter | TextFormatFlags.EndEllipsis);
+                string name = DirectoryDisplayName(value);
+                e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                Rectangle avatar = new Rectangle(e.Bounds.X + 12, e.Bounds.Y + 14, 40, 40);
+                Color avatarColor = selected ? Color.FromArgb(65, 255, 255, 255) : Color.FromArgb(78, 163, 219);
+                using (Brush avatarBrush = new SolidBrush(avatarColor)) e.Graphics.FillEllipse(avatarBrush, avatar);
+                using (Font glyph = new Font("Segoe MDL2 Assets", 14F))
+                    GlassTextRenderer.Draw(e.Graphics, "\uE8B7", glyph, avatar, Color.White, StringAlignment.Center, StringTrimming.None);
+                int textWidth = Math.Max(20, e.Bounds.Width - 88);
+                using (Font titleFont = new Font("Microsoft YaHei UI", 9.5F, FontStyle.Bold))
+                    GlassTextRenderer.Draw(e.Graphics, name, titleFont, new RectangleF(64, e.Bounds.Y + 9, textWidth, 25), selected ? Color.White : Ink, StringAlignment.Near, StringTrimming.EllipsisCharacter);
+                using (Font pathFont = new Font("Segoe UI", 8.5F))
+                    GlassTextRenderer.Draw(e.Graphics, value, pathFont, new RectangleF(64, e.Bounds.Y + 35, textWidth, 22), selected ? Color.FromArgb(230, 243, 255) : Muted, StringAlignment.Near, StringTrimming.EllipsisCharacter);
             };
             rootList.SelectedIndexChanged += delegate
             {
                 removeRootButton.Enabled = rootList.SelectedIndex >= 0;
-                UpdateRootScrollBar();
-            };
-            rootList.ViewportChanged += delegate { UpdateRootScrollBar(); };
-            rootScroll.Name = "RootScroll";
-            rootScroll.Orientation = Orientation.Vertical;
-            rootScroll.SmallChange = rootList.ItemHeight;
-            rootScroll.ValueChanged += delegate
-            {
-                if (rootList.Items.Count == 0) return;
-                rootList.ScrollOffset = rootScroll.Value;
             };
             rootSurface.Controls.Add(rootList);
-            rootSurface.Controls.Add(rootScroll);
-            rootScroll.BringToFront();
-            rootSurface.Resize += delegate { LayoutRootScrollBar(rootSurface); };
+            rootSurface.Resize += delegate { LayoutRootList(rootSurface); };
             layout.Controls.Add(rootSurface, 0, 3);
 
             Panel actions = new Panel { Dock = DockStyle.Fill, BackColor = Color.Transparent, Margin = new Padding(0, 8, 0, 0) };
@@ -3167,18 +3173,24 @@ namespace MinecraftWorldBrowser
             return sidebar;
         }
 
-        private void LayoutRootScrollBar(Control surface)
+        private static string DirectoryDisplayName(string path)
         {
-            rootList.SetBounds(1, 1, Math.Max(20, surface.ClientSize.Width - 2), Math.Max(20, surface.ClientSize.Height - 2));
-            rootScroll.SetBounds(Math.Max(1, surface.ClientSize.Width - 11), 5, 8, Math.Max(26, surface.ClientSize.Height - 10));
-            rootScroll.BringToFront();
-            UpdateRootScrollBar();
+            string lower = (path ?? "").ToLowerInvariant();
+            foreach (string launcher in new string[] { "PCL2", "HMCL", "PrismLauncher", "MultiMC", "CurseForge", "Modrinth", "ATLauncher", "GDLauncher" })
+                if (lower.Contains(launcher.ToLowerInvariant())) return launcher;
+            if (lower.Contains("appdata")) return "\u5b98\u65b9\u542f\u52a8\u5668";
+            string name = Path.GetFileName((path ?? "").TrimEnd(Path.DirectorySeparatorChar));
+            if (name == ".minecraft")
+            {
+                DirectoryInfo parent = Directory.GetParent(path);
+                if (parent != null) return parent.Name;
+            }
+            return String.IsNullOrEmpty(name) ? path : name;
         }
 
-        private void UpdateRootScrollBar()
+        private void LayoutRootList(Control surface)
         {
-            int contentHeight = rootList.Items.Count * Math.Max(1, rootList.ItemHeight);
-            rootScroll.SetMetrics(contentHeight, Math.Max(1, rootList.ClientSize.Height), rootList.ScrollOffset);
+            rootList.SetBounds(1, 1, Math.Max(20, surface.ClientSize.Width - 2), Math.Max(20, surface.ClientSize.Height - 2));
         }
 
         private void LayoutGridScrollBars(Control surface)
@@ -3223,13 +3235,13 @@ namespace MinecraftWorldBrowser
             grid.ReadOnly = true;
             grid.MultiSelect = false;
             grid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            grid.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.None;
             grid.ScrollBars = ScrollBars.None;
             grid.RowHeadersVisible = false;
-            grid.RowTemplate.Height = 56;
+            grid.RowTemplate.Height = 64;
             grid.AutoGenerateColumns = false;
             grid.EnableHeadersVisualStyles = false;
-            grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            grid.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             grid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             grid.ColumnHeadersHeight = 42;
             grid.ColumnHeadersDefaultCellStyle.BackColor = AppTheme.Header;
@@ -3244,14 +3256,14 @@ namespace MinecraftWorldBrowser
             grid.DefaultCellStyle.Padding = new Padding(8, 3, 8, 3);
             grid.GridColor = Line;
 
-            DataGridViewImageColumn icon = new DataGridViewImageColumn { Name = "Icon", HeaderText = "", Width = 54, ImageLayout = DataGridViewImageCellLayout.Zoom };
+            DataGridViewImageColumn icon = new DataGridViewImageColumn { Name = "Icon", HeaderText = "", Width = 60, ImageLayout = DataGridViewImageCellLayout.Zoom };
             DataGridViewTextBoxColumn name = new DataGridViewTextBoxColumn { Name = "WorldName", HeaderText = "\u4e16\u754c", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 360 };
-            DataGridViewTextBoxColumn version = new DataGridViewTextBoxColumn { Name = "Version", HeaderText = "Minecraft \u7248\u672c", Width = 140 };
-            DataGridViewTextBoxColumn mode = new DataGridViewTextBoxColumn { Name = "Mode", HeaderText = "\u6a21\u5f0f", Width = 80 };
-            DataGridViewTextBoxColumn health = new DataGridViewTextBoxColumn { Name = "Health", HeaderText = "\u72b6\u6001", Width = 86 };
-            DataGridViewTextBoxColumn size = new DataGridViewTextBoxColumn { Name = "Size", HeaderText = "\u5927\u5c0f", Width = 92 };
-            DataGridViewTextBoxColumn date = new DataGridViewTextBoxColumn { Name = "LastPlayed", HeaderText = "\u6700\u540e\u6e38\u73a9", Width = 145 };
-            DataGridViewTextBoxColumn instance = new DataGridViewTextBoxColumn { Name = "Instance", HeaderText = "\u52a0\u8f7d\u5668", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 120 };
+            DataGridViewTextBoxColumn version = new DataGridViewTextBoxColumn { Name = "Version", HeaderText = "\u7248\u672c", Width = 100 };
+            DataGridViewTextBoxColumn mode = new DataGridViewTextBoxColumn { Name = "Mode", HeaderText = "\u6a21\u5f0f", Width = 66 };
+            DataGridViewTextBoxColumn health = new DataGridViewTextBoxColumn { Name = "Health", HeaderText = "\u72b6\u6001", Width = 68 };
+            DataGridViewTextBoxColumn size = new DataGridViewTextBoxColumn { Name = "Size", HeaderText = "\u5927\u5c0f", Width = 96 };
+            DataGridViewTextBoxColumn date = new DataGridViewTextBoxColumn { Name = "LastPlayed", HeaderText = "\u6700\u540e\u6e38\u73a9", Width = 122 };
+            DataGridViewTextBoxColumn instance = new DataGridViewTextBoxColumn { Name = "Instance", HeaderText = "\u52a0\u8f7d\u5668", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 108 };
             DataGridViewTextBoxColumn source = new DataGridViewTextBoxColumn { Name = "Source", HeaderText = "\u5b58\u6863\u4f4d\u7f6e", AutoSizeMode = DataGridViewAutoSizeColumnMode.None, Width = 360 };
             grid.Columns.AddRange(icon, name, version, mode, health, size, date, instance, source);
             foreach (DataGridViewColumn column in grid.Columns) column.SortMode = column.Name == "Icon" ? DataGridViewColumnSortMode.NotSortable : DataGridViewColumnSortMode.Programmatic;
@@ -3266,6 +3278,7 @@ namespace MinecraftWorldBrowser
                 if (selectedColumn == "Size" && allWorlds.Any(delegate(WorldInfo world) { return world.SizeBytes <= 0 && Directory.Exists(world.Path); })) await EnsureWorldSizes();
                 ApplyFilter(true);
             };
+            grid.CellPainting += PaintWorldCell;
             grid.CellFormatting += delegate(object sender, DataGridViewCellFormattingEventArgs e)
             {
                 WorldInfo world = e.RowIndex >= 0 && e.RowIndex < grid.Rows.Count ? grid.Rows[e.RowIndex].Tag as WorldInfo : null;
@@ -3275,15 +3288,93 @@ namespace MinecraftWorldBrowser
             };
         }
 
+        private void PaintWorldCell(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.ColumnIndex < 0) return;
+            // Never fall back to native cell frames, including while a newly added row has no metadata yet.
+            e.Handled = true;
+            e.AdvancedBorderStyle.All = DataGridViewAdvancedCellBorderStyle.None;
+            GraphicsState paintState = e.Graphics.Save();
+            try
+            {
+                e.Graphics.SmoothingMode = SmoothingMode.None;
+                e.Graphics.PixelOffsetMode = PixelOffsetMode.Default;
+                if (e.RowIndex < 0)
+                {
+                    using (Brush background = new SolidBrush(AppTheme.Header)) e.Graphics.FillRectangle(background, e.CellBounds);
+                    GlassTextRenderer.Draw(e.Graphics, Convert.ToString(e.FormattedValue), grid.ColumnHeadersDefaultCellStyle.Font,
+                        new RectangleF(e.CellBounds.X + 8, e.CellBounds.Y, Math.Max(1, e.CellBounds.Width - 22), e.CellBounds.Height),
+                        Muted, StringAlignment.Near, StringTrimming.EllipsisCharacter);
+                    SortOrder order = grid.Columns[e.ColumnIndex].HeaderCell.SortGlyphDirection;
+                    if (order != SortOrder.None)
+                    {
+                        int x = e.CellBounds.Right - 12;
+                        int y = e.CellBounds.Top + e.CellBounds.Height / 2;
+                        int direction = order == SortOrder.Ascending ? 1 : -1;
+                        using (Pen arrow = new Pen(AppTheme.Muted, 1.4F))
+                        {
+                            e.Graphics.DrawLine(arrow, x - 3, y + direction * 2, x, y - direction * 1);
+                            e.Graphics.DrawLine(arrow, x, y - direction * 1, x + 3, y + direction * 2);
+                        }
+                    }
+                    using (Pen line = new Pen(AppTheme.Line)) e.Graphics.DrawLine(line, e.CellBounds.Left, e.CellBounds.Bottom - 1, e.CellBounds.Right, e.CellBounds.Bottom - 1);
+                    e.Handled = true;
+                    return;
+                }
+                WorldInfo world = grid.Rows[e.RowIndex].Tag as WorldInfo;
+                Color rowFill = (e.State & DataGridViewElementStates.Selected) != 0 ? AppTheme.Selection : Surface;
+                using (Brush background = new SolidBrush(rowFill)) e.Graphics.FillRectangle(background, e.CellBounds);
+                Rectangle cell = e.CellBounds;
+                string column = grid.Columns[e.ColumnIndex].Name;
+                if (column == "Icon" && world != null && world.Icon != null)
+                {
+                    Rectangle avatar = new Rectangle(cell.X + (cell.Width - 40) / 2, cell.Y + (cell.Height - 40) / 2, 40, 40);
+                    GraphicsState state = e.Graphics.Save();
+                    e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+                    using (GraphicsPath clip = new GraphicsPath())
+                    {
+                        clip.AddEllipse(avatar);
+                        e.Graphics.SetClip(clip, CombineMode.Intersect);
+                        e.Graphics.DrawImage(world.Icon, avatar);
+                    }
+                    e.Graphics.Restore(state);
+                }
+                else if (column == "WorldName" && world != null)
+                {
+                    string title = (world.Favorite ? "\u2605  " : "") + world.Name;
+                    using (Font font = new Font(Font.FontFamily, 10F, FontStyle.Bold))
+                        GlassTextRenderer.Draw(e.Graphics, title, font, new RectangleF(cell.X + 8, cell.Y + 9, cell.Width - 16, 25), Ink, StringAlignment.Near, StringTrimming.EllipsisCharacter);
+                    string subtitle = String.IsNullOrWhiteSpace(world.Source) ? "Minecraft Java" : world.Source;
+                    using (Font font = new Font(Font.FontFamily, 8.5F))
+                        GlassTextRenderer.Draw(e.Graphics, subtitle, font, new RectangleF(cell.X + 8, cell.Y + 35, cell.Width - 16, 20), Muted, StringAlignment.Near, StringTrimming.EllipsisCharacter);
+                }
+                else if (column == "LastPlayed" && world != null)
+                {
+                    GlassTextRenderer.Draw(e.Graphics, world.LastPlayed.ToString("yyyy-MM-dd"), grid.Font,
+                        new RectangleF(cell.X + 8, cell.Y + 10, cell.Width - 16, 25), Ink, StringAlignment.Near, StringTrimming.EllipsisCharacter);
+                    using (Font font = new Font(Font.FontFamily, 8.5F))
+                        GlassTextRenderer.Draw(e.Graphics, world.LastPlayed.ToString("HH:mm"), font,
+                            new RectangleF(cell.X + 8, cell.Y + 35, cell.Width - 16, 20), Muted, StringAlignment.Near, StringTrimming.None);
+                }
+                else if (column != "Icon")
+                    GlassTextRenderer.Draw(e.Graphics, Convert.ToString(e.FormattedValue), e.CellStyle.Font ?? grid.Font,
+                        new RectangleF(cell.X + 8, cell.Y, Math.Max(1, cell.Width - 16), cell.Height),
+                        e.CellStyle.ForeColor, StringAlignment.Near, StringTrimming.EllipsisCharacter);
+                using (Pen divider = new Pen(AppTheme.Line))
+                    e.Graphics.DrawLine(divider, cell.Left, cell.Bottom - 1, cell.Right, cell.Bottom - 1);
+                e.Handled = true;
+
+            }
+            finally { e.Graphics.Restore(paintState); }
+        }
+
         private void InitializeColumnWidths()
         {
             DataGridViewColumn name = grid.Columns["WorldName"];
             DataGridViewColumn source = grid.Columns["Source"];
             if (name == null || source == null) return;
-            int fixedWidth = grid.Columns["Icon"].Width + grid.Columns["Version"].Width + grid.Columns["Mode"].Width + grid.Columns["Health"].Width + grid.Columns["Size"].Width + grid.Columns["LastPlayed"].Width + grid.Columns["Instance"].Width + 24;
-            int available = Math.Max(380, grid.ClientSize.Width - fixedWidth);
-            name.Width = Math.Max(220, (int)(available * 0.56));
-            source.Width = Math.Max(160, available - name.Width);
+            name.Width = 210;
+            source.Width = 260;
             UpdateGridScrollBars();
         }
 
@@ -3295,13 +3386,13 @@ namespace MinecraftWorldBrowser
             button.Height = 36;
             button.Width = primary ? 158 : 116;
             button.BackColor = Color.Transparent;
-            button.FillColor = AppTheme.SecondaryFill;
-            button.ForeColor = primary ? Accent : Ink;
-            button.HoverBackColor = AppTheme.SecondaryHover;
-            button.PressedBackColor = AppTheme.SecondaryPressed;
-            button.BorderColor = Color.Transparent;
+            button.FillColor = primary ? AppTheme.PrimaryFill : AppTheme.SecondaryFill;
+            button.ForeColor = primary ? Color.White : Ink;
+            button.HoverBackColor = primary ? Color.FromArgb(28, 123, 202) : AppTheme.SecondaryHover;
+            button.PressedBackColor = primary ? Color.FromArgb(22, 102, 173) : AppTheme.SecondaryPressed;
+            button.BorderColor = primary ? Color.Transparent : AppTheme.SecondaryBorder;
             button.HighlightColor = Color.Transparent;
-            button.CornerRadius = 18;
+            button.CornerRadius = 8;
             button.Cursor = Cursors.Hand;
             return button;
         }
@@ -3310,8 +3401,8 @@ namespace MinecraftWorldBrowser
         {
             combo.BackColor = Color.Transparent;
             combo.ForeColor = Ink;
-            combo.Location = new Point(left, 4);
-            combo.Size = new Size(width, 30);
+            combo.Location = new Point(left, 2);
+            combo.Size = new Size(width, 34);
             combo.DropDownHeight = 260;
         }
 
@@ -3374,7 +3465,7 @@ namespace MinecraftWorldBrowser
             if (panel == null) return;
             panel.BackColor = Color.Transparent;
             panel.MaterialColor = name == "SearchSurface" ? GlassSurface : SurfaceRaised;
-            panel.BorderColor = Color.Transparent;
+            panel.BorderColor = name == "SearchSurface" ? AppTheme.InputBorder : Color.Transparent;
             panel.HighlightColor = Color.Transparent;
             panel.ShadowColor = AppTheme.Shadow;
         }
@@ -3436,7 +3527,7 @@ namespace MinecraftWorldBrowser
         {
             Color oldInk = AppTheme.InkFor(previousDark);
             Color oldMuted = AppTheme.MutedFor(previousDark);
-            Color oldAccent = previousDark ? Color.FromArgb(132, 166, 255) : Color.FromArgb(74, 118, 232);
+            Color oldAccent = previousDark ? Color.FromArgb(100, 181, 239) : Color.FromArgb(51, 144, 236);
             if (parent.ForeColor == oldInk) parent.ForeColor = Ink;
             else if (parent.ForeColor == oldMuted) parent.ForeColor = Muted;
             else if (parent.ForeColor == oldAccent) parent.ForeColor = Accent;
@@ -3458,11 +3549,11 @@ namespace MinecraftWorldBrowser
         {
             bool primary = button.IsPrimary;
             button.BackColor = Color.Transparent;
-            button.FillColor = AppTheme.SecondaryFill;
-            button.ForeColor = primary ? Accent : Ink;
-            button.HoverBackColor = AppTheme.SecondaryHover;
-            button.PressedBackColor = AppTheme.SecondaryPressed;
-            button.BorderColor = Color.Transparent;
+            button.FillColor = primary ? AppTheme.PrimaryFill : AppTheme.SecondaryFill;
+            button.ForeColor = primary ? Color.White : Ink;
+            button.HoverBackColor = primary ? Color.FromArgb(28, 123, 202) : AppTheme.SecondaryHover;
+            button.PressedBackColor = primary ? Color.FromArgb(22, 102, 173) : AppTheme.SecondaryPressed;
+            button.BorderColor = primary ? Color.Transparent : AppTheme.SecondaryBorder;
             button.HighlightColor = Color.Transparent;
             button.Invalidate();
         }
@@ -3503,13 +3594,159 @@ namespace MinecraftWorldBrowser
             ApplyTheme(original, false);
         }
 
+        internal void FlatControlsSelfTest()
+        {
+            bool original = AppTheme.Dark;
+            try
+            {
+                using (MainForm preview = new MainForm(appDirectory, true))
+                {
+                    preview.Size = new Size(1000, 720);
+                    preview.CreateControl();
+                    preview.PerformLayout();
+                    preview.PrepareVisualPreview();
+                    foreach (bool dark in new bool[] { false, true })
+                    {
+                        preview.ApplyTheme(dark, false);
+                        foreach (string name in new string[] { "ThemeToggleButton", "RefreshButton", "FullScanButton", "FavoriteFilterButton", "VersionFilter", "ModeFilter" })
+                        {
+                            Control control = preview.Controls.Find(name, true)[0];
+                            ModernButton button = control as ModernButton;
+                            SmoothComboBox combo = control as SmoothComboBox;
+                            using (Bitmap normal = new Bitmap(control.Width, control.Height))
+                            using (Bitmap pressed = new Bitmap(control.Width, control.Height))
+                            using (Bitmap released = new Bitmap(control.Width, control.Height))
+                            {
+                                if (button != null) button.PaintForTest(normal); else combo.PaintForTest(normal);
+                                Color face = normal.GetPixel(12, 6);
+                                Color canvas = AppTheme.Canvas;
+                                int difference = Math.Abs(face.R - canvas.R) + Math.Abs(face.G - canvas.G) + Math.Abs(face.B - canvas.B);
+                                if (difference < 24) throw new Exception(name + " blends into the page background.");
+                                if (button != null && button.BorderColor != AppTheme.SecondaryBorder)
+                                    throw new Exception(name + " has no visible secondary button boundary.");
+                                if (button != null) button.SetPressedForTest(true); else combo.SetPressedForTest(true);
+                                if (button != null) button.PaintForTest(pressed); else combo.PaintForTest(pressed);
+                                if (normal.GetPixel(12, 6) == pressed.GetPixel(12, 6)) throw new Exception(name + " has no press feedback.");
+                                if (pressed.GetPixel(0, 0) != normal.GetPixel(0, 0)) throw new Exception(name + " exposes its rectangular canvas when pressed.");
+                                if (button != null) button.SetPressedForTest(false); else combo.SetPressedForTest(false);
+                                if (button != null) button.PaintForTest(released); else combo.PaintForTest(released);
+                                for (int y = 0; y < normal.Height; y++)
+                                    for (int x = 0; x < normal.Width; x++)
+                                        if (normal.GetPixel(x, y) != released.GetPixel(x, y)) throw new Exception(name + " release does not restore its pixels.");
+                            }
+                        }
+                        foreach (int horizontalOffset in new int[] { 0, 60 })
+                        {
+                            preview.grid.HorizontalScrollingOffset = horizontalOffset;
+                            using (Bitmap bitmap = new Bitmap(preview.grid.Width, preview.grid.Height))
+                            {
+                                preview.grid.DrawToBitmap(bitmap, preview.grid.ClientRectangle);
+                                for (int row = 0; row < 2; row++)
+                                {
+                                    Color fill = row == 0 ? AppTheme.Selection : AppTheme.Surface;
+                                    foreach (DataGridViewColumn column in preview.grid.Columns)
+                                    {
+                                        Rectangle bounds = preview.grid.GetCellDisplayRectangle(column.Index, row, false);
+                                        int x = bounds.Right - 1;
+                                        if (bounds.Width < 20 || x < 2 || x >= bitmap.Width - 2) continue;
+                                        for (int y = bounds.Top + 5; y < bounds.Bottom - 5; y++)
+                                            if (bitmap.GetPixel(x, y).ToArgb() != fill.ToArgb())
+                                                throw new Exception("World list has a vertical cell edge in " + column.Name + " at " + x + "," + y + ": " + bitmap.GetPixel(x, y));
+                                        int dividerX = Math.Max(2, bounds.Left + 6);
+                                        if (dividerX < bitmap.Width - 2 && bitmap.GetPixel(dividerX, bounds.Bottom - 1).ToArgb() != AppTheme.Line.ToArgb())
+                                            throw new Exception("World list is missing its horizontal row divider.");
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            finally { ApplyTheme(original, false); }
+        }
+
+        internal void RootScrollBarSelfTest()
+        {
+            bool originalTheme = AppTheme.Dark;
+            List<object> originalItems = new List<object>(rootList.Items);
+            int originalSelection = rootList.SelectedIndex;
+            int originalOffset = rootList.ScrollOffset;
+            try
+            {
+                if (!rootList.ShowInternalScrollBar || !rootList.OverlayScrollBar)
+                    throw new Exception("Directory scrollbar must overlay the row canvas.");
+                rootList.BeginUpdate();
+                rootList.Items.Clear();
+                for (int i = 0; i < 16; i++) rootList.Items.Add(@"D:\Minecraft\Profile " + i + @"\.minecraft");
+                rootList.EndUpdate();
+                rootList.SelectedIndex = 0;
+                foreach (bool dark in new bool[] { false, true })
+                {
+                    ApplyTheme(dark, false);
+                    rootList.ScrollOffset = 0;
+                    using (Bitmap normal = new Bitmap(rootList.Width, rootList.Height))
+                    using (Bitmap pressed = new Bitmap(rootList.Width, rootList.Height))
+                    using (Bitmap released = new Bitmap(rootList.Width, rootList.Height))
+                    {
+                        rootList.DrawToBitmap(normal, rootList.ClientRectangle);
+                        rootList.SetScrollBarPressedForTest(true);
+                        rootList.DrawToBitmap(pressed, rootList.ClientRectangle);
+                        rootList.SetScrollBarPressedForTest(false);
+                        rootList.DrawToBitmap(released, rootList.ClientRectangle);
+                        foreach (Bitmap bitmap in new Bitmap[] { normal, pressed, released })
+                        {
+                            foreach (int offset in new int[] { 1, 11 })
+                                if (bitmap.GetPixel(rootList.Width - offset, 14).ToArgb() != AppTheme.PrimaryFill.ToArgb())
+                                    throw new Exception("Directory scrollbar exposes a rectangular background on the selected row.");
+                            if (bitmap.GetPixel(rootList.Width - 11, rootList.ItemHeight + 14).ToArgb() != AppTheme.Sidebar.ToArgb())
+                                throw new Exception("Directory scrollbar background does not follow the unselected row.");
+                        }
+                        bool feedback = false;
+                        for (int y = 0; y < normal.Height; y++)
+                            for (int x = normal.Width - 14; x < normal.Width; x++)
+                            {
+                                if (normal.GetPixel(x, y) != released.GetPixel(x, y))
+                                    throw new Exception("Directory scrollbar release does not restore its original pixels.");
+                                if (normal.GetPixel(x, y) != pressed.GetPixel(x, y)) feedback = true;
+                            }
+                        if (!feedback) throw new Exception("Directory scrollbar has no press feedback.");
+                        rootList.HoverItemForTest(1);
+                        rootList.DrawToBitmap(released, rootList.ClientRectangle);
+                        if (released.GetPixel(rootList.Width - 11, rootList.ItemHeight + 14).ToArgb() != AppTheme.Hover.ToArgb())
+                            throw new Exception("Directory scrollbar background does not follow the hovered row.");
+                        rootList.HoverItemForTest(-1);
+                        rootList.DragScrollBarForTest(30);
+                        if (rootList.ScrollOffset <= 0) throw new Exception("Directory scrollbar dragging does not move the viewport.");
+                        rootList.ScrollOffset = 17;
+                        rootList.DrawToBitmap(released, rootList.ClientRectangle);
+                        if (released.GetPixel(rootList.Width - 11, 14).ToArgb() != AppTheme.PrimaryFill.ToArgb())
+                            throw new Exception("Directory scrollbar background breaks after pixel scrolling.");
+                    }
+                }
+            }
+            finally
+            {
+                rootList.BeginUpdate();
+                rootList.Items.Clear();
+                rootList.Items.AddRange(originalItems);
+                rootList.EndUpdate();
+                rootList.SelectedIndex = originalSelection;
+                rootList.ScrollOffset = originalOffset;
+                ApplyTheme(originalTheme, false);
+            }
+        }
+
         internal void PrepareVisualPreview()
         {
             roots.Clear();
             roots.Add(@"D:\Games\PCL2\.minecraft");
             roots.Add(@"D:\Minecraft\PrismLauncher\instances");
             roots.Add(@"C:\Users\Player\AppData\Roaming\.minecraft");
+            // Include enough directories to exercise the scrollbar in every preview.
+            for (int index = 1; index <= 13; index++)
+                roots.Add(@"D:\Minecraft\Profiles\Profile " + index.ToString("00") + @"\.minecraft");
             RefreshRootList();
+            rootList.SelectedIndex = 0;
             allWorlds = new List<WorldInfo>
             {
                 new WorldInfo { Icon = WorldScanner.CreateFallbackIcon(), Name = "Survival Garden", Version = "1.21.1", GameMode = "\u751f\u5b58", Health = "\u6b63\u5e38", SizeBytes = 1328755507L, LastPlayed = DateTime.Now.AddMinutes(-18), Loader = "Fabric 0.16.9", Path = @"D:\Games\PCL2\.minecraft\versions\1.21.1-Fabric\saves\Survival Garden", Source = "1.21.1-Fabric", Favorite = true },
@@ -3519,11 +3756,13 @@ namespace MinecraftWorldBrowser
             versionFilter.Items.Clear();
             versionFilter.Items.AddRange(new object[] { "\u5168\u90e8\u7248\u672c", "1.21.1", "1.20.4", "1.19.2" });
             versionFilter.SelectedIndex = 0;
+            InitializeColumnWidths();
             ApplyFilter(true);
             if (grid.Rows.Count > 0)
             {
                 grid.Rows[0].Selected = true;
                 grid.CurrentCell = grid.Rows[0].Cells["WorldName"];
+                grid.Focus();
             }
             statusLabel.Text = "\u5df2\u53d1\u73b0 3 \u4e2a\u4e16\u754c  \u00b7  \u8de8\u542f\u52a8\u5668\u5b58\u6863\u5df2\u5408\u5e76";
         }
@@ -3533,7 +3772,7 @@ namespace MinecraftWorldBrowser
             favoriteFilterButton.FillColor = favoriteOnly ? AppTheme.Selection : AppTheme.SecondaryFill;
             favoriteFilterButton.HoverBackColor = favoriteOnly ? AppTheme.Selection : AppTheme.SecondaryHover;
             favoriteFilterButton.PressedBackColor = favoriteOnly ? AppTheme.Selection : AppTheme.SecondaryPressed;
-            favoriteFilterButton.BorderColor = Color.Transparent;
+            favoriteFilterButton.BorderColor = favoriteOnly ? AppTheme.Accent : AppTheme.SecondaryBorder;
             favoriteFilterButton.ForeColor = favoriteOnly ? Accent : Ink;
             favoriteFilterButton.Invalidate();
         }
@@ -3549,7 +3788,7 @@ namespace MinecraftWorldBrowser
                 Color hoverPixel = bitmap.GetPixel(16, favoriteFilterButton.Height / 2);
                 int surfaceDifference = Math.Abs(hoverPixel.R - AppTheme.Selection.R) + Math.Abs(hoverPixel.G - AppTheme.Selection.G) + Math.Abs(hoverPixel.B - AppTheme.Selection.B);
                 if (favoriteFilterButton.ForeColor != Accent || favoriteFilterButton.FillColor != AppTheme.Selection || favoriteFilterButton.HoverBackColor != AppTheme.Selection || surfaceDifference > 8)
-                    throw new Exception("Active favorite filter loses its selected neumorphic surface while hovered.");
+                    throw new Exception("Active favorite filter loses its selected flat surface while hovered.");
             }
             favoriteFilterButton.SetHoveredForTest(false);
             favoriteOnly = false;
@@ -4022,7 +4261,6 @@ namespace MinecraftWorldBrowser
             foreach (string root in roots.OrderBy(delegate(string value) { return value; })) rootList.Items.Add(root);
             rootList.EndUpdate();
             rootList.Invalidate();
-            UpdateRootScrollBar();
         }
 
         private async void StartScan(bool discoverAll)
@@ -4298,7 +4536,7 @@ namespace MinecraftWorldBrowser
             int errors = allWorlds.Count(delegate(WorldInfo world) { return !String.IsNullOrEmpty(world.Error); });
             statusLabel.Text = "\u5171 " + allWorlds.Count + " \u4e2a\u4e16\u754c\uff0c\u5f53\u524d\u663e\u793a " + shown + (errors > 0 ? "\uff0c" + errors + " \u4e2a\u5b58\u6863\u5143\u6570\u636e\u5f02\u5e38" : "");
             summaryLabel.Text = allWorlds.Count + "  \u4e2a\u4e16\u754c   /   " + roots.Count + "  \u4e2a\u76ee\u5f55";
-            if (summaryLabel.Parent != null) summaryLabel.Left = summaryLabel.Parent.ClientSize.Width - summaryLabel.Width - 4;
+            if (summaryLabel.Parent != null) summaryLabel.Parent.PerformLayout();
             UpdateDetails();
         }
 
@@ -5037,7 +5275,14 @@ namespace MinecraftWorldBrowser
                 {
                     string outputPath = renderArgument.Substring("--render-preview=".Length).Trim('"');
                     bool darkPreview = args.Any(delegate(string arg) { return String.Equals(arg, "--dark", StringComparison.OrdinalIgnoreCase); });
-                    RenderPreview(appDirectory, outputPath, darkPreview);
+                    RenderPreview(appDirectory, outputPath, darkPreview, args.Any(delegate(string arg) { return String.Equals(arg, "--capture-screen", StringComparison.OrdinalIgnoreCase); }));
+                    return 0;
+                }
+                string detailsRenderArgument = args == null ? null : args.FirstOrDefault(delegate(string arg) { return arg.StartsWith("--render-details-preview=", StringComparison.OrdinalIgnoreCase); });
+                if (!String.IsNullOrEmpty(detailsRenderArgument))
+                {
+                    RenderDetailsPreview(detailsRenderArgument.Substring("--render-details-preview=".Length).Trim('"'),
+                        args.Any(delegate(string arg) { return String.Equals(arg, "--dark", StringComparison.OrdinalIgnoreCase); }));
                     return 0;
                 }
                 if (args != null && args.Any(delegate(string arg) { return String.Equals(arg, "--details-preview", StringComparison.OrdinalIgnoreCase); }))
@@ -5086,7 +5331,7 @@ namespace MinecraftWorldBrowser
             Application.Run(new MainForm(appDirectory));
         }
 
-        public static void RenderPreview(string appDirectory, string outputPath, bool dark)
+        public static void RenderPreview(string appDirectory, string outputPath, bool dark, bool captureScreen = false)
         {
             if (String.IsNullOrWhiteSpace(outputPath)) throw new ArgumentException("A preview output path is required.");
             AppTheme.SetDark(dark);
@@ -5098,6 +5343,13 @@ namespace MinecraftWorldBrowser
                 form.ClientSize = new Size(1280, 780);
                 form.StartPosition = FormStartPosition.Manual;
                 form.Location = new Point(-32000, -32000);
+                if (captureScreen)
+                {
+                    Rectangle screen = Screen.PrimaryScreen.WorkingArea;
+                    form.Size = new Size(Math.Min(1280, screen.Width - 16), Math.Min(780, screen.Height - 16));
+                    form.Location = new Point(screen.Left + (screen.Width - form.Width) / 2, screen.Top + (screen.Height - form.Height) / 2);
+                    form.TopMost = true;
+                }
                 form.ShowInTaskbar = false;
                 form.Show();
                 Application.DoEvents();
@@ -5106,9 +5358,17 @@ namespace MinecraftWorldBrowser
                 form.PrepareVisualPreview();
                 form.PerformLayout();
                 Application.DoEvents();
-                using (Bitmap bitmap = new Bitmap(form.ClientSize.Width, form.ClientSize.Height, PixelFormat.Format32bppPArgb))
+                using (Bitmap bitmap = new Bitmap(form.Width, form.Height, PixelFormat.Format32bppPArgb))
                 {
-                    form.DrawToBitmap(bitmap, form.ClientRectangle);
+                    if (captureScreen)
+                    {
+                        form.Refresh();
+                        Stopwatch wait = Stopwatch.StartNew();
+                        while (wait.ElapsedMilliseconds < 180) { Application.DoEvents(); System.Threading.Thread.Sleep(15); }
+                        using (Graphics graphics = Graphics.FromImage(bitmap))
+                            graphics.CopyFromScreen(form.Location, Point.Empty, form.Size);
+                    }
+                    else form.DrawToBitmap(bitmap, new Rectangle(Point.Empty, form.Size));
                     Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outputPath)));
                     bitmap.Save(outputPath, ImageFormat.Png);
                 }
@@ -5119,6 +5379,36 @@ namespace MinecraftWorldBrowser
         {
             parent.CreateControl();
             foreach (Control child in parent.Controls) CreateControlTree(child);
+        }
+
+        public static void RenderDetailsPreview(string outputPath, bool dark)
+        {
+            AppTheme.SetDark(dark);
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            using (Image icon = WorldScanner.CreateFallbackIcon())
+            using (WorldDetailsDialog dialog = new WorldDetailsDialog(new WorldInfo
+            {
+                Icon = icon, Name = "Survival Garden", Version = "1.21.1", GameMode = "\u751f\u5b58", Difficulty = "\u666e\u901a",
+                Seed = 1234567890123456789L, DataVersion = 3953, LastPlayed = new DateTime(2026, 9, 30, 18, 30, 0),
+                SizeBytes = 1328755507L, Source = "1.21.1-Fabric", Loader = "Fabric 0.16.9", Health = "\u6b63\u5e38",
+                Favorite = true, Tags = "\u751f\u5b58, \u4e3b\u5b58\u6863", Notes = "\u6e56\u8fb9\u7684\u751f\u5b58\u57fa\u5730\u3002" + Environment.NewLine + "\u5347\u7ea7\u6e38\u620f\u7248\u672c\u524d\u8bb0\u5f97\u5907\u4efd\u3002", BackupCount = 3, AutoBackup = true
+            }))
+            {
+                dialog.StartPosition = FormStartPosition.Manual;
+                dialog.Location = new Point(-32000, -32000);
+                dialog.ShowInTaskbar = false;
+                dialog.Show();
+                Application.DoEvents();
+                CreateControlTree(dialog);
+                dialog.PerformLayout();
+                using (Bitmap bitmap = new Bitmap(dialog.Width, dialog.Height, PixelFormat.Format32bppPArgb))
+                {
+                    dialog.DrawToBitmap(bitmap, new Rectangle(Point.Empty, dialog.Size));
+                    Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outputPath)));
+                    bitmap.Save(outputPath, ImageFormat.Png);
+                }
+            }
         }
 
         public static string SelfTest(string testRoot)
@@ -5227,6 +5517,29 @@ namespace MinecraftWorldBrowser
                     }
                 }
                 AppTheme.SetDark(progressTheme);
+                foreach (bool darkHintTest in new bool[] { false, true })
+                using (HintTextBox hintTest = new HintTextBox())
+                using (Bitmap hintBitmap = new Bitmap(280, 30, PixelFormat.Format32bppPArgb))
+                {
+                    AppTheme.SetDark(darkHintTest);
+                    hintTest.Size = hintBitmap.Size;
+                    hintTest.BorderStyle = BorderStyle.None;
+                    hintTest.Font = new Font("Microsoft YaHei UI", 9F);
+                    hintTest.BackColor = AppTheme.GlassSurface;
+                    hintTest.ForeColor = AppTheme.Ink;
+                    hintTest.DrawToBitmap(hintBitmap, hintTest.ClientRectangle);
+                    int hintPixels = 0;
+                    for (int y = 0; y < hintTest.ClientSize.Height; y++)
+                        for (int x = 0; x < hintTest.ClientSize.Width; x++)
+                            if (hintBitmap.GetPixel(x, y).ToArgb() != hintTest.BackColor.ToArgb()) hintPixels++;
+                    if (hintPixels < 30 || hintPixels > hintTest.ClientSize.Width * hintTest.ClientSize.Height * 0.42)
+                        throw new Exception("Search placeholder is missing or paints an opaque text background.");
+                    hintTest.Text = "Search fixture";
+                    if (hintTest.TextLength != 14 || hintTest.Text != "Search fixture")
+                        throw new Exception("Search placeholder interferes with native text input.");
+                    hintTest.DrawToBitmap(hintBitmap, hintTest.ClientRectangle);
+                }
+                AppTheme.SetDark(progressTheme);
                 if (form.Controls.Find("RefreshButton", true).Length != 1 || form.Controls.Find("FullScanButton", true).Length != 1)
                     throw new Exception("Refresh or full scan command is missing.");
                 if (form.Controls.Find("ThemeToggleButton", true).Length != 1)
@@ -5248,7 +5561,7 @@ namespace MinecraftWorldBrowser
                     throw new Exception("Search input and its visual hit area are not aligned.");
                 RoundedPanel searchPanel = search as RoundedPanel;
                 if (searchPanel == null || searchPanel.DrawSheen || searchPanel.SheenHeight != 0 || searchInput.BackColor != searchPanel.MaterialColor)
-                    throw new Exception("Search input does not share the uniform neumorphic surface.");
+                    throw new Exception("Search input does not share the uniform input surface.");
                 using (Bitmap searchBitmap = new Bitmap(search.Width, search.Height, PixelFormat.Format32bppPArgb))
                 {
                     search.DrawToBitmap(searchBitmap, search.ClientRectangle);
@@ -5260,10 +5573,10 @@ namespace MinecraftWorldBrowser
                     int difference = Math.Abs(inputPixel.R - surfacePixel.R) + Math.Abs(inputPixel.G - surfacePixel.G) + Math.Abs(inputPixel.B - surfacePixel.B);
                     if (difference > 3)
                         throw new Exception("Search input background has a visible rectangular edge: " + inputPixel + " / " + surfacePixel + ", difference=" + difference);
-                    Color upperShadowPixel = searchBitmap.GetPixel(search.Width / 2, 1);
+                    Color upperShadowPixel = searchBitmap.GetPixel(search.Width / 2, 0);
                     Color interiorPixel = searchBitmap.GetPixel(search.Width / 2, searchInput.Bottom + 1);
                     if (upperShadowPixel.ToArgb() == interiorPixel.ToArgb())
-                        throw new Exception("Search surface lost its raised neumorphic edge.");
+                        throw new Exception("Search surface lost its contrasting flat input boundary.");
                 }
                 if (form.Controls.Find("VersionFilter", true).Length != 1 || form.Controls.Find("ModeFilter", true).Length != 1 || form.Controls.Find("FavoriteFilterButton", true).Length != 1)
                     throw new Exception("Advanced world filters are missing.");
@@ -5274,6 +5587,7 @@ namespace MinecraftWorldBrowser
                 if (testVersionFilter.SelectedIndex != versionSelection) throw new Exception("A closed version filter changes selection from the mouse wheel.");
                 form.FavoriteFilterHoverSelfTest();
                 form.ThemeSelfTest();
+                form.FlatControlsSelfTest();
                 Control[] logos = form.Controls.Find("AppLogo", true);
                 if (logos.Length != 1 || ((PictureBox)logos[0]).Image == null || ((PictureBox)logos[0]).Image.Width < 128)
                     throw new Exception("The high-resolution in-app icon is missing.");
@@ -5317,9 +5631,10 @@ namespace MinecraftWorldBrowser
                     if (action.Left != 0 || action.Right != action.Parent.ClientSize.Width)
                         throw new Exception("Directory action button is clipped by its parent: " + action.Name + "=" + action.Bounds + ", parent=" + action.Parent.ClientSize + ".");
                 }
-                if (form.Controls.Find("RootScroll", true).Length != 1 || form.Controls.Find("GridVerticalScroll", true).Length != 1 || form.Controls.Find("GridHorizontalScroll", true).Length != 1)
+                if (form.Controls.Find("GridVerticalScroll", true).Length != 1 || form.Controls.Find("GridHorizontalScroll", true).Length != 1)
                     throw new Exception("Minimal scroll bars are missing.");
                 if (!(form.Controls.Find("RootList", true)[0] is SmoothListControl)) throw new Exception("Root list does not use pixel-based scrolling.");
+                form.RootScrollBarSelfTest();
                 using (SmoothListControl smoothList = new SmoothListControl())
                 {
                     smoothList.Size = new Size(220, 114);
@@ -5339,8 +5654,8 @@ namespace MinecraftWorldBrowser
                 if (testGrid.ScrollBars != ScrollBars.None) throw new Exception("Native grid scroll bars are still enabled.");
                 if (testGrid.ColumnHeadersHeight != 42 || testGrid.ColumnHeadersHeightSizeMode != DataGridViewColumnHeadersHeightSizeMode.DisableResizing)
                     throw new Exception("World-list header height is not fixed.");
-                if (testGrid.ColumnHeadersBorderStyle != DataGridViewHeaderBorderStyle.Single)
-                    throw new Exception("World-list header uses the thick native raised border.");
+                if (testGrid.ColumnHeadersBorderStyle != DataGridViewHeaderBorderStyle.None)
+                    throw new Exception("World-list header must only use the custom horizontal divider.");
                 if (testGrid.Columns["Instance"] == null || testGrid.Columns["Source"] == null || testGrid.Columns["Instance"].HeaderText != "\u52a0\u8f7d\u5668" || testGrid.Columns["Instance"].HeaderText == testGrid.Columns["Source"].HeaderText)
                     throw new Exception("Instance information and world location do not use separate columns.");
                 testGrid.CreateControl();
@@ -5417,12 +5732,14 @@ namespace MinecraftWorldBrowser
                     if (buttonBitmap.GetPixel(0, 0).ToArgb() != Color.White.ToArgb() || buttonBitmap.GetPixel(119, 0).ToArgb() != Color.White.ToArgb())
                         throw new Exception("Rounded button corners contain a rectangular background artifact: " + buttonBitmap.GetPixel(0, 0) + " / " + buttonBitmap.GetPixel(119, 0));
                 }
+                foreach (bool darkCornerTest in new bool[] { false, true })
                 using (Panel patternedHost = new Panel())
                 using (ModernButton patternedButton = new ModernButton())
                 using (Bitmap pattern = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
                 using (Bitmap baseline = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
                 using (Bitmap rendered = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
                 {
+                    AppTheme.SetDark(darkCornerTest);
                     for (int y = 0; y < pattern.Height; y++)
                     {
                         for (int x = 0; x < pattern.Width; x++)
@@ -5445,53 +5762,49 @@ namespace MinecraftWorldBrowser
                             throw new Exception("Rounded button exposes its rectangular control canvas at " + corner + ": " + rendered.GetPixel(corner.X, corner.Y) + " / " + baseline.GetPixel(corner.X, corner.Y));
                     }
                 }
+                foreach (bool darkPressTest in new bool[] { false, true })
                 using (Panel pressHost = new Panel())
                 using (ModernButton pressButton = new ModernButton())
                 using (Bitmap raisedButton = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
                 using (Bitmap insetButton = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
+                using (Bitmap releasedButton = new Bitmap(160, 48, PixelFormat.Format32bppPArgb))
                 {
-                    AppTheme.SetDark(false);
+                    AppTheme.SetDark(darkPressTest);
                     pressHost.Size = raisedButton.Size;
                     pressHost.BackColor = AppTheme.WindowBase;
                     pressButton.Size = pressHost.Size;
                     pressButton.BackColor = Color.Transparent;
-                    pressButton.FillColor = AppTheme.GlassSurface;
-                    pressButton.PressedBackColor = AppTheme.GlassSurface;
-                    pressButton.CornerRadius = 18;
+                    pressButton.FillColor = AppTheme.SecondaryFill;
+                    pressButton.PressedBackColor = AppTheme.SecondaryPressed;
+                    pressButton.CornerRadius = 8;
                     pressHost.Controls.Add(pressButton);
-                    pressButton.SetPressedForTest(false);
                     pressHost.DrawToBitmap(raisedButton, pressHost.ClientRectangle);
                     pressButton.SetPressedForTest(true);
-                    if (pressButton.PressProgressForTest != 1F) throw new Exception("Neumorphic button press state did not reach its inset target.");
                     pressHost.DrawToBitmap(insetButton, pressHost.ClientRectangle);
                     int changedPixels = 0;
                     for (int y = 1; y < raisedButton.Height - 1; y++)
-                    {
                         for (int x = 1; x < raisedButton.Width - 1; x++)
-                        {
                             if (raisedButton.GetPixel(x, y).ToArgb() != insetButton.GetPixel(x, y).ToArgb()) changedPixels++;
-                        }
-                    }
-                    if (changedPixels < 180) throw new Exception("Pressed button does not visibly change from raised shadows to inset shadows: changed=" + changedPixels);
+                    if (changedPixels < 180) throw new Exception("Flat button press feedback is not visible in both themes.");
                     foreach (Point corner in new Point[] { new Point(0, 0), new Point(159, 0), new Point(0, 47), new Point(159, 47) })
-                    {
                         if (insetButton.GetPixel(corner.X, corner.Y).ToArgb() != AppTheme.WindowBase.ToArgb())
-                            throw new Exception("Pressed neumorphic button exposes a rectangular corner at " + corner + ".");
-                    }
-                    Color raisedOuter = raisedButton.GetPixel(158, 24);
-                    Color insetOuter = insetButton.GetPixel(158, 24);
-                    int raisedDistance = Math.Abs(raisedOuter.R - AppTheme.WindowBase.R) + Math.Abs(raisedOuter.G - AppTheme.WindowBase.G) + Math.Abs(raisedOuter.B - AppTheme.WindowBase.B);
-                    int insetDistance = Math.Abs(insetOuter.R - AppTheme.WindowBase.R) + Math.Abs(insetOuter.G - AppTheme.WindowBase.G) + Math.Abs(insetOuter.B - AppTheme.WindowBase.B);
-                    if (raisedDistance <= insetDistance) throw new Exception("Outer raised shadow does not disappear when the button is pressed.");
+                            throw new Exception("Pressed flat button exposes a rectangular corner at " + corner + ".");
                     pressButton.SetPressedForTest(false);
-                    if (pressButton.PressProgressForTest != 0F) throw new Exception("Neumorphic button did not restore its raised state after release.");
+                    pressHost.DrawToBitmap(releasedButton, pressHost.ClientRectangle);
+                    for (int y = 0; y < raisedButton.Height; y++)
+                        for (int x = 0; x < raisedButton.Width; x++)
+                            if (raisedButton.GetPixel(x, y).ToArgb() != releasedButton.GetPixel(x, y).ToArgb())
+                                throw new Exception("Released flat button did not restore its original pixels.");
                 }
+                AppTheme.SetDark(false);
+                foreach (bool darkRoundedTest in new bool[] { false, true })
                 using (Panel roundedHost = new Panel())
                 using (RoundedPanel roundedSurface = new RoundedPanel())
                 using (Bitmap roundedPattern = new Bitmap(220, 64, PixelFormat.Format32bppPArgb))
                 using (Bitmap roundedBaseline = new Bitmap(220, 64, PixelFormat.Format32bppPArgb))
                 using (Bitmap roundedRendered = new Bitmap(220, 64, PixelFormat.Format32bppPArgb))
                 {
+                    AppTheme.SetDark(darkRoundedTest);
                     for (int y = 0; y < roundedPattern.Height; y++)
                     {
                         for (int x = 0; x < roundedPattern.Width; x++)
@@ -5553,11 +5866,13 @@ namespace MinecraftWorldBrowser
                     }
                 }
                 AppTheme.SetDark(false);
+                foreach (bool darkComboTest in new bool[] { false, true })
                 using (Panel backgroundHost = new Panel())
                 using (Panel transparentHost = new Panel())
                 using (SmoothComboBox testCombo = new SmoothComboBox())
                 using (Bitmap comboBitmap = new Bitmap(184, 30))
                 {
+                    AppTheme.SetDark(darkComboTest);
                     backgroundHost.BackColor = Color.White;
                     backgroundHost.Size = comboBitmap.Size;
                     transparentHost.BackColor = Color.Transparent;
@@ -5574,6 +5889,7 @@ namespace MinecraftWorldBrowser
                 if (topLeft.ToArgb() != Color.White.ToArgb() || bottomRight.ToArgb() != Color.White.ToArgb())
                     throw new Exception("Filter dropdown corners contain a dark rectangular artifact: " + topLeft + " / " + bottomRight);
                 }
+                AppTheme.SetDark(false);
                 if (WindowBackdrop.UsesSystemBackdropForTest)
                     throw new Exception("The main window still uses a system backdrop that can flash during maximize transitions.");
                 if (form.UsesTopLevelResizeBufferForTest || ((MaterialPanel)sidebar).UsesTransparentResizeBufferForTest || ((MaterialPanel)main).UsesTransparentResizeBufferForTest)

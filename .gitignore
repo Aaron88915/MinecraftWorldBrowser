@@ -1,9 +1,21 @@
 # Build outputs and release binaries
 *.exe
 *.zip
+*.tar.gz
+*.tar.gz.part
+*.run
+*.run.part
+/MinecraftWorldBrowser-v*-linux-*.run.sha256
+/MinecraftWorldBrowser-v*-linux-*.tar.gz.sha256
 /build/
 /bin/
 /obj/
+/.venv-linux/
+/linux/.venv/
+/linux/build/
+/linux/dist/
+__pycache__/
+*.pyc
 
 # Local application data and test artifacts
 /.vs/

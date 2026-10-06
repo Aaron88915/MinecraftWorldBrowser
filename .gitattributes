@@ -5,4 +5,13 @@
 *.png binary
 *.ico binary
 *.exe binary
+*.sh text eol=lf
+*.py text eol=lf
+*.yml text eol=lf
+*.svg text eol=lf
+*.ttf binary
+*.desktop text eol=lf
+linux/**/*.txt text eol=lf
+# Keep the upstream font license verbatim, including its original whitespace.
+linux/assets/NotoSansSC-OFL.txt whitespace=-blank-at-eol
 
