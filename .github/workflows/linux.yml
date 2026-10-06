@@ -35,7 +35,8 @@ jobs:
       - name: Install desktop libraries and virtual display
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb xauth libgl1 libegl1 libxkbcommon0 libxkbcommon-x11-0 libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 libxcb-render-util0 libxcb-xinerama0 xdg-user-dirs desktop-file-utils
+          mwb_dependencies=$(python -c "import sys; sys.path.insert(0, 'linux'); from mwb.environment import APT_DEPENDENCIES; print(APT_DEPENDENCIES)")
+          sudo apt-get install -y xvfb xauth xdg-user-dirs desktop-file-utils $mwb_dependencies
       - name: Verify source edition on Linux
         run: |
           python -m pip install -r linux/requirements.txt

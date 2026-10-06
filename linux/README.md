@@ -38,7 +38,10 @@ cd MinecraftWorldBrowser-v3.3.2-linux-x86_64
 sudo apt update
 sudo apt install libgl1 libegl1 libxkbcommon0 libxkbcommon-x11-0 \
   libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 \
-  libxcb-render-util0 libxcb-xinerama0
+  libxcb-render-util0 libxcb-xinerama0 libxcb-shape0 libxcb-shm0 \
+  libxcb-xfixes0 libxcb-randr0 libxcb-sync1 libxcb-render0 libxcb-xkb1 \
+  libxcb1 libx11-xcb1 libx11-6 libxext6 libxrender1 libsm6 libice6 \
+  libfontconfig1 libfreetype6
 ```
 
 如果提示 `Could not load the Qt platform plugin "xcb"`、`libxcb-cursor0 is needed`，或终端显示 `IOT instruction`，通常是 Qt 的 X11 系统依赖没有补齐。安装上面的软件包后，在程序目录重新执行 `./launch.sh`。无需换成 Ubuntu，也无需重新安装 Python。

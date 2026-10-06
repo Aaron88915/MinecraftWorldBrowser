@@ -7,7 +7,10 @@ import sys
 from pathlib import Path
 
 APT_DEPENDENCIES = ("libxcb-cursor0 libxcb-icccm4 libxcb-image0 libxcb-keysyms1 "
-                    "libxcb-render-util0 libxcb-xinerama0 libxkbcommon-x11-0 libgl1 libegl1")
+                    "libxcb-render-util0 libxcb-xinerama0 libxcb-shape0 libxcb-shm0 "
+                    "libxcb-xfixes0 libxcb-randr0 libxcb-sync1 libxcb-render0 libxcb-xkb1 libxcb1 "
+                    "libxkbcommon0 libxkbcommon-x11-0 libx11-xcb1 libx11-6 libxext6 libxrender1 "
+                    "libsm6 libice6 libfontconfig1 libfreetype6 libgl1 libegl1")
 
 
 def x11_dependency_error(qt_package: Path, environment=None, loader=None) -> str | None:
