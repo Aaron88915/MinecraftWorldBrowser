@@ -35,7 +35,7 @@
 
 Windows 版需要 .NET Framework 4.8。Linux x86_64 安装包与解压启动包包含 Python、Qt 和中文字体，需要使用 glibc 的图形桌面环境；不适用于 ARM64 或 Alpine/musl。Release 同时提供 Linux 下载文件的 `.sha256` 校验文件。
 
-### Kali 一键安装
+### Linux版本 一键安装
 
 下载 `.run` 文件，在文件所在目录执行：
 
